@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Living Pages V1.6 Moonlit Elegance</title>
+  <title>The Living Pages V1.7 Offline PWA</title>
   <meta name="theme-color" content="#2b1d28" />
+  <meta name="description" content="A private offline-first legacy studio for recovering your own poetic voice." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
 
   <style>
     :root{
@@ -66,6 +69,8 @@
     .ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#cfae76;letter-spacing:.14em;text-transform:uppercase}
     .tag{font-size:15px;color:#ead6bd;margin-top:6px;font-style:italic}
     .pill{border:1px solid rgba(228,193,122,.45);background:rgba(28,20,32,.58);padding:10px 14px;border-radius:999px;color:#fff2dd;font-size:13px;box-shadow:var(--softshadow);backdrop-filter:blur(10px)}
+    .syncStatus{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border:1px solid rgba(228,193,122,.45);background:rgba(28,20,32,.58);padding:10px 14px;border-radius:999px;color:#fff2dd;box-shadow:var(--softshadow);backdrop-filter:blur(10px)}
+    .syncStatus.off{background:rgba(75,42,58,.72);color:#ffe7d4}.syncStatus.on{background:rgba(44,67,58,.68);color:#eaffef}
     .nav{display:flex;gap:9px;overflow:auto;padding:8px 2px 20px;scrollbar-width:none}
     .nav::-webkit-scrollbar{display:none}
     .nav button{border:1px solid rgba(228,193,122,.35);background:rgba(255,250,243,.82);color:var(--plum);border-radius:999px;padding:10px 15px;white-space:nowrap;box-shadow:0 5px 16px rgba(74,53,40,.05)}
@@ -115,7 +120,7 @@
 <body>
 <div class="app">
   <div class="top">
-    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy studio for recovering your own voice</div><div class="ver">V1.6 MOONLIT ELEGANCE</div></div></div>
+    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy studio for recovering your own voice</div><div class="ver">V1.7 OFFLINE PWA</div></div></div>
     <div class="pill">AI guides. You write. Your children inherit your voice.</div>
   </div>
   <div class="nav" id="nav"></div>
@@ -127,6 +132,7 @@
         <p class="small">Begin with one memory, one photo, or one feeling. The app will open an elegant page and guide you gently, without writing the poem for you.</p>
         <button class="bigbtn" onclick="startCreate()">Begin a Living Page</button>
         <div class="quote">“I do not need AI to become poetic. I need space to hear what is already mine.”</div>
+        <p class="small"><b>Offline-ready:</b> after you open this from GitHub Pages once, it can open without internet. Drafts save first on this device. Firebase sync comes next.</p>
       </div>
       <div class="card">
         <h3>Today’s doorway</h3>
@@ -200,7 +206,7 @@
 <div class="footerbar"><button class="mini" onclick="showPanel('home')">Home</button><button class="mini" onclick="startCreate()">Create Today</button><button class="mini" onclick="showPanel('archive')">Archive</button></div>
 <div class="toast" id="toast"></div>
 <script>
-const VERSION='V1.6 MOONLIT ELEGANCE';
+const VERSION='V1.7 OFFLINE PWA';
 const STORE='livingPagesV15';
 const panels=[['home','Home'],['create','Create Today'],['doors','Voice Doors'],['archive','Archive'],['voice','Voice Map'],['backup','Backup']];
 const doors={
@@ -332,6 +338,25 @@ function importData(ev){const f=ev.target.files[0]; if(!f)return; const r=new Fi
 function resetAll(){if(confirm('Reset all saved demo data on this browser? Export first if needed.')){data={entries:[],lastDoor:null};save();toast('Reset complete');showPanel('home')}}
 function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 load();
+
+function updateSyncStatus(){
+  const el=document.getElementById('syncStatus');
+  if(!el) return;
+  const online = navigator.onLine;
+  el.textContent = online ? 'Online • saved on this device' : 'Offline • writing still works';
+  el.className = 'syncStatus ' + (online ? 'on' : 'off');
+}
+window.addEventListener('online', updateSyncStatus);
+window.addEventListener('offline', updateSyncStatus);
+updateSyncStatus();
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(()=>{ console.log('The Living Pages offline service worker is ready.'); })
+      .catch(err=>{ console.warn('Service worker registration failed:', err); });
+  });
+}
+
 </script>
 </body>
 </html>

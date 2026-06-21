@@ -1,9 +1,13 @@
-The Living Pages V1.6 Moonlit Elegance
+The Living Pages V1.7 OFFLINE PWA
 
-Changes:
-- Updated visible version label to V1.6 MOONLIT ELEGANCE.
-- New less-orange, more elegant moonlit palette: ink plum, ivory, soft rose, muted gold.
-- Added live word and character counter in the Editing Window.
-- Clarifies that long writing is okay, but guidance works best with one poem/section at a time.
+What changed:
+- Added manifest.json so the app can be installed like a real PWA.
+- Added service-worker.js so the app shell can open offline after it has been opened once from a proper web host such as GitHub Pages.
+- Added online/offline status indicator.
+- Existing local draft/archive storage remains device-first.
 
-Open index.html in your browser. If an older version appears, open this V1.6 folder directly or hard refresh the browser.
+Important:
+- Service workers do not work from a raw file:// open in many browsers.
+- To test real offline opening, upload this folder to GitHub Pages, open the live URL once while online, then turn Wi-Fi off and reopen/refresh.
+- Opening from a ChatGPT sandbox/download link still requires internet. Download links are not the installed app.
+- Firebase sync is not included yet. This version is offline-opening + local save first.
