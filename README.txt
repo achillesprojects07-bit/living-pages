@@ -1,4 +1,4 @@
-The Living Pages V1.7 OFFLINE PWA
+The Living Pages V1.8 IVORY BLACK GOLD
 
 What changed:
 - Added manifest.json so the app can be installed like a real PWA.
@@ -11,3 +11,5 @@ Important:
 - To test real offline opening, upload this folder to GitHub Pages, open the live URL once while online, then turn Wi-Fi off and reopen/refresh.
 - Opening from a ChatGPT sandbox/download link still requires internet. Download links are not the installed app.
 - Firebase sync is not included yet. This version is offline-opening + local save first.
+
+V1.8 update: changed visual direction to ivory, ink black, antique gold, and champagne gold accents.
