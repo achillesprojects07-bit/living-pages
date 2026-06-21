@@ -1,3 +1,9 @@
+The Living Pages V1.5 TAILORED VOICE GUIDANCE
+
+This corrected package shows the correct version label inside the app.
+
+Open index.html. If your browser still shows V1.4, close the old tab and open this new extracted folder.
+
 The Living Pages V1.5 — Tailored Voice Guidance
 
 A private legacy writing app for recovering your poetic voice.
