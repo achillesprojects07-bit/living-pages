@@ -1,4 +1,4 @@
-const CACHE_NAME = 'living-pages-v1-8-offline-pwa';
+const CACHE_NAME = 'living-pages-v1-9-jewel-legacy';
 const APP_SHELL = [
   './',
   './index.html',

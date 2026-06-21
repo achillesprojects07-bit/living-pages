@@ -1,15 +1,11 @@
-The Living Pages V1.8 IVORY BLACK GOLD
+The Living Pages V1.9 JEWEL LEGACY
 
-What changed:
-- Added manifest.json so the app can be installed like a real PWA.
-- Added service-worker.js so the app shell can open offline after it has been opened once from a proper web host such as GitHub Pages.
-- Added online/offline status indicator.
-- Existing local draft/archive storage remains device-first.
+Visual change:
+- Rebuilt the look to feel like opening a jewel box of treasures: deep ink/onyx header, readable ivory title, antique gold accents, warm ivory pages, stronger contrast, and more intimate legacy character.
+- Kept V1.7/V1.8 offline PWA structure.
+- Updated visible version label to V1.9 JEWEL LEGACY.
 
-Important:
-- Service workers do not work from a raw file:// open in many browsers.
-- To test real offline opening, upload this folder to GitHub Pages, open the live URL once while online, then turn Wi-Fi off and reopen/refresh.
-- Opening from a ChatGPT sandbox/download link still requires internet. Download links are not the installed app.
-- Firebase sync is not included yet. This version is offline-opening + local save first.
-
-V1.8 update: changed visual direction to ivory, ink black, antique gold, and champagne gold accents.
+Offline note:
+- Service workers do not fully work from raw file:// opens in many browsers.
+- Upload the whole folder to GitHub Pages, open once online, then it can reopen offline.
+- Text saves first on this device. Firebase sync/photos/audio cloud storage come next.

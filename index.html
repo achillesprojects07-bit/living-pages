@@ -3,137 +3,185 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Living Pages V1.8 Ivory Black Gold</title>
-  <meta name="theme-color" content="#2b1d28" />
+  <title>The Living Pages V1.9 Jewel Legacy</title>
+  <meta name="theme-color" content="#0E0D0C" />
   <meta name="description" content="A private offline-first legacy studio for recovering your own poetic voice." />
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="icon-192.png" />
 
   <style>
+
     :root{
-      --ink:#171514;
-      --muted:#6E675F;
-      --paper:#FFFDFC;
-      --paper2:#F7F4EE;
-      --page:#FAF8F3;
-      --vellum:#F4EFE6;
-      --edge:#B89146;
-      --line:#D8D0C3;
+      --ink:#151211;
+      --ink2:#211A18;
+      --night:#0E0D0C;
+      --onyx:#171412;
+      --blackgold:#221B15;
+      --paper:#FFFDF8;
+      --paper2:#F8F1E7;
+      --page:#FCF7EF;
+      --vellum:#EFE3D2;
+      --pearl:#FFF9EF;
+      --muted:#6F6257;
       --gold:#B89146;
-      --gold2:#C8A96B;
-      --champagne:#C8A96B;
-      --palegold:#D8C08A;
-      --umber:#4A4038;
-      --sepia:#1C1A19;
-      --rose:#E7D8D3;
-      --plum:#171514;
-      --sage:#7F8874;
+      --gold2:#D3B571;
+      --gold3:#8F6A2E;
+      --champagne:#E0C98C;
+      --line:#D5BC86;
+      --line2:#E8DCC6;
+      --rose:#EEE2DF;
       --danger:#88414B;
-      --shadow:0 24px 60px rgba(23,21,20,.16);
-      --softshadow:0 10px 28px rgba(23,21,20,.07);
-      --radius:28px;
+      --shadow:0 26px 70px rgba(10,8,7,.22);
+      --softshadow:0 12px 30px rgba(20,16,12,.10);
+      --glow:0 0 0 1px rgba(211,181,113,.26), 0 22px 56px rgba(184,137,69,.20);
+      --radius:30px;
     }
     *{box-sizing:border-box}
+    html{background:var(--night)}
     body{
       margin:0;
       min-height:100vh;
       color:var(--ink);
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Georgia, 'Times New Roman', Palatino, serif;
       background:
-        radial-gradient(circle at 20% 4%, rgba(212,176,111,.24), transparent 26%),
-        radial-gradient(circle at 88% 10%, rgba(138,93,98,.12), transparent 28%),
-        linear-gradient(135deg,#2b1d28 0%, #5a3540 28%, #efe0c9 61%, #FFFDFC8ee 100%);
+        radial-gradient(circle at 50% -12%, rgba(255,245,218,.22), transparent 23%),
+        radial-gradient(circle at 12% 8%, rgba(184,137,69,.33), transparent 24%),
+        radial-gradient(circle at 92% 8%, rgba(224,201,140,.23), transparent 25%),
+        linear-gradient(180deg,#0e0d0c 0%, #1B1613 19%, #F4EAD9 20%, #FFFDF8 55%, #F6EAD8 100%);
       position:relative;
     }
     body:before{
       content:'';
-      position:fixed; inset:0; pointer-events:none; opacity:.55;
-      background-image:
-        linear-gradient(rgba(255,255,255,.23) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
-      background-size:42px 42px;
+      position:fixed; inset:0; pointer-events:none; opacity:.62;
+      background:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(211,181,113,.25), transparent 38%);
+      background-size:46px 46px,46px 46px,100% 100%;
       mix-blend-mode:soft-light;
     }
     body:after{
-      content:'✦'; position:fixed; right:34px; top:28px; color:rgba(228,193,122,.34); font-size:72px; pointer-events:none;
+      content:'✦'; position:fixed; right:40px; top:30px; color:rgba(211,181,113,.44); font-size:64px; pointer-events:none;
+      text-shadow:0 0 22px rgba(211,181,113,.28);
     }
     button,input,textarea,select{font:inherit}
     button{cursor:pointer}
-    .app{max-width:1160px;margin:0 auto;padding:28px 18px 92px}
-    .top{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:18px;padding:14px 0 10px;color:#FFFDFC}
-    .brand{display:flex;gap:14px;align-items:center}
-    .seal{
-      width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:#FFFDFC;font-size:25px;letter-spacing:.03em;
-      background:radial-gradient(circle at 34% 25%,#FFFDFC4cf 0%,#c8a56b 38%,#6b4b59 72%,#241a28 100%);
-      border:1px solid rgba(255,245,216,.75);box-shadow:0 16px 36px rgba(74,53,40,.24), inset 0 0 0 3px rgba(255,255,255,.16);
+    .app{max-width:1180px;margin:0 auto;padding:28px 18px 96px}
+
+    .top{
+      display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:20px;
+      padding:22px 24px;color:#FFF8E8;
+      border:1px solid rgba(211,181,113,.52);
+      border-radius:34px;
+      background:
+        linear-gradient(135deg,rgba(14,13,12,.98),rgba(35,25,20,.96) 58%,rgba(70,48,29,.92)),
+        radial-gradient(circle at 16% 14%,rgba(224,201,140,.24),transparent 30%);
+      box-shadow:0 28px 72px rgba(11,8,6,.34), inset 0 0 0 1px rgba(255,255,255,.06);
+      position:relative;overflow:hidden;
     }
-    h1{font-size:36px;line-height:.95;margin:0;color:#FFFDFC7e8;font-weight:normal;letter-spacing:.01em;text-shadow:0 2px 12px rgba(0,0,0,.20)}
-    .ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#cfae76;letter-spacing:.14em;text-transform:uppercase}
-    .tag{font-size:15px;color:#ead6bd;margin-top:6px;font-style:italic}
-    .pill{border:1px solid rgba(228,193,122,.45);background:rgba(23,21,20,.88);padding:10px 14px;border-radius:999px;color:#F7F4EE;font-size:13px;box-shadow:var(--softshadow);backdrop-filter:blur(10px)}
-    .syncStatus{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border:1px solid rgba(228,193,122,.45);background:rgba(23,21,20,.88);padding:10px 14px;border-radius:999px;color:#F7F4EE;box-shadow:var(--softshadow);backdrop-filter:blur(10px)}
-    .syncStatus.off{background:rgba(75,42,58,.72);color:#ffe7d4}.syncStatus.on{background:rgba(44,67,58,.68);color:#eaffef}
-    .nav{display:flex;gap:9px;overflow:auto;padding:8px 2px 20px;scrollbar-width:none}
-    .nav::-webkit-scrollbar{display:none}
-    .nav button{border:1px solid rgba(228,193,122,.35);background:rgba(255,253,252,.92);color:var(--plum);border-radius:999px;padding:10px 15px;white-space:nowrap;box-shadow:0 5px 16px rgba(74,53,40,.05)}
-    .nav button.active{background:linear-gradient(135deg,var(--plum),#4A4038);color:#FFFDFC;border-color:#e4c17a}
+    .top:before{
+      content:'';position:absolute;inset:12px;border:1px solid rgba(224,201,140,.24);border-radius:24px;pointer-events:none;
+    }
+    .top:after{
+      content:'A private jewel box for memory, voice, and the truths your children will inherit';
+      position:absolute;left:118px;bottom:14px;color:rgba(255,248,232,.52);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:ui-sans-serif,system-ui,sans-serif;
+    }
+    .brand{display:flex;gap:18px;align-items:center;min-width:0;position:relative;z-index:1;padding-bottom:14px}
+    .seal{
+      width:76px;height:76px;border-radius:50%;display:grid;place-items:center;color:#1A1410;font-size:27px;letter-spacing:.03em;font-weight:bold;
+      background:
+        radial-gradient(circle at 35% 24%,#fffef8 0%,#F4E1A4 34%,#B89146 63%,#4B311A 100%);
+      border:2px solid rgba(255,245,215,.86);
+      box-shadow:0 0 0 5px rgba(184,137,69,.14), 0 18px 42px rgba(0,0,0,.38), inset 0 1px 10px rgba(255,255,255,.42);
+      flex:0 0 auto;
+    }
+    h1{
+      font-size:48px;line-height:.92;margin:0;color:#FFF4D4;font-weight:normal;letter-spacing:.01em;
+      text-shadow:0 2px 0 rgba(0,0,0,.16),0 0 26px rgba(224,201,140,.22);
+    }
+    .ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#D3B571;letter-spacing:.16em;text-transform:uppercase;margin-top:6px;font-weight:700}
+    .tag{font-size:17px;color:#E5D0A5;margin-top:8px;font-style:italic}
+    .pill,.syncStatus{
+      border:1px solid rgba(224,201,140,.55);background:rgba(255,248,232,.07);padding:12px 16px;border-radius:999px;color:#FFF7E5;font-size:13px;box-shadow:0 12px 30px rgba(0,0,0,.22);backdrop-filter:blur(10px);position:relative;z-index:1;
+    }
+    .syncStatus{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+    .syncStatus.off{background:rgba(104,54,64,.42);color:#ffe6de}.syncStatus.on{background:rgba(56,78,64,.42);color:#edfff1}
+
+    .nav{display:flex;gap:10px;overflow:auto;padding:4px 2px 24px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+    .nav button{
+      border:1px solid rgba(184,137,69,.45);background:rgba(255,253,248,.96);color:var(--ink);border-radius:999px;padding:11px 17px;white-space:nowrap;box-shadow:0 9px 24px rgba(23,18,14,.08);
+    }
+    .nav button.active{background:linear-gradient(135deg,#11100F,#2B211A);color:#FFF6DE;border-color:#CFAE66;box-shadow:0 12px 28px rgba(20,13,8,.22)}
     .panel{display:none}.panel.active{display:block}
     .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
+
     .card{
-      position:relative;background:linear-gradient(180deg,rgba(255,253,248,.99),rgba(249,242,244,.97));
-      border:1px solid rgba(184,137,69,.32);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);overflow:hidden;
+      position:relative;background:
+        linear-gradient(180deg,rgba(255,253,248,.99),rgba(252,247,239,.98)),
+        radial-gradient(circle at 88% 6%,rgba(224,201,140,.16),transparent 26%);
+      border:1px solid rgba(184,137,69,.42);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);overflow:hidden;
     }
     .card:before{
-      content:'';position:absolute;left:22px;top:22px;bottom:22px;width:1px;background:linear-gradient(180deg,transparent,rgba(184,137,69,.42),transparent);
+      content:'';position:absolute;left:18px;right:18px;top:18px;bottom:18px;border:1px solid rgba(184,137,69,.19);border-radius:22px;pointer-events:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.56);
     }
     .card:after{
-      content:'';position:absolute;inset:10px;border:1px solid rgba(184,137,69,.15);border-radius:22px;pointer-events:none;
+      content:'✧';position:absolute;right:26px;top:20px;color:rgba(184,137,69,.33);font-size:28px;pointer-events:none;
     }
     .card>*{position:relative;z-index:1}
-    .card h2{margin:0 0 12px;color:var(--sepia);font-size:30px;font-weight:normal;letter-spacing:.01em}
-    .card h3{margin:0 0 10px;color:var(--sepia);font-size:22px;font-weight:normal}
-    .small{font-size:15px;color:var(--muted);line-height:1.62}
-    .quote{border-left:3px solid var(--gold);padding:12px 0 12px 16px;color:#6a5a50;font-style:italic;line-height:1.6;background:rgba(248,241,244,.62);border-radius:0 16px 16px 0;margin-top:14px}
-    .bigbtn{border:0;background:linear-gradient(135deg,#241a28 0%, #5b4455 58%, #b9945d 145%);color:#FFFDFC;border-radius:18px;padding:16px 18px;width:100%;font-weight:bold;box-shadow:0 14px 28px rgba(74,53,40,.22);margin:8px 0;letter-spacing:.01em}
-    .ghost{border:1px solid rgba(184,137,69,.35);background:rgba(255,253,252,.96);color:var(--sepia);border-radius:16px;padding:11px 13px;box-shadow:0 7px 18px rgba(74,53,40,.05)}
-    .mini{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;border:1px solid rgba(184,137,69,.32);background:#FFFDFC;color:var(--sepia);border-radius:13px;padding:8px 10px}
+    .card h2{margin:0 0 14px;color:var(--ink);font-size:34px;font-weight:normal;letter-spacing:.01em}
+    .card h3{margin:0 0 12px;color:var(--ink);font-size:24px;font-weight:normal}
+    .small{font-size:16px;color:var(--muted);line-height:1.68}
+    .quote{
+      border-left:4px solid var(--gold);padding:14px 0 14px 18px;color:#55483D;font-style:italic;line-height:1.72;
+      background:linear-gradient(90deg,rgba(224,201,140,.16),rgba(255,253,248,.35));border-radius:0 18px 18px 0;margin-top:16px;
+    }
+    .bigbtn{
+      border:1px solid rgba(224,201,140,.7);background:linear-gradient(135deg,#11100F 0%, #2B211A 55%, #8F6A2E 130%);color:#FFF6DE;border-radius:18px;padding:16px 18px;width:100%;font-weight:bold;box-shadow:0 18px 36px rgba(32,22,13,.26);margin:8px 0;letter-spacing:.01em;
+    }
+    .bigbtn:hover{box-shadow:0 20px 42px rgba(32,22,13,.30),0 0 0 3px rgba(211,181,113,.14)}
+    .ghost{border:1px solid rgba(184,137,69,.48);background:rgba(255,253,248,.98);color:var(--ink);border-radius:16px;padding:11px 14px;box-shadow:0 8px 20px rgba(23,18,14,.07)}
+    .ghost:hover{border-color:#B89146;background:#FFF9ED}
+    .mini{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;border:1px solid rgba(184,137,69,.42);background:#FFFDF8;color:var(--ink);border-radius:13px;padding:8px 10px}
     .danger{color:#FFFDFC;background:var(--danger);border-color:var(--danger)}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .door{min-height:144px;border-radius:24px;border:1px solid rgba(184,137,69,.30);background:linear-gradient(150deg,#FFFDFC,#F7F4EE);padding:20px;text-align:left;box-shadow:var(--softshadow);position:relative;overflow:hidden}
-    .door:after{content:'';position:absolute;right:-18px;bottom:-24px;width:92px;height:92px;border-radius:50%;background:rgba(184,137,69,.10)}
-    .door b{display:block;color:var(--sepia);font-size:20px;margin-bottom:10px;font-weight:normal}.door span{color:var(--muted);font-size:14px;line-height:1.45}.door:hover{outline:2px solid rgba(184,137,69,.30)}
-    .flow{max-width:820px;margin:0 auto}.steps{display:flex;gap:8px;margin:10px 0 22px}.dot{height:6px;flex:1;background:#D8D0C3;border-radius:999px}.dot.on{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-    .prompt{font-size:31px;color:var(--sepia);line-height:1.22;margin:14px 0 8px;font-weight:normal}.hint{color:#6E675F;line-height:1.68;font-style:italic;font-size:16px}
-    .field{margin:14px 0}label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:#8a7768;margin:0 0 7px}
-    input,textarea,select{width:100%;border:1px solid rgba(184,137,69,.28);border-radius:18px;background:#FFFDFC;color:var(--ink);padding:13px 14px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.86)}
-    input:focus,textarea:focus,select:focus{border-color:rgba(184,137,69,.75);box-shadow:0 0 0 4px rgba(184,137,69,.13)}
-    textarea{min-height:210px;resize:vertical;line-height:1.82;background:linear-gradient(#FFFDFCdf9,#faf3f6);background-size:100% 36px;font-size:16px}
+    .door{min-height:150px;border-radius:24px;border:1px solid rgba(184,137,69,.38);background:linear-gradient(150deg,#FFFDF8,#F7EAD6);padding:22px;text-align:left;box-shadow:var(--softshadow);position:relative;overflow:hidden}
+    .door:before{content:'';position:absolute;inset:10px;border:1px solid rgba(184,137,69,.14);border-radius:18px;pointer-events:none}
+    .door:after{content:'✦';position:absolute;right:18px;bottom:12px;color:rgba(184,137,69,.23);font-size:42px}
+    .door b{display:block;color:var(--ink);font-size:21px;margin-bottom:10px;font-weight:normal}.door span{color:var(--muted);font-size:14px;line-height:1.5}.door:hover{outline:2px solid rgba(184,137,69,.30)}
+    .flow{max-width:850px;margin:0 auto}.steps{display:flex;gap:8px;margin:10px 0 22px}.dot{height:6px;flex:1;background:#E4D5BC;border-radius:999px}.dot.on{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    .prompt{font-size:34px;color:var(--ink);line-height:1.22;margin:14px 0 8px;font-weight:normal}.hint{color:#62584E;line-height:1.72;font-style:italic;font-size:17px}
+    .field{margin:14px 0}label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#846F51;margin:0 0 7px;font-weight:700}
+    input,textarea,select{width:100%;border:1px solid rgba(184,137,69,.36);border-radius:18px;background:#FFFDF8;color:var(--ink);padding:14px 15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.86)}
+    input:focus,textarea:focus,select:focus{border-color:rgba(184,137,69,.85);box-shadow:0 0 0 4px rgba(184,137,69,.14)}
+    textarea{min-height:220px;resize:vertical;line-height:1.86;background:linear-gradient(#FFFDF8 35px,#FBF3E8 36px);background-size:100% 36px;font-size:17px}
     .row{display:flex;gap:9px;flex-wrap:wrap}.row .ghost,.row .mini,.row .bigbtn{width:auto}.workbench{display:grid;grid-template-columns:.84fr 1.16fr;gap:18px}
-    .seedbox{border:1px solid rgba(184,137,69,.32);background:linear-gradient(180deg,#FFFDFC,#F7F4EE);border-radius:20px;padding:15px;margin:11px 0;box-shadow:var(--softshadow)}.seedbox b{color:var(--sepia);font-weight:normal;font-size:18px}
-    .poemlist{display:grid;gap:14px}.entry{border:1px solid rgba(184,137,69,.28);border-radius:22px;background:linear-gradient(180deg,#FFFDFC,#F7F4EE);padding:20px;box-shadow:var(--softshadow)}
-    .entrytop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.entry h3{margin:0;color:var(--sepia);font-weight:normal;font-size:22px}.badge{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;border:1px solid rgba(184,137,69,.27);border-radius:999px;padding:5px 8px;color:#76675c;background:#FFFDFC}.poemtext{white-space:pre-wrap;line-height:1.65;margin-top:12px;color:#1C1A19}
-    .mentorout{background:linear-gradient(180deg,#F7F4EE,#FFFDFC);border:1px solid rgba(184,137,69,.28);border-radius:20px;padding:16px;line-height:1.68;white-space:pre-wrap;color:#4A4038}.empty{text-align:center;color:var(--muted);padding:30px;border:1px dashed rgba(184,137,69,.45);border-radius:22px;background:#FAF8F3}
-    .footerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,252,247,.88);border-top:1px solid rgba(184,137,69,.25);backdrop-filter:blur(14px);padding:10px 14px;display:flex;justify-content:center;gap:10px;z-index:10}.footerbar button{max-width:220px}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);background:var(--sepia);color:#FFFDFC;padding:12px 17px;border-radius:999px;box-shadow:var(--shadow);z-index:99;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
-    .filebox{border:1px dashed rgba(184,137,69,.55);border-radius:20px;padding:15px;background:#FAF8F3;margin:12px 0}.photoPreview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photoPreview img{width:82px;height:82px;object-fit:cover;border-radius:16px;border:1px solid rgba(184,137,69,.30);box-shadow:var(--softshadow)}.audioRow audio{width:100%;margin-top:8px}.rec{background:#FFFDFC;color:var(--danger);border-color:#d8a7a7}.rec.on{background:var(--danger);color:#FFFDFC}
-    @media(max-width:860px){.hero,.workbench,.grid2{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.pill{display:none}.app{padding-left:12px;padding-right:12px}.card{padding:22px}.prompt{font-size:27px}}
-    @media(max-width:560px){.grid{grid-template-columns:1fr}h1{font-size:28px}.seal{width:50px;height:50px}.footerbar{justify-content:stretch}.footerbar button{flex:1}.nav button{padding:10px 12px}.row .ghost,.row .mini{flex:1}.row .bigbtn{width:100%}.card{border-radius:24px;padding:19px}.prompt{font-size:25px}}
+    .seedbox{border:1px solid rgba(184,137,69,.38);background:linear-gradient(180deg,#FFFDF8,#F6EBDD);border-radius:20px;padding:16px;margin:11px 0;box-shadow:var(--softshadow)}.seedbox b{color:var(--ink);font-weight:normal;font-size:18px}
+    .poemlist{display:grid;gap:14px}.entry{border:1px solid rgba(184,137,69,.35);border-radius:22px;background:linear-gradient(180deg,#FFFDF8,#F7ECDD);padding:20px;box-shadow:var(--softshadow)}
+    .entrytop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.entry h3{margin:0;color:var(--ink);font-weight:normal;font-size:22px}.badge{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;border:1px solid rgba(184,137,69,.34);border-radius:999px;padding:5px 8px;color:#6E5B3F;background:#FFFDF8}.poemtext{white-space:pre-wrap;line-height:1.68;margin-top:12px;color:#1C1A19}
+    .mentorout{background:linear-gradient(180deg,#FFF9ED,#FFFDF8);border:1px solid rgba(184,137,69,.36);border-radius:20px;padding:16px;line-height:1.72;white-space:pre-wrap;color:#4A4038}.empty{text-align:center;color:var(--muted);padding:30px;border:1px dashed rgba(184,137,69,.48);border-radius:22px;background:#FFF8EA}
+    .footerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(15,13,11,.86);border-top:1px solid rgba(211,181,113,.45);backdrop-filter:blur(16px);padding:10px 14px;display:flex;justify-content:center;gap:10px;z-index:10}.footerbar button{max-width:220px;background:#FFF7E8}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);background:#11100F;color:#FFF6DE;padding:12px 17px;border-radius:999px;box-shadow:var(--shadow);z-index:99;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
+    .filebox{border:1px dashed rgba(184,137,69,.58);border-radius:20px;padding:15px;background:#FFF8EA;margin:12px 0}.photoPreview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photoPreview img{width:82px;height:82px;object-fit:cover;border-radius:16px;border:1px solid rgba(184,137,69,.36);box-shadow:var(--softshadow)}.audioRow audio{width:100%;margin-top:8px}.rec{background:#FFFDF8;color:var(--danger);border-color:#d8a7a7}.rec.on{background:var(--danger);color:#FFFDFC}
+    @media(max-width:860px){.hero,.workbench,.grid2{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.top:after{left:24px;bottom:10px;right:24px}.brand{padding-bottom:28px}.pill{display:none}.app{padding-left:12px;padding-right:12px}.card{padding:24px}.prompt{font-size:28px}h1{font-size:40px}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}h1{font-size:33px}.seal{width:58px;height:58px}.footerbar{justify-content:stretch}.footerbar button{flex:1}.nav button{padding:10px 12px}.row .ghost,.row .mini{flex:1}.row .bigbtn{width:100%}.card{border-radius:24px;padding:21px}.prompt{font-size:25px}.top{border-radius:26px;padding:18px}.brand{gap:13px}.top:after{font-size:10px}}
+
   </style>
 </head>
 <body>
 <div class="app">
   <div class="top">
-    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy studio for recovering your own voice</div><div class="ver">V1.8 IVORY BLACK GOLD</div></div></div>
-    <div class="pill">AI guides. You write. Your children inherit your voice.</div>
+    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy studio for recovering your own voice</div><div class="ver">V1.9 JEWEL LEGACY</div></div></div>
+    <div class="pill">A jewel box of memory. You write. Your children inherit your voice.</div>
   </div>
   <div class="nav" id="nav"></div>
 
   <section id="home" class="panel active">
     <div class="hero">
       <div class="card">
-        <h2>Begin a living page</h2>
-        <p class="small">Begin with one memory, one photo, or one feeling. The app will open an elegant page and guide you gently, without writing the poem for you.</p>
-        <button class="bigbtn" onclick="startCreate()">Begin a Living Page</button>
-        <div class="quote">“I do not need AI to become poetic. I need space to hear what is already mine.”</div>
+        <h2>Open a living page</h2>
+        <p class="small">Begin with one memory, one photograph, or one feeling. Open it like a jewel box: one treasure at a time, held gently in your own words.</p>
+        <button class="bigbtn" onclick="startCreate()">Open a Living Page</button>
+        <div class="quote">“These are the treasures I leave behind: my words, my voice, my memory, my love.”</div>
         <p class="small"><b>Offline-ready:</b> after you open this from GitHub Pages once, it can open without internet. Drafts save first on this device. Firebase sync comes next.</p>
       </div>
       <div class="card">
@@ -166,7 +214,7 @@
         <div id="seedSummary"></div>
         <div class="filebox">
           <b>Optional legacy attachments</b>
-          <p class="small">Attach small photos or record your voice. This V1.6 saves them only on this device. Firebase cloud vault comes next.</p>
+          <p class="small">Attach small photos or record your voice. This V1.9 saves them only on this device. Firebase cloud vault comes next.</p>
           <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)">
           <div class="photoPreview" id="photoPreview"></div>
           <div class="row" style="margin-top:10px"><button class="mini rec" id="recBtn" onclick="toggleRecord()">Record voice</button><button class="mini" onclick="clearAudio()">Clear audio</button></div>
@@ -202,14 +250,14 @@
   </section>
 
   <section id="backup" class="panel">
-    <div class="card"><h2>Export / Import Legacy</h2><p class="small">Use Export often. V1.6 saves on this browser/device only. When we move to Firebase, this becomes your backup file.</p><div class="row"><button class="bigbtn" onclick="exportData()">Export Legacy Backup</button><label class="ghost" style="display:inline-block">Import Backup<input type="file" accept="application/json" onchange="importData(event)" style="display:none"></label><button class="ghost danger" onclick="resetAll()">Reset Demo Data</button></div></div>
+    <div class="card"><h2>Export / Import Legacy</h2><p class="small">Use Export often. V1.9 saves on this browser/device only. When we move to Firebase, this becomes your backup file.</p><div class="row"><button class="bigbtn" onclick="exportData()">Export Legacy Backup</button><label class="ghost" style="display:inline-block">Import Backup<input type="file" accept="application/json" onchange="importData(event)" style="display:none"></label><button class="ghost danger" onclick="resetAll()">Reset Demo Data</button></div></div>
   </section>
 </div>
 <div class="footerbar"><button class="mini" onclick="showPanel('home')">Home</button><button class="mini" onclick="startCreate()">Create Today</button><button class="mini" onclick="showPanel('archive')">Archive</button></div>
 <div class="toast" id="toast"></div>
 <script>
-const VERSION='V1.8 IVORY BLACK GOLD';
-const STORE='livingPagesV15';
+const VERSION='V1.9 JEWEL LEGACY';
+const STORE='livingPagesV19';
 const panels=[['home','Home'],['create','Create Today'],['doors','Voice Doors'],['archive','Archive'],['voice','Voice Map'],['backup','Backup']];
 const doors={
   Mother:{lead:'Enter through the photograph, the fragment, the ache of what love left behind.', prompts:['What fragment of your mother are you holding today?','What proof of love still remains in the image, the object, or the memory?','What question are you still asking her?']},
@@ -251,7 +299,7 @@ function randomDoorPrompt(show=true){const names=Object.keys(doors); const d=nam
 function renderDoors(){document.getElementById('doorGrid').innerHTML=Object.keys(doors).map(d=>`<button class="door" onclick="startDoor('${d}')"><b>${d} Door</b><span>${doors[d].lead}</span></button>`).join('')}
 function startDoor(d){flowType=d==='Photograph'?'Photograph':(d==='Prayer'||d==='Becoming'?'Feeling':'Memory'); step=0; answers=[]; showPanel('create'); renderStep(); document.getElementById('flowAnswer').value=doors[d].prompts[0]+'\n';}
 function startCreate(){step=0;answers=[];photos=[];audioData=null;showPanel('create'); chooseType();}
-function chooseType(){document.getElementById('steps').innerHTML='';document.getElementById('flowPrompt').textContent='Begin a Living Page.';document.getElementById('flowHint').innerHTML='Choose the doorway that feels closest. The page will open with poetic guidance, then the editing window will respond to what you actually wrote.';document.getElementById('flowAnswer').classList.add('hidden'); const box=document.querySelector('#create .row'); box.innerHTML=`<button class="bigbtn" onclick="setFlow('Memory')">From a Memory</button><button class="bigbtn" onclick="setFlow('Photograph')">From a Photograph</button><button class="bigbtn" onclick="setFlow('Feeling')">From a Feeling</button>`}
+function chooseType(){document.getElementById('steps').innerHTML='';document.getElementById('flowPrompt').textContent='Open a Living Page.';document.getElementById('flowHint').innerHTML='Choose the doorway that feels closest. The page will open with poetic guidance, then the editing window will respond to what you actually wrote.';document.getElementById('flowAnswer').classList.add('hidden'); const box=document.querySelector('#create .row'); box.innerHTML=`<button class="bigbtn" onclick="setFlow('Memory')">From a Memory</button><button class="bigbtn" onclick="setFlow('Photograph')">From a Photograph</button><button class="bigbtn" onclick="setFlow('Feeling')">From a Feeling</button>`}
 function setFlow(t){flowType=t; step=0; answers=[]; document.getElementById('flowAnswer').classList.remove('hidden'); document.querySelector('#create .row').innerHTML=`<button class="ghost" onclick="prevStep()">Back</button><button class="bigbtn" onclick="nextStep()">Continue</button><button class="ghost" onclick="saveAsFragmentNow()">Save what I have</button>`; renderStep();}
 function renderStep(){const p=flowPrompts[flowType][step]; document.getElementById('steps').innerHTML=flowPrompts[flowType].map((_,i)=>`<div class="dot ${i<=step?'on':''}"></div>`).join(''); document.getElementById('flowPrompt').textContent=p[0]; document.getElementById('flowHint').textContent=p[1]; document.getElementById('flowAnswer').value=answers[step]||''; document.getElementById('flowAnswer').focus();}
 function nextStep(){const val=document.getElementById('flowAnswer').value.trim(); answers[step]=val; if(step<4){step++;renderStep()}else{buildWorkbench()}}
@@ -325,7 +373,7 @@ function pickStrongLine(lines){if(!lines.length)return 'No line yet'; return lin
 function scoreLine(s){let score=s.length>18&&s.length<95?3:0; ['mother','father','children','home','moon','tree','wait','love','God','photo','voice','house','memory','years','sky'].forEach(w=>{if(s.toLowerCase().includes(w))score+=2}); return score}
 function saveDraft(){const title=document.getElementById('draftTitle').value.trim()||'Untitled piece'; const text=document.getElementById('draftText').value.trim(); if(!text){toast('Write something first');return} const entry={id:Date.now(),title,status:document.getElementById('draftStatus').value,text,story:answers.filter(Boolean).join('\n\n'),created:new Date().toISOString(),photos,audio:audioData}; data.entries.unshift(entry); save(); toast('Saved to archive'); showPanel('archive')}
 function newBlank(){answers=[];photos=[];audioData=null;document.getElementById('seedSummary').innerHTML='<div class="seedbox"><b>Blank entry</b><br>Start with your own words.</div>';document.getElementById('draftTitle').value='';document.getElementById('draftText').value=''; setTimeout(updateDraftCount,0);document.getElementById('draftStatus').value='Fragment';document.getElementById('mentorOut').textContent='Write first. Then ask for guidance.';document.getElementById('photoPreview').innerHTML='';document.getElementById('audioRow').innerHTML='';showPanel('workbench')}
-function renderArchive(){const list=document.getElementById('poemList'); if(!data.entries.length){list.innerHTML='<div class="empty">No saved pages yet. Begin a Living Page when you are ready.</div>'; return} list.innerHTML=data.entries.map(e=>`<div class="entry"><div class="entrytop"><div><h3>${escapeHtml(e.title)}</h3><span class="badge">${escapeHtml(e.status)}</span> <span class="badge">${new Date(e.created).toLocaleDateString()}</span></div><div class="row"><button class="mini" onclick="editEntry(${e.id})">Open</button><button class="mini danger" onclick="deleteEntry(${e.id})">Delete</button></div></div><div class="poemtext">${escapeHtml(e.text).slice(0,900)}${e.text.length>900?'...':''}</div>${e.photos&&e.photos.length?`<div class="photoPreview">${e.photos.map(p=>`<img src="${p}">`).join('')}</div>`:''}${e.audio?`<audio controls src="${e.audio}" style="width:100%;margin-top:8px"></audio>`:''}</div>`).join('')}
+function renderArchive(){const list=document.getElementById('poemList'); if(!data.entries.length){list.innerHTML='<div class="empty">No saved pages yet. Open a Living Page when you are ready.</div>'; return} list.innerHTML=data.entries.map(e=>`<div class="entry"><div class="entrytop"><div><h3>${escapeHtml(e.title)}</h3><span class="badge">${escapeHtml(e.status)}</span> <span class="badge">${new Date(e.created).toLocaleDateString()}</span></div><div class="row"><button class="mini" onclick="editEntry(${e.id})">Open</button><button class="mini danger" onclick="deleteEntry(${e.id})">Delete</button></div></div><div class="poemtext">${escapeHtml(e.text).slice(0,900)}${e.text.length>900?'...':''}</div>${e.photos&&e.photos.length?`<div class="photoPreview">${e.photos.map(p=>`<img src="${p}">`).join('')}</div>`:''}${e.audio?`<audio controls src="${e.audio}" style="width:100%;margin-top:8px"></audio>`:''}</div>`).join('')}
 function editEntry(id){const e=data.entries.find(x=>x.id===id); if(!e)return; answers=[]; photos=e.photos||[]; audioData=e.audio||null; document.getElementById('seedSummary').innerHTML=e.story?`<div class="seedbox"><b>Story / seed</b><br>${escapeHtml(e.story)}</div>`:'<div class="seedbox"><b>Opened from archive</b></div>'; document.getElementById('draftTitle').value=e.title; document.getElementById('draftText').value=e.text; document.getElementById('draftStatus').value=e.status; renderPhotoPreview(); renderAudio(); document.getElementById('mentorOut').textContent='Opened. Edit in your own words, then save as a new version.'; showPanel('workbench')}
 function deleteEntry(id){if(confirm('Delete this saved piece from this device?')){data.entries=data.entries.filter(e=>e.id!==id);save();toast('Deleted')}}
 function renderVoice(){const box=document.getElementById('voiceMap'); const text=data.entries.map(e=>`${e.title} ${e.text} ${e.story}`).join(' ').toLowerCase(); const themes={Mother:['mother','mom','mama'],Father:['father','dad'],Home:['home','house','gate','room','tree','cypress'],Children:['children','boys','son','school','wait'],Prayer:['prayer','god','spirit','soul','love'],Nature:['moon','sky','flower','rain','wind','leaves','earth'],Memory:['memory','years','remember','photograph','photo']}; let html=''; Object.keys(themes).forEach(k=>{let n=themes[k].reduce((s,w)=>s+(text.match(new RegExp('\\b'+w+'\\b','g'))||[]).length,0); html+=`<div class="seedbox"><b>${k}</b><br>${n?`Appears ${n} time${n===1?'':'s'} in your saved work.`:'Not yet present in saved pieces.'}</div>`}); box.innerHTML=html+`<p class="small"><b>Current mirror:</b> Your voice becomes strongest when a real object or place becomes a witness to love, grief, time, or devotion.</p>`}
