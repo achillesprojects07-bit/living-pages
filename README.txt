@@ -1,19 +1,16 @@
-The Living Pages V2.4 — Clear Save Actions
+The Living Pages V2.5 Offline Prompt Polish
 
-This version keeps the V2.3 Firebase configuration and offline-first PWA structure, but focuses on usability and confidence.
+Changes from V2.4:
+- True Mentor was NOT changed; it remains a preview/placeholder until the secure AI backend is built.
+- Fixed the bug where guidance labels such as [Travel / Vacation — WAVES] were inserted into the draft.
+- Rewrote prompt banks to be more beautiful, inspiring, reflective, and specific across all doors.
+- Added app-wide offline wording and pending sync status for text, photo, and voice.
+- Pages, photos, and voice save on device first; Firebase sync happens when online and logged in.
+- Kept clear Save / Replace / Delete actions.
+- Kept one compressed photo + one voice note per page, with 3-minute voice cap.
 
-What changed:
-- True Mentor was NOT upgraded yet; it remains a local preview / endpoint placeholder.
-- Added clear Save Page, Save as New, Replace Existing, and Delete Page actions.
-- Added Save Photo, Replace Photo, and Delete Photo.
-- Added Save Voice Note, Replace Recording, and Delete Recording.
-- Added visible status messages for page, photo, and voice saving.
-- Added stronger button click feedback so you know when a button was pressed.
-- Kept 1 compressed photo per page and 1 voice note per page, max 3 minutes.
-- Kept offline-first local saving.
-- Kept Firebase config, Firestore rules, Storage rules, manifest, service worker, and icons.
+Installation:
+Upload all files in this folder to GitHub Pages. Open once online so the service worker caches the app shell. After that, the app can open offline.
 
 Important:
-After uploading to GitHub Pages, open the app once online so the service worker can cache the new version. Then test offline.
-
-Do not put private poem backups, photos, or voice recordings directly in GitHub. Store them through Firebase after login.
+Offline text is safest. Photos and voice are stored locally as pending data until sync succeeds. Always keep Export Backup available for legacy safety.
