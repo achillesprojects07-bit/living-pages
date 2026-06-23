@@ -1,15 +1,7 @@
-The Living Pages V3.0 — True Mentor Backend
+The Living Pages V3.1 — True Mentor Workbench
 
-This build keeps the offline-first legacy journal and adds backend-ready True Mentor support.
+This build fixes the True Mentor usability issue. The True Mentor tab now has its own editable title, memory anchor, and writing box, plus clickable mentor buttons. You can also copy the mentor page back to the main Writing Page.
 
-Important:
-- Do not place any OpenAI/API secret key in GitHub or index.html.
-- Deploy the included Firebase Cloud Function in /functions.
-- Store your OpenAI API key as a Firebase secret named OPENAI_API_KEY.
-- Save the deployed function endpoint in the Firebase tab of the app.
+True Mentor backend still requires Firebase Functions deployment and a secure OpenAI/API key stored as a server-side secret. Do not put secret API keys in GitHub.
 
-Writing rule:
-The mentor guides only. It does not write poems, stories, quotes, essays, letters, or finished legacy text for Aileen.
-
-Offline rule:
-Always press Save Page. If offline, the page stays on this device and syncs when internet returns.
+Upload all files to GitHub Pages. If the old version appears, hard refresh or unregister the old service worker once.

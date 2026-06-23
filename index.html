@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>The Living Pages V3.0 True Mentor Backend</title>
+<title>The Living Pages V3.1 True Mentor Workbench</title>
 <meta name="theme-color" content="#0B0B0C" />
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icon-192.png" />
@@ -31,7 +31,7 @@ body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;ba
 <body>
 <div class="app">
   <header class="top">
-    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy journal for poems, memories, photographs, and the voice only you can leave.</div><div class="ver">V3.0 TRUE MENTOR BACKEND</div></div></div>
+    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy journal for poems, memories, photographs, and the voice only you can leave.</div><div class="ver">V3.1 TRUE MENTOR WORKBENCH</div></div></div>
     <div class="status"><div id="onlineBadge" class="pill inactive">Online</div><div id="offlineBadge" class="pill inactive">Offline</div><div id="syncStatus" class="pill">Sync status</div></div>
   </header>
   <nav class="nav">
@@ -72,7 +72,12 @@ body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;ba
     </div>
   </section>
 
-  <section id="mentor" class="panel"><div class="grid"><div class="card"><div class="mini">True mentor buttons</div><div class="headline">Guidance that responds to this page.</div><p class="copy">True Mentor is backend-ready. Once your secure Cloud Function is deployed and saved below, these buttons read your current page and return tailored mentor notes without writing the piece for you.</p><div class="actions"><button class="btn" onclick="mentor('clearer')">Make it Clearer</button><button class="btn" onclick="mentor('voice')">Make it More Like Me</button><button class="btn" onclick="mentor('finish')">Help Me Finish</button><button class="btn" onclick="mentor('deeper')">Ask Me Deeper Questions</button></div><div class="inlineMedia"><div class="mini">Attach context for this page</div><p class="copy">A photo or voice note can stay with the same page the mentor is reading.</p><div class="actions"><button class="btn small" onclick="choosePhoto(this)">Choose Photo</button><button class="btn small success" onclick="savePhoto(this)">Save Photo</button><button class="btn small" onclick="startRec(this)">Record Voice</button><button class="btn small success" onclick="saveVoice(this)">Save Voice</button></div><img data-photo-preview class="photoPreview hidden" alt="photo preview"><audio data-audio-preview controls class="hidden" style="width:100%;margin-top:12px"></audio></div></div><div class="card"><div class="mini">Mentor Response</div><div id="mentorOut" class="mentorBox">Write or paste a page, then ask the mentor for help.</div></div></div></section>
+  <section id="mentor" class="panel"><div class="grid"><div class="card"><div class="mini">True Mentor Workbench</div><div class="headline">Type here, then ask for guidance.</div><p class="copy">This space is editable. You can paste or write a page here even if you did not start in Write Freely. The mentor will guide only — it will not write the finished piece for you.</p>
+        <div class="field"><label>Title / working name</label><input id="mentorTitle" placeholder="Example: The balcony, A letter for Josh, The day by the sea"></div>
+        <div class="field"><label>Memory anchor / subject</label><input id="mentorAnchor" placeholder="Example: balcony, waves, my mother’s photo, waiting room, a quote I made"></div>
+        <div class="field"><label>Your page for mentor guidance</label><textarea id="mentorDraft" placeholder="Write or paste anything here: a story, poem, quote, essay, letter, memory, fragment, or unfinished truth."></textarea><div class="counts"><span id="mentorWc">0 words</span><span id="mentorCc">0 characters</span></div></div>
+        <div class="actions"><button class="btn success" onclick="copyMentorToWriter(this)">Copy to Writing Page</button><button class="btn primary" onclick="mentorFromWorkbench('continue', this)">Help Me Continue</button><button class="btn" onclick="mentorFromWorkbench('clearer', this)">Make it Clearer</button><button class="btn" onclick="mentorFromWorkbench('voice', this)">Make it More Like Me</button><button class="btn" onclick="mentorFromWorkbench('finish', this)">Help Me Finish</button><button class="btn" onclick="mentorFromWorkbench('deeper', this)">Ask Me Deeper Questions</button></div><div id="mentorStatus" class="saveStatus warn">Type a page here or open an existing page, then press a mentor button.</div>
+        <div class="inlineMedia"><div class="mini">Attach context for this page</div><p class="copy">A photo or voice note can stay with the same page the mentor is reading.</p><div class="actions"><button class="btn small" onclick="choosePhoto(this)">Choose Photo</button><button class="btn small success" onclick="savePhoto(this)">Save Photo</button><button class="btn small" onclick="startRec(this)">Record Voice</button><button class="btn small success" onclick="saveVoice(this)">Save Voice</button></div><img data-photo-preview class="photoPreview hidden" alt="photo preview"><audio data-audio-preview controls class="hidden" style="width:100%;margin-top:12px"></audio></div></div><div class="card"><div class="mini">Mentor Response</div><div id="mentorOut" class="mentorBox">Write or paste a page, then ask the mentor for help.</div></div></div></section>
 
   <section id="vault" class="panel"><div class="grid"><div class="card"><div class="mini">Legacy Vault</div><div class="headline">Pages waiting for you.</div><div class="actions"><button class="btn" onclick="exportBackup()">Export Backup</button><label class="btn"><input class="hidden" type="file" accept="application/json" onchange="importBackup(event)">Import Backup</label><button class="btn" onclick="newEntry()">New Page</button></div><div id="entryList" class="sideList" style="margin-top:18px"></div></div><div class="card"><div class="mini">Selected Page</div><div id="selectedEntry" class="copy">Choose a page from the vault.</div></div></div></section>
 
@@ -81,7 +86,7 @@ body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;ba
   <section id="cloud" class="panel"><div class="grid"><div class="card"><div class="mini">Firebase Legacy Vault</div><div class="headline">Private Legacy Vault.</div><p class="copy">Your Firebase config is installed. Press <b>Save Page</b> whenever you write. If you are online and logged in, saved pages sync automatically. If you are offline, they stay on this device and sync when internet returns.</p><div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com"></div><div class="field"><label>Password</label><input id="password" type="password" placeholder="password"></div><div class="actions"><button class="btn primary" onclick="firebaseLogin()">Login</button><button class="btn" onclick="firebaseSignup()">Create Account</button><button class="btn" onclick="syncNow()">Sync Now</button></div><div id="cloudMsg" class="promptBox">Firebase config installed. Enable Email/Password, Firestore, and Storage, then create your account or log in.</div></div><div class="card"><div class="mini">AI Mentor Endpoint</div><p class="copy">True Mentor uses a secure Firebase Cloud Function so no secret AI key is placed in GitHub. The browser sends your current page and receives guidance only.</p><div class="field"><label>Mentor endpoint</label><input id="mentorEndpoint" placeholder="https://us-central1-the-living-pages.cloudfunctions.net/livingPagesMentor"></div><div class="actions"><button class="btn" onclick="saveEndpoint()">Save Endpoint</button><button class="btn" onclick="testEndpoint()">Test Mentor</button></div></div></div></section>
 </div><div id="toast" class="toast"></div>
 <script>
-const $=id=>document.getElementById(id); const LS='living_pages_entries'; const EP='living_pages_mentor_endpoint'; const APP_VERSION='3.0';
+const $=id=>document.getElementById(id); const LS='living_pages_entries'; const EP='living_pages_mentor_endpoint'; const APP_VERSION='3.1';
 const LEGACY_KEYS=['living_pages_entries','living_pages_v28_entries','living_pages_v27_entries','living_pages_v26_entries','living_pages_v25_entries','living_pages_v24_entries','living_pages_v23_entries'];
 function loadStoredEntries(){
   for(const k of LEGACY_KEYS){try{const raw=localStorage.getItem(k); if(raw){const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length){localStorage.setItem(LS,JSON.stringify(arr)); return arr;}}}catch(e){}}
@@ -223,11 +228,11 @@ function afterLocalSave(messageId='pageStatus'){
  if(navigator.onLine && fbUser) setTimeout(()=>syncNow(true),350);
 }
 
-function tab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));$(name).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));}
+function tab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));$(name).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name)); if(name==='mentor') hydrateMentorWorkbench();}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
 function openWriter(mode){tab('write'); newEntry(false); const labels={free:'Write Freely',guided:'Guide Me Gently',daily:'Today’s Living Page',photo:'Preserve a Photograph',voice:'Record My Voice'}; $('writeModeLabel').textContent=labels[mode]||'Write Freely'; if(mode==='daily'){$('type').value='Daily Page';$('theme').value='Daily Life'} if(mode==='photo'){$('type').value='Photograph Story';$('theme').value='Photograph'} if(mode==='voice'){$('type').value='Voice Note'} if(mode==='guided'){$('theme').value='Open / Not sure'} renderGuide();}
 function newEntry(clear=true){current=null;if(clear){$('title').value='';$('draft').value='';$('anchor').value='';photoData='';audioData='';$('photoPreview').classList.add('hidden');$('audioPreview').classList.add('hidden');updateCounts();setStatus('pageStatus','New page started. Nothing saved yet.','warn');setAllStatus(['photoStatus','inlinePhotoStatus'],'No photo saved for this page yet.','warn');setAllStatus(['voiceStatus','inlineVoiceStatus'],'No voice note saved for this page yet.','warn');refreshMediaViews();}}
-$('draft').addEventListener('input', updateCounts); function updateCounts(){const t=$('draft').value.trim();$('wc').textContent=(t?t.split(/\s+/).length:0)+' words';$('cc').textContent=$('draft').value.length+' characters'}
+$('draft').addEventListener('input', updateCounts); function updateCounts(){const t=$('draft').value.trim();$('wc').textContent=(t?t.split(/\s+/).length:0)+' words';$('cc').textContent=$('draft').value.length+' characters'} document.addEventListener('input', e=>{ if(e.target && e.target.id==='mentorDraft') updateMentorCounts(); });
 function pathTitle(theme,ix){
  const names={
   'Mother':['A photograph or fragment','What remains of her love','The child who needed her'],
@@ -269,9 +274,48 @@ function usePath(ix,btn){
  toast('Writing path added');
 }
 function insertPromptStarter(btn){usePath(promptIndex,btn)}
+
+function updateMentorCounts(){
+ const t=$('mentorDraft')?$('mentorDraft').value:'';
+ if($('mentorWc')) $('mentorWc').textContent=(t.trim()?t.trim().split(/\s+/).length:0)+' words';
+ if($('mentorCc')) $('mentorCc').textContent=t.length+' characters';
+}
+function hydrateMentorWorkbench(){
+ if(!$('mentorDraft')) return;
+ if(!$('mentorDraft').value.trim() && $('draft').value.trim()){
+   $('mentorDraft').value=$('draft').value;
+   $('mentorTitle').value=$('title').value||'';
+   $('mentorAnchor').value=$('anchor').value||'';
+ }
+ updateMentorCounts();
+}
+function copyMentorToWriter(btn){
+ flashBtn(btn);
+ if($('mentorTitle').value.trim()) $('title').value=$('mentorTitle').value.trim();
+ if($('mentorAnchor').value.trim()) $('anchor').value=$('mentorAnchor').value.trim();
+ $('draft').value=$('mentorDraft').value;
+ updateCounts();
+ setStatus('mentorStatus','Copied to the Writing Page. Press Save Page there when ready.','good');
+ toast('Copied to Writing Page');
+}
+function mentorFromWorkbench(mode,btn){
+ if(btn) flashBtn(btn);
+ if(!$('mentorDraft').value.trim()){
+   $('mentorOut').textContent='Write or paste even one sentence first. The mentor needs a real page, memory, object, person, image, or feeling to hold.';
+   setStatus('mentorStatus','Add text in the True Mentor page box first.','warn');
+   return;
+ }
+ if($('mentorTitle').value.trim()) $('title').value=$('mentorTitle').value.trim();
+ if($('mentorAnchor').value.trim()) $('anchor').value=$('mentorAnchor').value.trim();
+ $('draft').value=$('mentorDraft').value;
+ updateCounts();
+ setStatus('mentorStatus','Mentor is reading this page.','warn');
+ mentor(mode, true);
+}
+
 function detect(){const text=($('title').value+' '+$('anchor').value+' '+$('draft').value).toLowerCase(); const map=[['Mother',['mother','mom','mama','photograph','smile','baby','october','fragments']],['Children',['children','boys','son','school','waiting','xavier','senior','fetch','fifteen']],['Home',['home','house','room','gate','tree','cypress','singer','driver','caretaker','kitchen']],['Father',['father','dad','sky','stars','jove','orion','dipper']],['Prayer',['prayer','god','soul','spirit','fear','hope','silence','moon','love']],['Photograph',['photo','photograph','picture','image','captured','fading']],['Travel / Vacation',['vacation','travel','beach','sand','rock','sea','hotel','trip','greece','assos','athens']],['Becoming',['begin','again','voice','path','puzzle','horizon','becoming','return']]]; for(const [k,words] of map){if(words.some(w=>text.includes(w))) return k;} return $('theme').value || 'Open / Not sure';}
 function strongestImage(){const text=($('anchor').value+' '+$('draft').value).toLowerCase(); const imgs=['photograph','photo','cypress','tree','moon','waiting room','gate','house','room','singer','sand','rock','sea','flower','clock','chair','window','voice','silence','puzzle','horizon','school','light','wind','leaves']; return imgs.find(i=>text.includes(i)) || $('anchor').value.trim() || 'the first concrete detail';}
-function mentor(mode){tab('mentor'); const draft=$('draft').value.trim(); const theme=detect(); const img=strongestImage(); if(!draft){$('mentorOut').textContent='Begin with even one sentence. The mentor needs something real to hold: a memory, object, person, photograph, place, or feeling.'; return;}
+function mentor(mode, stay=false){ if(!stay) tab('mentor'); const draft=$('draft').value.trim(); const theme=detect(); const img=strongestImage(); if(!draft){$('mentorOut').textContent='Begin with even one sentence. The mentor needs something real to hold: a memory, object, person, photograph, place, or feeling.'; return;}
  const endpoint=localStorage.getItem(EP)||window.LIVING_PAGES_MENTOR_ENDPOINT||''; if(endpoint){callMentorEndpoint(endpoint,mode,theme,img,draft);return;}
  const base=`Theme I hear: ${theme}\nStrongest image: ${img}\n\n`;
  let out='';
