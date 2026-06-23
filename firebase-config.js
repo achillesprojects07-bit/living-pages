@@ -1,12 +1,12 @@
-// Paste your Firebase web config here after creating the Firebase project.
-// Keep this file in GitHub. It is not a password. Privacy comes from Firebase Authentication + Security Rules.
+// Firebase web config for The Living Pages.
+// This is not a password. Privacy is protected by Firebase Authentication + Security Rules.
 window.LIVING_PAGES_FIREBASE_CONFIG = {
-  apiKey: "PASTE_API_KEY_HERE",
-  authDomain: "PASTE_PROJECT.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  apiKey: "AIzaSyDto9psGnEdGAYvc7iNdf0xjYH613Fw8FY",
+  authDomain: "the-living-pages.firebaseapp.com",
+  projectId: "the-living-pages",
+  storageBucket: "the-living-pages.firebasestorage.app",
+  messagingSenderId: "247260914179",
+  appId: "1:247260914179:web:108c7911d797717face436"
 };
 
 // Later, for true AI mentor guidance, point this to a secure Cloud Function.
