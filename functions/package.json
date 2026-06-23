@@ -1,0 +1,13 @@
+{
+  "name": "living-pages-functions",
+  "version": "3.0.0",
+  "description": "The Living Pages secure True Mentor backend",
+  "main": "index.js",
+  "engines": { "node": "20" },
+  "scripts": { "deploy": "firebase deploy --only functions:livingPagesMentor" },
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^5.1.1",
+    "openai": "^4.104.0"
+  }
+}

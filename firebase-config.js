@@ -11,4 +11,4 @@ window.LIVING_PAGES_FIREBASE_CONFIG = {
 
 // Later, for true AI mentor guidance, point this to a secure Cloud Function.
 // Do NOT put OpenAI or other secret keys inside GitHub or this browser file.
-window.LIVING_PAGES_MENTOR_ENDPOINT = "";
+window.LIVING_PAGES_MENTOR_ENDPOINT = "https://us-central1-the-living-pages.cloudfunctions.net/livingPagesMentor";

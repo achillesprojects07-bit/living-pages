@@ -1,10 +1,15 @@
-The Living Pages V2.10 Online/Offline Signals
+The Living Pages V3.0 — True Mentor Backend
 
-Changes from V2.9:
-- Adds separate ONLINE and OFFLINE indicators in the header.
-- ONLINE lights green when internet is available.
-- OFFLINE lights red when internet is absent.
-- Keeps the V2.9 offline/sync clarity: always press Save Page; online saves sync automatically when logged in; offline saves stay on device and sync when internet returns.
-- Store for Later remains renamed to Mark as Unfinished.
-- Preserves V2.8 fixes: writing paths cycle properly, photo/voice controls in Write and True Mentor, Firebase-ready/offline PWA.
-- True Mentor backend is still untouched.
+This build keeps the offline-first legacy journal and adds backend-ready True Mentor support.
+
+Important:
+- Do not place any OpenAI/API secret key in GitHub or index.html.
+- Deploy the included Firebase Cloud Function in /functions.
+- Store your OpenAI API key as a Firebase secret named OPENAI_API_KEY.
+- Save the deployed function endpoint in the Firebase tab of the app.
+
+Writing rule:
+The mentor guides only. It does not write poems, stories, quotes, essays, letters, or finished legacy text for Aileen.
+
+Offline rule:
+Always press Save Page. If offline, the page stays on this device and syncs when internet returns.
