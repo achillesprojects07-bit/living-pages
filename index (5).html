@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Living Pages V3.5 True Mentor Complete Workbench</title>
+<meta name="theme-color" content="#0B0B0C" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<script src="firebase-config.js"></script>
+<style>
+:root{
+  --onyx:#0B0B0C;--onyx2:#151515;--ink:#171514;--muted:#6A6258;--paper:#FFFDF8;--ivory:#F7F1E7;--vellum:#EFE4D1;
+  --gold:#B89146;--gold2:#D2B36F;--deepgold:#8D6727;--line:#D9CBAE;--rose:#F5ECE6;--green:#3d5b46;--red:#8f3943;
+  --shadow:0 24px 70px rgba(10,9,8,.18);--soft:0 14px 36px rgba(20,16,12,.09);--r:26px;
+}
+*{box-sizing:border-box} html{background:var(--onyx)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(circle at 50% -10%,rgba(210,179,111,.24),transparent 26%),linear-gradient(180deg,#090909 0,#151515 230px,#F5EFE4 231px,#FFFDF8 62%,#F4EBDC 100%)}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mix-blend-mode:soft-light}
+.app{max-width:1180px;margin:0 auto;padding:26px 16px 90px}
+.top{position:relative;overflow:hidden;display:flex;justify-content:space-between;gap:18px;align-items:center;color:#fff7e2;padding:24px 25px;border:1px solid rgba(210,179,111,.58);border-radius:34px;background:linear-gradient(135deg,#080808,#161616 58%,#272117);box-shadow:0 28px 70px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.05)}
+.top:before{content:'';position:absolute;inset:12px;border:1px solid rgba(210,179,111,.24);border-radius:24px}
+.brand{display:flex;gap:18px;align-items:center;position:relative;z-index:1}
+.seal{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#111;font-size:26px;font-weight:bold;background:radial-gradient(circle at 35% 22%,#fff 0,#F5E2A6 36%,#B89146 65%,#121212 100%);border:2px solid #F6E4B7;box-shadow:0 0 0 5px rgba(184,145,70,.14),0 18px 42px rgba(0,0,0,.38)}
+h1{font-size:46px;line-height:.92;margin:0;color:#F7E4AF;font-weight:normal;text-shadow:0 0 24px rgba(210,179,111,.22)}
+.tag{font-style:italic;color:#D9C080;margin-top:8px;font-size:17px}
+.ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#D2B36F;letter-spacing:.14em;text-transform:uppercase;margin-top:7px;font-weight:800}
+.status{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid rgba(210,179,111,.54);background:rgba(255,255,255,.07);padding:10px 13px;border-radius:999px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+.pill.on{background:rgba(61,91,70,.42)}.pill.off{background:rgba(143,57,67,.38)}
+.pill.onlineActive{background:rgba(28,255,136,.22);border-color:#39ff9a;color:#d9ffe9;box-shadow:0 0 20px rgba(57,255,154,.35),inset 0 0 0 1px rgba(57,255,154,.18)}
+.pill.offlineActive{background:rgba(255,48,78,.24);border-color:#ff3b57;color:#ffe0e5;box-shadow:0 0 22px rgba(255,59,87,.38),inset 0 0 0 1px rgba(255,59,87,.2)}
+.pill.inactive{opacity:.46;background:rgba(255,255,255,.05);color:#c8bea3}.pill.wait{background:rgba(184,145,70,.28)}.pill.syncing{background:rgba(184,145,70,.44)}
+.nav{display:flex;gap:10px;overflow:auto;padding:18px 2px 24px;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,black 88%,transparent 100%)}
+.nav::-webkit-scrollbar{display:none}
+.nav button{border:1px solid rgba(184,145,70,.42);background:rgba(255,253,248,.97);border-radius:999px;padding:11px 16px;white-space:nowrap;box-shadow:0 8px 20px rgba(20,16,12,.06);color:#211d18;cursor:pointer;font-family:Georgia,serif}
+.nav button.active{background:linear-gradient(135deg,#090909,#1b1b1b);color:#fff3d5;border-color:#D2B36F}
+.panel{display:none}.panel.active{display:block}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+.card{background:linear-gradient(180deg,rgba(255,253,248,.99),rgba(251,246,238,.98));border:1px solid rgba(184,145,70,.32);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;position:relative}
+.card:before{content:'';position:absolute;inset:9px;border:1px solid rgba(184,145,70,.16);border-radius:20px;pointer-events:none}
+.card>*{position:relative}
+.mini{font-family:ui-sans-serif,system-ui,sans-serif;color:var(--deepgold);letter-spacing:.12em;text-transform:uppercase;font-size:11px;font-weight:800}
+.headline{font-size:42px;line-height:1.02;margin:9px 0 10px}
+.copy{color:#4F4740;font-size:17px;line-height:1.62}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+.btn{border:1px solid rgba(184,145,70,.58);border-radius:999px;padding:12px 16px;background:#FFFDF8;color:#161514;box-shadow:var(--soft);font-weight:800;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,background .12s ease,border-color .12s ease;position:relative;font-family:Georgia,serif}
+.btn:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(20,16,12,.13);border-color:#B89146}
+.btn:active,.btn.clicked{transform:scale(.97);box-shadow:0 4px 12px rgba(20,16,12,.12);background:#F6EAD6}
+.btn.danger{background:#fff7f7;border-color:rgba(143,57,67,.55);color:#7a2631}
+.btn.success{background:#f7fff8;border-color:rgba(61,91,70,.55);color:#2f5138}
+.btn.primary{background:linear-gradient(135deg,#080808,#1b1b1b);color:#fff4d8;border-color:#D2B36F}
+.btn.gold{background:linear-gradient(135deg,#B89146,#8D6727);color:#fff7e8}
+.btn.small{font-size:13px;padding:9px 12px}
+.dailyChoice{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:18px}
+.dailyTile{border:1px solid rgba(184,145,70,.36);background:linear-gradient(180deg,#FFFDF8,#F8F0E5);border-radius:24px;padding:17px;box-shadow:var(--soft);cursor:pointer;min-height:140px;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+.dailyTile:hover{transform:translateY(-2px);border-color:#B89146;box-shadow:0 18px 36px rgba(20,16,12,.13)}
+.dailyTile b{display:block;font-size:20px;margin-bottom:7px;color:#171514}
+.dailyTile span{display:block;font-size:14px;line-height:1.42;color:#61584e}
+.flowNote{border-left:4px solid var(--gold);padding:12px 14px;margin-top:14px;background:rgba(255,250,241,.82);border-radius:0 16px 16px 0;color:#4F4740;line-height:1.55}
+.pathCard{border:1px solid rgba(184,145,70,.34);background:linear-gradient(180deg,#FFFDFB,#FBF4EA);border-radius:20px;padding:14px;margin:12px 0;box-shadow:var(--soft)}
+.pathCard h3{margin:0 0 7px;font-size:20px;line-height:1.2}.pathCard p{margin:0 0 10px;color:#5b5148;line-height:1.45}.pathCard .actions{margin-top:10px}
+.guideHead{padding:12px 13px;border:1px solid rgba(184,145,70,.34);background:#111;color:#F7E4AF;border-radius:18px;margin-bottom:12px}
+.guideHead b{display:block;font-size:16px}.guideHead span{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;color:#e7d7b5;line-height:1.4}
+.writingIntent{border:1px solid rgba(184,145,70,.22);background:#fffaf1;border-radius:18px;padding:12px 14px;margin-bottom:14px;color:#5a5148;line-height:1.5}
+.writingIntent b{color:#1b1713}
+.promptActionsSticky{position:sticky;bottom:12px;background:linear-gradient(180deg,rgba(255,253,248,.2),rgba(255,253,248,.98));padding-top:8px}
+.inlineMedia{margin-top:18px;border:1px solid rgba(184,145,70,.28);background:linear-gradient(180deg,#FFFDF8,#F8F0E5);border-radius:22px;padding:15px;box-shadow:var(--soft)}
+.inlineMedia .mediaGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.inlineMedia .mediaMini{padding:11px;border:1px solid rgba(184,145,70,.22);border-radius:16px;background:#fffdf9}
+.inlineMedia .mediaMini b{display:block;margin-bottom:6px}
+.editor{display:grid;grid-template-columns:1fr 340px;gap:20px}
+.field{margin:12px 0}
+label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#8D6727;font-weight:900;margin-bottom:7px}
+input,textarea,select{width:100%;border:1px solid var(--line);border-radius:18px;background:#FFFDFB;color:var(--ink);padding:13px 14px;outline:none;font-family:Georgia,serif}
+textarea{min-height:330px;resize:vertical;line-height:1.58;font-size:16px}
+.counts{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-top:7px}
+.promptBox{padding:16px;border-radius:20px;background:linear-gradient(180deg,#fffaf1,#f7edde);border:1px solid rgba(184,145,70,.28);margin-top:10px}
+.steps{display:grid;gap:9px;margin-top:10px}
+.step{padding:12px;border-radius:16px;background:rgba(255,255,255,.76);border:1px solid rgba(217,203,174,.8);color:#4c443d;line-height:1.5}
+.mentorBox{min-height:220px;padding:16px;border-radius:20px;background:#101010;color:#f8ecd0;border:1px solid rgba(210,179,111,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);white-space:pre-wrap;line-height:1.6}
+.mentorCards{display:grid;gap:12px;white-space:normal}
+.mentorCard{background:rgba(255,253,248,.06);border:1px solid rgba(210,179,111,.28);border-radius:16px;padding:13px;color:#f8ecd0}
+.mentorCard h4{margin:0 0 7px;color:#F5D58C;font-size:16px;letter-spacing:.02em}
+.mentorCard p{margin:0;line-height:1.55}.mentorCard ul{margin:8px 0 0;padding-left:18px}.mentorCard li{margin:6px 0;line-height:1.45}
+.mentorActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mentorActions .btn{font-size:12px;padding:8px 10px}
+.doorCard{border:1px solid rgba(210,179,111,.34);background:rgba(255,253,248,.07);border-radius:16px;padding:13px;margin-top:10px}
+.doorCard b{color:#F5D58C}
+.voiceProfileBox textarea{min-height:92px;font-size:14px}
+.savedGuidanceList{display:grid;gap:8px;margin-top:10px}
+.savedGuidanceItem{padding:10px;border-radius:14px;background:#fffdf9;border:1px solid rgba(184,145,70,.22);font-size:13px;line-height:1.45}
+.mentorPath{border-left:3px solid #D2B36F;padding-left:10px;margin-top:7px}
+.sideList{display:grid;gap:10px}
+.entry{padding:13px 14px;border:1px solid rgba(184,145,70,.24);border-radius:18px;background:#fffdf9;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+.entry:hover{border-color:#B89146;box-shadow:var(--soft)}
+.entry b{display:block}.entry span{font-family:ui-sans-serif,system-ui,sans-serif;color:var(--muted);font-size:12px}
+.photoPreview{max-width:100%;border-radius:18px;margin-top:10px;border:1px solid var(--line)}
+.saveStatus{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;color:#6A6258;margin-top:9px;padding:9px 11px;border:1px solid rgba(184,145,70,.22);border-radius:14px;background:#fffaf1}
+.saveStatus.good{color:#2f5138;border-color:rgba(61,91,70,.35);background:#f7fff8}
+.saveStatus.warn{color:#7a4d12;border-color:rgba(184,145,70,.45)}
+.saveStatus.bad{color:#7a2631;border-color:rgba(143,57,67,.35);background:#fff7f7}
+.hidden{display:none!important}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff3d5;border:1px solid #D2B36F;border-radius:999px;padding:12px 18px;box-shadow:var(--shadow);z-index:20;display:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:14px}
+.toast.show{display:block}
+.emptyState{padding:24px;text-align:center;color:var(--muted);font-style:italic;border:1px dashed rgba(184,145,70,.3);border-radius:18px;margin-top:12px}
+@media(max-width:1050px){.grid,.editor{grid-template-columns:1fr}}
+@media(max-width:850px){.top{align-items:flex-start;flex-direction:column}.headline{font-size:34px}h1{font-size:38px}.app{padding-bottom:120px}}
+@media(max-width:620px){.inlineMedia .mediaGrid{grid-template-columns:1fr}.pathCard h3{font-size:18px}.promptActionsSticky{position:static}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy journal for poems, memories, photographs, and the voice only you can leave.</div><div class="ver">V3.5 TRUE MENTOR COMPLETE WORKBENCH</div></div></div>
+    <div class="status"><div id="onlineBadge" class="pill inactive">Online</div><div id="offlineBadge" class="pill inactive">Offline</div><div id="syncStatus" class="pill">Sync status</div></div>
+  </header>
+  <nav class="nav">
+    <button class="active" data-tab="home">Home</button>
+    <button data-tab="write">Write</button>
+    <button data-tab="mentor">True Mentor</button>
+    <button data-tab="vault">Legacy Vault</button>
+    <button data-tab="media">Photos &amp; Voice</button>
+    <button data-tab="cloud">Firebase</button>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="panel active">
+    <div class="card">
+      <div class="mini">Daily legacy studio</div>
+      <div class="headline">What do you want to leave today?</div>
+      <p class="copy">Leave what is true today. It can be a poem, a story, a quote, an essay, a letter, a memory, a voice note, or one unfinished page. It does not have to be completed before it can be kept.</p>
+      <div class="dailyChoice">
+        <div class="dailyTile" onclick="openWriter('free')"><b>Write Freely</b><span>A blank page when your voice already knows where to begin.</span></div>
+        <div class="dailyTile" onclick="openWriter('guided')"><b>Write With Guidance</b><span>Choose a door and a memory anchor, then select one writing path.</span></div>
+        <div class="dailyTile" onclick="openWriter('daily')"><b>Today's Page</b><span>Preserve one thing from today before it disappears.</span></div>
+        <div class="dailyTile" onclick="tab('media')"><b>Photo or Voice</b><span>Attach a photograph or record your voice for the page you are keeping.</span></div>
+        <div class="dailyTile" onclick="tab('vault')"><b>Continue Later</b><span>Return to unfinished fragments and pages waiting for you.</span></div>
+      </div>
+      <div class="flowNote"><b>Simple flow:</b> choose how to write → write or use a path → press <b>Save Page</b>. If you are online, it syncs automatically. If you are offline, it stays saved here and syncs when internet returns.</div>
+    </div>
+    <div class="grid" style="margin-top:20px">
+      <div class="card"><div class="mini">Encouragement</div><div class="headline" style="font-size:32px">One true page is enough.</div><p class="copy">Some days your legacy is a poem. Some days it is a story, a quote you made, an essay, one line, one object, one sound, one memory of your children, one fragment of your mother, or one ordinary thing you do not want time to erase.</p></div>
+      <div class="card"><div class="mini">Offline promise</div><div class="headline" style="font-size:32px">Write anywhere. Save always.</div><p class="copy">You do not need to think about Wi‑Fi. Press <b>Save Page</b>. Online pages sync automatically to the Legacy Vault. Offline pages stay safe on this device and sync when internet returns.</p></div>
+    </div>
+  </section>
+
+  <!-- WRITE -->
+  <section id="write" class="panel">
+    <div class="editor">
+      <div class="card">
+        <div class="mini" id="writeModeLabel">Write Freely</div>
+        <div class="field"><label>Title</label><input id="title" placeholder="Untitled Living Page"></div>
+        <div class="field"><label>What kind of page is this?</label><select id="type"><option>Fragment</option><option>Memory Seed</option><option>Unfinished Page</option><option>Working Poem</option><option>Legacy Poem</option><option>Letter Note</option><option>Daily Page</option><option>Photograph Story</option><option>Voice Note</option></select></div>
+        <div class="field"><label>Your Draft / Fragment</label><textarea id="draft" placeholder="Write anything here. A line. A memory. A poem. A note to your children. A story behind a photograph. Something unfinished."></textarea><div class="counts"><span id="wc">0 words</span><span id="cc">0 characters</span></div></div>
+        <div class="actions">
+          <button class="btn primary" onclick="saveEntry(this)">Save Page</button>
+          <button class="btn" onclick="saveAsNew(this)">Save as New</button>
+          <button class="btn success" onclick="replaceExisting(this)">Replace Existing</button>
+          <button class="btn danger" onclick="deleteEntry(this)">Delete Page</button>
+          <button class="btn" onclick="mentor('continue')">Help Me Continue</button>
+          <button class="btn" onclick="mentor('finish')">Help Me Finish</button>
+          <button class="btn" onclick="markUnfinished(this)">Mark as Unfinished</button>
+        </div>
+        <div id="pageStatus" class="saveStatus warn">No page saved yet in this session.</div>
+        <div class="inlineMedia">
+          <div class="mini">Photo &amp; Voice for this page</div>
+          <p class="copy">Attach a photo or record your voice while writing. Save the page first or press Save Photo / Save Voice after attaching.</p>
+          <div class="mediaGrid">
+            <div class="mediaMini"><b>Photo</b>
+              <div class="actions">
+                <button class="btn small" onclick="choosePhoto(this)">Choose Photo</button>
+                <button class="btn small success" onclick="savePhoto(this)">Save Photo</button>
+                <button class="btn small" onclick="replacePhoto(this)">Replace</button>
+                <button class="btn small danger" onclick="deletePhoto(this)">Delete</button>
+              </div>
+              <img data-photo-preview class="photoPreview hidden" alt="photo preview">
+              <div id="inlinePhotoStatus" class="saveStatus warn">No photo saved for this page yet.</div>
+            </div>
+            <div class="mediaMini"><b>Voice</b>
+              <div class="actions">
+                <button class="btn small" onclick="startRec(this)">Record</button>
+                <button class="btn small" onclick="stopRec(this)">Stop</button>
+                <button class="btn small success" onclick="saveVoice(this)">Save Voice</button>
+                <button class="btn small danger" onclick="deleteVoice(this)">Delete</button>
+              </div>
+              <audio data-audio-preview controls class="hidden" style="width:100%;margin-top:12px"></audio>
+              <div id="inlineVoiceStatus" class="saveStatus warn">No voice note saved for this page yet.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside class="card">
+        <div class="mini">Guided writing studio</div>
+        <div class="writingIntent"><b>How this works:</b> type any memory anchor, choose a door, then choose one writing path. Nothing enters your draft until you press <b>Use This Path</b>.</div>
+        <div class="field"><label>Memory anchor — type anything</label><input id="anchor" placeholder="Example: the balcony, waves, cypress tree, school gate, a dress, a smell, a vacation, a room" oninput="renderGuide(false)"></div>
+        <div class="field"><label>Theme / Door</label><select id="theme" onchange="renderGuide()"><option>Open / Not sure</option><option>Mother</option><option>Father</option><option>Children</option><option>Home</option><option>Photograph</option><option>Prayer</option><option>Travel / Vacation</option><option>Daily Life</option><option>Becoming</option><option>Legacy Letter</option></select></div>
+        <div id="guidePanel" class="promptBox"><div style="font-size:19px;color:#2c241b;margin-bottom:8px">Prompt ready</div><div class="copy">Choose a door and memory anchor to see writing paths.</div></div>
+        <div class="promptActionsSticky">
+          <div class="actions">
+            <button class="btn small" onclick="renderGuide(true)">Show Three New Paths</button>
+            <button class="btn small" onclick="openWriter('free')">Return to Blank Page</button>
+          </div>
+          <div class="saveStatus warn">Guidance is optional. Use a path only when it helps.</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- MENTOR -->
+  <section id="mentor" class="panel">
+    <div class="grid">
+      <div class="card">
+        <div class="mini">True Mentor Complete Workbench</div>
+        <div class="headline">Type here, then ask for guidance.</div>
+        <p class="copy">This is your private mentor table. True Mentor can ask, notice, protect your voice, and offer doors — but it must not write the finished page for you.</p>
+        <div class="field"><label>Title / working name</label><input id="mentorTitle" placeholder="Example: The balcony, A letter for Josh, The day by the sea"></div>
+        <div class="field"><label>Memory anchor / subject</label><input id="mentorAnchor" placeholder="Example: balcony, waves, my mother's photo, waiting room, a quote I made"></div>
+        <div class="field"><label>Your page for mentor guidance</label><textarea id="mentorDraft" placeholder="Write or paste anything here: a story, poem, quote, essay, letter, memory, fragment, or unfinished truth."></textarea><div class="counts"><span id="mentorWc">0 words</span><span id="mentorCc">0 characters</span></div></div>
+        <div class="actions">
+          <button class="btn success" onclick="copyMentorToWriter(this)">Copy to Writing Page</button>
+          <button class="btn primary" onclick="mentorFromWorkbench('continue',this)">Help Me Continue</button>
+          <button class="btn" onclick="mentorFromWorkbench('clearer',this)">Make it Clearer</button>
+          <button class="btn" onclick="mentorFromWorkbench('voice',this)">Make it More Like Me</button>
+          <button class="btn" onclick="mentorFromWorkbench('finish',this)">Help Me Finish</button>
+          <button class="btn gold" onclick="mentorFromWorkbench('deeper',this)">Open the 5-Door Room</button>
+        </div>
+        <div id="mentorStatus" class="saveStatus warn">Type a page here or open an existing page, then press a mentor button.</div>
+        <div class="inlineMedia">
+          <div class="mini">Attach context for this page</div>
+          <p class="copy">A photo or voice note can stay with the same page the mentor is reading.</p>
+          <div class="actions">
+            <button class="btn small" onclick="choosePhoto(this)">Choose Photo</button>
+            <button class="btn small success" onclick="savePhoto(this)">Save Photo</button>
+            <button class="btn small" onclick="startRec(this)">Record Voice</button>
+            <button class="btn small success" onclick="saveVoice(this)">Save Voice</button>
+          </div>
+          <img data-photo-preview class="photoPreview hidden" alt="photo preview">
+          <audio data-audio-preview controls class="hidden" style="width:100%;margin-top:12px"></audio>
+        </div>
+      </div>
+      <div class="card">
+        <div class="mini">Voice Profile</div>
+        <div class="headline" style="font-size:30px">Protect the writing that sounds most like you.</div>
+        <p class="copy">Paste 2–3 of your most authentic old pieces here. When you press <b>Make It More Like Me</b>, True Mentor compares the new page against these samples.</p>
+        <div class="voiceProfileBox">
+          <div class="field"><label>Voice sample 1</label><textarea id="voiceSample1" placeholder="Paste one authentic poem, story, quote, essay, letter, or memory here."></textarea></div>
+          <div class="field"><label>Voice sample 2</label><textarea id="voiceSample2" placeholder="Optional second sample."></textarea></div>
+          <div class="field"><label>Voice sample 3</label><textarea id="voiceSample3" placeholder="Optional third sample."></textarea></div>
+        </div>
+        <div class="actions">
+          <button class="btn success" onclick="saveVoiceProfile(this)">Save Voice Profile</button>
+          <button class="btn" onclick="loadVoiceProfile(true)">Reload Profile</button>
+          <button class="btn danger" onclick="clearVoiceProfile(this)">Clear Profile</button>
+        </div>
+        <div id="voiceProfileStatus" class="saveStatus warn">No voice profile loaded yet.</div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:20px">
+      <div class="card"><div class="mini">Mentor Response</div><div id="mentorOut" class="mentorBox">Write or paste a page, then ask the mentor for help.</div></div>
+      <div class="card"><div class="mini">Saved Guidance</div><p class="copy">Keep mentor questions or doors that you may want to return to later. These are prompts only, not finished writing.</p><div id="savedGuidance" class="savedGuidanceList"></div></div>
+    </div>
+  </section>
+
+  <!-- VAULT -->
+  <section id="vault" class="panel">
+    <div class="grid">
+      <div class="card">
+        <div class="mini">Legacy Vault</div>
+        <div class="headline">Pages waiting for you.</div>
+        <div class="actions">
+          <button class="btn" onclick="exportBackup()">Export Backup</button>
+          <label class="btn"><input class="hidden" type="file" accept="application/json" onchange="importBackup(event)">Import Backup</label>
+          <button class="btn" onclick="newEntry()">New Page</button>
+        </div>
+        <div id="entryList" class="sideList" style="margin-top:18px"></div>
+      </div>
+      <div class="card"><div class="mini">Selected Page</div><div id="selectedEntry" class="copy">Choose a page from the vault.</div></div>
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section id="media" class="panel">
+    <div class="grid">
+      <div class="card">
+        <div class="mini">Photographs</div>
+        <p class="copy">Attach one photo to the current page. Choose it, preview it, then press <b>Save Photo</b> so you know it is stored with the page.</p>
+        <input id="photoInput" class="hidden" type="file" accept="image/*" onchange="attachPhoto(event)">
+        <div class="actions">
+          <button class="btn" onclick="choosePhoto(this)">Choose Photo</button>
+          <button class="btn success" onclick="savePhoto(this)">Save Photo</button>
+          <button class="btn" onclick="replacePhoto(this)">Replace Photo</button>
+          <button class="btn danger" onclick="deletePhoto(this)">Delete Photo</button>
+        </div>
+        <img id="photoPreview" data-photo-preview class="photoPreview hidden" alt="photo preview">
+        <div id="photoStatus" class="saveStatus">No photo saved for this page yet.</div>
+      </div>
+      <div class="card">
+        <div class="mini">Voice Recorder</div>
+        <p class="copy">Record one spoken memory, reflection, story, quote, letter, or page reading. Listen first, then press <b>Save Voice Note</b>. Maximum recording: 3 minutes.</p>
+        <div class="actions">
+          <button class="btn" onclick="startRec(this)">Record</button>
+          <button class="btn" onclick="stopRec(this)">Stop</button>
+          <button class="btn success" onclick="saveVoice(this)">Save Voice Note</button>
+          <button class="btn" onclick="replaceVoice(this)">Replace Recording</button>
+          <button class="btn danger" onclick="deleteVoice(this)">Delete Recording</button>
+        </div>
+        <audio id="audioPreview" data-audio-preview controls class="hidden" style="width:100%;margin-top:12px"></audio>
+        <div id="voiceStatus" class="saveStatus">No voice note saved for this page yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOUD / FIREBASE -->
+  <section id="cloud" class="panel">
+    <div class="grid">
+      <div class="card">
+        <div class="mini">Firebase Legacy Vault</div>
+        <div class="headline">Private Legacy Vault.</div>
+        <p class="copy">Your Firebase config is installed. Press <b>Save Page</b> whenever you write. If you are online and logged in, saved pages sync automatically. If you are offline, they stay on this device and sync when internet returns.</p>
+        <div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input id="password" type="password" placeholder="password"></div>
+        <div class="actions">
+          <button class="btn primary" onclick="firebaseLogin()">Login</button>
+          <button class="btn" onclick="firebaseSignup()">Create Account</button>
+          <button class="btn" onclick="syncNow()">Sync Now</button>
+        </div>
+        <div id="userStatus" class="saveStatus warn" style="margin-top:12px">Not logged in.</div>
+        <div id="cloudMsg" class="promptBox" style="margin-top:12px">Firebase config installed. Enable Email/Password, Firestore, and Storage in the Firebase console, then create your account or log in.</div>
+      </div>
+      <div class="card">
+        <div class="mini">AI Mentor Endpoint</div>
+        <p class="copy">True Mentor uses a secure Firebase Cloud Function so no secret AI key is placed in GitHub. The browser sends your current page and receives guidance only.</p>
+        <div class="field"><label>Mentor endpoint</label><input id="mentorEndpoint" placeholder="https://us-central1-the-living-pages.cloudfunctions.net/livingPagesMentor"></div>
+        <div class="actions">
+          <button class="btn" onclick="saveEndpoint()">Save Endpoint</button>
+          <button class="btn" onclick="testEndpoint()">Test Mentor</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+// ─── UTILITIES ────────────────────────────────────────────────────────────────
+const $=id=>document.getElementById(id);
+
+function esc(s){
+  return String(s==null?'':s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(t){ return esc(String(t||'')); }
+
+const LS='living_pages_entries', EP='living_pages_mentor_endpoint';
+const VP='living_pages_voice_profile', SG='living_pages_saved_guidance';
+const APP_VERSION='3.5';
+
+const LEGACY_KEYS=['living_pages_entries','living_pages_v28_entries','living_pages_v27_entries',
+  'living_pages_v26_entries','living_pages_v25_entries','living_pages_v24_entries','living_pages_v23_entries'];
+
+function loadStoredEntries(){
+  for(const k of LEGACY_KEYS){
+    try{ const raw=localStorage.getItem(k);
+      if(raw){ const arr=JSON.parse(raw); if(Array.isArray(arr)&&arr.length){ localStorage.setItem(LS,JSON.stringify(arr)); return arr; } }
+    }catch(e){}
+  }
+  return [];
+}
+
+let entries=loadStoredEntries(), current=null, promptIndex=0, photoData='', audioData='';
+
+// ─── SAVE / RENDER ────────────────────────────────────────────────────────────
+function save(){ localStorage.setItem(LS,JSON.stringify(entries)); renderEntries(); }
+
+function renderEntries(){
+  const el=$('entryList'); if(!el) return;
+  if(!entries.length){ el.innerHTML='<div class="emptyState">No pages saved yet. Write your first page.</div>'; return; }
+  el.innerHTML=entries.map(e=>`
+    <div class="entry" onclick="loadEntry('${escAttr(e.id)}')">
+      <b>${esc(e.title||'Untitled Living Page')}</b>
+      <span>${esc(e.type||'Fragment')} · ${e.updatedAt?new Date(e.updatedAt).toLocaleDateString('en-PH',{year:'numeric',month:'short',day:'numeric'}):''} ${e.sync==='Synced'?'· ✓':e.sync==='Waiting to sync'?'· pending':''}</span>
+    </div>`).join('');
+}
+
+// ─── BUILD / SAVE ITEM (from V3.4 — cleaner pattern) ─────────────────────────
+function buildCurrentItem(forceNew=false){
+  return {
+    id: forceNew?('lp_'+Date.now()+'_'+Math.random().toString(36).slice(2,6)):current||('lp_'+Date.now()),
+    title: $('title').value.trim()||'Untitled Living Page',
+    type: $('type').value,
+    theme: $('theme').value,
+    anchor: $('anchor').value,
+    draft: $('draft').value,
+    photoData, audioData,
+    updatedAt: new Date().toISOString(),
+    sync: 'Waiting to sync'
+  };
+}
+
+function saveEntry(btn){
+  if(btn) flashBtn(btn);
+  const item=buildCurrentItem(false);
+  const i=entries.findIndex(e=>e.id===item.id);
+  if(i>=0) entries[i]=item; else entries.unshift(item);
+  current=item.id;
+  save(); afterLocalSave('pageStatus'); toast('Page saved');
+}
+function saveAsNew(btn){
+  if(btn) flashBtn(btn);
+  const item=buildCurrentItem(true);
+  entries.unshift(item); current=item.id;
+  save(); afterLocalSave('pageStatus');
+  setStatus('pageStatus',statusAfterSave().replace('Saved','Saved as a new page'),'good');
+  toast('Saved as new page');
+}
+function replaceExisting(btn){
+  if(btn) flashBtn(btn);
+  if(!current){ setStatus('pageStatus','No existing page selected. Press Save Page first, or open a page from the vault.','warn'); toast('No existing page selected'); return; }
+  saveEntry(null);
+  setStatus('pageStatus','Existing page replaced with your latest changes.','good');
+  toast('Page replaced');
+}
+function deleteEntry(btn){
+  if(btn) flashBtn(btn);
+  if(!current){ setStatus('pageStatus','No saved page selected to delete.','warn'); toast('No saved page selected'); return; }
+  const e=entries.find(x=>x.id===current);
+  if(!confirm('Delete this page permanently?\n\n'+(e?e.title:''))) return;
+  entries=entries.filter(x=>x.id!==current);
+  current=null; save(); newEntry();
+  const sel=$('selectedEntry'); if(sel) sel.innerHTML='<div class="copy">Choose a page from the vault.</div>';
+  toast('Page deleted');
+}
+function markUnfinished(btn){
+  if(btn) flashBtn(btn);
+  $('type').value='Unfinished Page';
+  saveEntry(null);
+  setStatus('pageStatus','Marked as Unfinished and saved. You can continue this page later.','good');
+  toast('Marked as Unfinished');
+}
+function newEntry(clear=true){
+  current=null;
+  if(clear){
+    $('title').value=''; $('draft').value=''; $('anchor').value=''; $('type').value='Fragment';
+    photoData=''; audioData='';
+    refreshMediaViews(); updateCounts();
+    setStatus('pageStatus','New page started. Nothing saved yet.','warn');
+    setAllStatus(['photoStatus','inlinePhotoStatus'],'No photo saved for this page yet.','warn');
+    setAllStatus(['voiceStatus','inlineVoiceStatus'],'No voice note saved for this page yet.','warn');
+  }
+}
+function loadEntry(id){
+  const e=entries.find(x=>x.id===id); if(!e) return;
+  current=e.id;
+  $('title').value=e.title||''; $('type').value=e.type||'Fragment';
+  $('theme').value=e.theme||'Open / Not sure'; $('anchor').value=e.anchor||'';
+  $('draft').value=e.draft||'';
+  if($('mentorTitle')) $('mentorTitle').value=e.title||'';
+  if($('mentorAnchor')) $('mentorAnchor').value=e.anchor||'';
+  if($('mentorDraft')){ $('mentorDraft').value=e.draft||''; updateMentorCounts(); }
+  photoData=e.photoData||e.photoUrl||'';
+  audioData=e.audioData||e.audioUrl||'';
+  updateCounts(); refreshMediaViews();
+  setAllStatus(['photoStatus','inlinePhotoStatus'],photoData?'Photo is attached to this page.':'No photo saved for this page yet.',photoData?'good':'warn');
+  setAllStatus(['voiceStatus','inlineVoiceStatus'],audioData?'Voice note is attached to this page.':'No voice note saved for this page yet.',audioData?'good':'warn');
+  setStatus('pageStatus','Page loaded. Edit, then press Save Page or Replace Existing.','warn');
+  const sel=$('selectedEntry');
+  if(sel) sel.innerHTML=`<div class="mini">${esc(e.type||'Fragment')}</div><div class="headline" style="font-size:28px">${esc(e.title||'Untitled')}</div><div class="copy" style="margin-top:12px;white-space:pre-wrap">${esc((e.draft||'').slice(0,600))}${(e.draft||'').length>600?'…':''}</div><div class="actions" style="margin-top:14px"><button class="btn primary" onclick="tab('write')">Open in Write</button><button class="btn danger" onclick="deleteEntry(null)">Delete</button></div>`;
+  tab('write'); renderGuide();
+}
+
+// ─── BACKUP ───────────────────────────────────────────────────────────────────
+function exportBackup(){
+  const blob=new Blob([JSON.stringify({version:APP_VERSION,exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='living-pages-backup-v'+APP_VERSION+'-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(a.href); toast('Backup exported');
+}
+function importBackup(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const data=JSON.parse(r.result);
+      const imported=data.entries||data;
+      if(!Array.isArray(imported)) throw new Error('Not a valid backup file.');
+      const byId=Object.fromEntries(entries.map(x=>[x.id,x]));
+      let added=0;
+      imported.forEach(x=>{ if(x.id&&!byId[x.id]){ entries.unshift(x); added++; } });
+      save(); updateSyncBadge(); toast('Imported '+added+' new pages');
+    }catch(e){ toast('Import failed: '+e.message); }
+  };
+  r.readAsText(f); ev.target.value='';
+}
+
+// ─── PHOTO (with V3.4 image compression) ─────────────────────────────────────
+function choosePhoto(btn){ if(btn) flashBtn(btn); $('photoInput').click(); }
+function replacePhoto(btn){
+  if(btn) flashBtn(btn);
+  setAllStatus(['photoStatus','inlinePhotoStatus'],'Choose a new photo. It will replace the current one after you press Save Photo.','warn');
+  $('photoInput').click();
+}
+async function attachPhoto(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  if(!f.type.startsWith('image/')){ toast('Please choose an image file.'); return; }
+  if(f.size>8*1024*1024){ toast('Photo is too large. Choose a smaller image.'); return; }
+  try{
+    photoData=await compressImage(f,1100,0.78);
+    refreshMediaViews();
+    setAllStatus(['photoStatus','inlinePhotoStatus'],'Photo ready. Press Save Photo to attach it to this page.','warn');
+    toast('Photo preview ready');
+  }catch(e){ toast('Photo could not be attached.'); }
+  ev.target.value='';
+}
+function savePhoto(btn){
+  if(btn) flashBtn(btn);
+  if(!photoData){ setAllStatus(['photoStatus','inlinePhotoStatus'],'Choose a photo first.','warn'); toast('Choose a photo first'); return; }
+  saveEntry(null);
+  setAllStatus(['photoStatus','inlinePhotoStatus'],navigator.onLine?'Photo saved with this page. Syncing when available.':'Photo saved on this device. Will sync when internet returns.','good');
+  refreshMediaViews(); toast('Photo saved');
+}
+function deletePhoto(btn){
+  if(btn) flashBtn(btn);
+  if(!photoData){ setAllStatus(['photoStatus','inlinePhotoStatus'],'No photo to delete.','warn'); toast('No photo to delete'); return; }
+  photoData=''; refreshMediaViews(); saveEntry(null);
+  setAllStatus(['photoStatus','inlinePhotoStatus'],'Photo deleted from this page.','bad'); toast('Photo deleted');
+}
+function compressImage(file,maxDim=1100,quality=0.78){
+  return new Promise((resolve,reject)=>{
+    const img=new Image(); const r=new FileReader();
+    r.onload=()=>{
+      img.onload=()=>{
+        let w=img.width,h=img.height;
+        const scale=Math.min(1,maxDim/Math.max(w,h));
+        w=Math.round(w*scale); h=Math.round(h*scale);
+        const c=document.createElement('canvas'); c.width=w; c.height=h;
+        c.getContext('2d').drawImage(img,0,0,w,h);
+        resolve(c.toDataURL('image/jpeg',quality));
+      };
+      img.onerror=reject; img.src=r.result;
+    };
+    r.onerror=reject; r.readAsDataURL(file);
+  });
+}
+
+// ─── VOICE RECORDER (with V3.4 12MB size guard) ───────────────────────────────
+let rec=null, chunks=[], recTimer=null;
+async function startRec(btn){
+  if(btn) flashBtn(btn);
+  if(!navigator.mediaDevices){ toast('Microphone not available on this device.'); return; }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    chunks=[]; rec=new MediaRecorder(stream);
+    rec.ondataavailable=e=>chunks.push(e.data);
+    rec.onstop=()=>{
+      clearTimeout(recTimer);
+      const blob=new Blob(chunks,{type:'audio/webm'});
+      if(blob.size>12*1024*1024){
+        toast('Voice note too large. Try a shorter recording.');
+        setAllStatus(['voiceStatus','inlineVoiceStatus'],'Voice note too large. Try a shorter recording.','bad');
+        stream.getTracks().forEach(t=>t.stop()); return;
+      }
+      const r=new FileReader();
+      r.onload=e=>{ audioData=e.target.result; refreshMediaViews(); setAllStatus(['voiceStatus','inlineVoiceStatus'],'Recording ready. Listen first, then press Save Voice.','warn'); toast('Recording ready'); };
+      r.readAsDataURL(blob); stream.getTracks().forEach(t=>t.stop());
+    };
+    rec.start();
+    recTimer=setTimeout(()=>stopRec(null),180000);
+    setAllStatus(['voiceStatus','inlineVoiceStatus'],'Recording now… maximum 3 minutes. Press Stop when done.','warn');
+    toast('Recording started');
+  }catch(e){ toast('Microphone access denied. Check browser permissions.'); setAllStatus(['voiceStatus','inlineVoiceStatus'],'Microphone not available.','bad'); }
+}
+function stopRec(btn){
+  if(btn) flashBtn(btn);
+  if(rec&&rec.state!=='inactive'){ rec.stop(); toast('Recording stopped'); }
+  else{ setAllStatus(['voiceStatus','inlineVoiceStatus'],'No active recording to stop.','warn'); }
+}
+function saveVoice(btn){
+  if(btn) flashBtn(btn);
+  if(!audioData){ setAllStatus(['voiceStatus','inlineVoiceStatus'],'Record a voice note first.','warn'); toast('Record a voice note first'); return; }
+  saveEntry(null);
+  setAllStatus(['voiceStatus','inlineVoiceStatus'],navigator.onLine?'Voice note saved. Syncing when available.':'Voice note saved on this device. Will sync when internet returns.','good');
+  refreshMediaViews(); toast('Voice note saved');
+}
+function replaceVoice(btn){
+  if(btn) flashBtn(btn);
+  audioData=''; refreshMediaViews();
+  setAllStatus(['voiceStatus','inlineVoiceStatus'],'Ready for a new recording. Press Record.','warn'); toast('Ready to replace voice note');
+}
+function deleteVoice(btn){
+  if(btn) flashBtn(btn);
+  if(!audioData){ setAllStatus(['voiceStatus','inlineVoiceStatus'],'No voice note to delete.','warn'); toast('No voice note to delete'); return; }
+  audioData=''; refreshMediaViews(); saveEntry(null);
+  setAllStatus(['voiceStatus','inlineVoiceStatus'],'Voice note deleted from this page.','bad'); toast('Voice note deleted');
+}
+
+function refreshMediaViews(){
+  document.querySelectorAll('[data-photo-preview]').forEach(img=>{ if(photoData){ img.src=photoData; img.classList.remove('hidden'); } else{ img.removeAttribute('src'); img.classList.add('hidden'); } });
+  document.querySelectorAll('[data-audio-preview]').forEach(a=>{ if(audioData){ a.src=audioData; a.classList.remove('hidden'); } else{ a.removeAttribute('src'); a.classList.add('hidden'); } });
+}
+
+// ─── STATUS & TOAST ───────────────────────────────────────────────────────────
+function toast(t){ $('toast').textContent=t; $('toast').classList.add('show'); setTimeout(()=>$('toast').classList.remove('show'),2600); }
+function flashBtn(btn){ if(!btn||!btn.classList) return; btn.classList.add('clicked'); setTimeout(()=>btn.classList.remove('clicked'),260); }
+function setStatus(id,msg,kind='good'){ const el=$(id); if(!el) return; el.textContent=msg; el.className='saveStatus '+kind; }
+function setAllStatus(ids,msg,kind='good'){ ids.forEach(id=>setStatus(id,msg,kind)); }
+function hasPendingSync(){ return entries.some(e=>e.sync&&e.sync!=='Synced'); }
+function updateSyncBadge(){
+  const el=$('syncStatus'); if(!el) return;
+  if(!navigator.onLine){ el.textContent=hasPendingSync()?'Saved here · waiting to sync':'Offline · saved here'; el.className='pill off'; return; }
+  if(hasPendingSync()){ el.textContent='Sync pending'; el.className='pill wait'; return; }
+  el.textContent='Pages synced'; el.className='pill on';
+}
+function statusAfterSave(){
+  if(!navigator.onLine) return 'Saved on this device. Will sync when internet returns.';
+  if(fbUser) return 'Saved. Syncing to Legacy Vault…';
+  return 'Saved on this device. Log in to Firebase to sync.';
+}
+function afterLocalSave(id='pageStatus'){
+  updateSyncBadge(); setStatus(id,statusAfterSave(),'good');
+  if(navigator.onLine&&fbUser) setTimeout(()=>syncNow(true),350);
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+function tab(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const p=$(name); if(p) p.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+  if(name==='mentor') hydrateMentorWorkbench();
+  if(name==='vault') renderEntries();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+
+function openWriter(mode){
+  tab('write'); newEntry(false);
+  const labels={free:'Write Freely',guided:'Guide Me Gently',daily:"Today's Living Page",photo:'Preserve a Photograph',voice:'Record My Voice'};
+  $('writeModeLabel').textContent=labels[mode]||'Write Freely';
+  if(mode==='daily'){ $('type').value='Daily Page'; $('theme').value='Daily Life'; }
+  if(mode==='photo'){ $('type').value='Photograph Story'; $('theme').value='Photograph'; }
+  if(mode==='voice'){ $('type').value='Voice Note'; }
+  if(mode==='guided'){ $('theme').value='Open / Not sure'; }
+  renderGuide();
+}
+
+// ─── COUNTS ───────────────────────────────────────────────────────────────────
+$('draft').addEventListener('input',updateCounts);
+function updateCounts(){ const t=$('draft').value.trim(); $('wc').textContent=(t?t.split(/\s+/).length:0)+' words'; $('cc').textContent=$('draft').value.length+' characters'; }
+document.addEventListener('input',e=>{ if(e.target&&e.target.id==='mentorDraft') updateMentorCounts(); });
+function updateMentorCounts(){ const t=$('mentorDraft')?$('mentorDraft').value:''; if($('mentorWc')) $('mentorWc').textContent=(t.trim()?t.trim().split(/\s+/).length:0)+' words'; if($('mentorCc')) $('mentorCc').textContent=t.length+' characters'; }
+
+// ─── WRITING DOORS ────────────────────────────────────────────────────────────
+const doors={
+  'Mother':[['Begin with one thing you know for certain about her.','Name the photograph, object, date, gesture, or sentence that proves it.','Write what you still do not know, but still feel.','Write what you want your children to understand about the love that reached you through fragments.'],['Choose one visible detail: her smile, dress, hands, hair, eyes, chair, cushion, or light.','Write where the light falls.','Write what the photo cannot tell you.','End by naming what remains even if memory is incomplete.'],['Write the question you would ask her if memory could answer.','Name the object that keeps the question alive.','Write what you imagine she might have wanted for you.','Save the question if it is not ready to become an answer.'],['Begin with the object that keeps her near: photograph, cloth, recipe, date, scent, chair, letter, or room.','Write the exact thing you can still see.','Write what you have had to imagine.','Write what her love still teaches you without a full memory.'],['Name the age you were in this memory or photograph.','Write what a child would have wanted to ask her.','Write what the adult you understands now.','End with what remains tender, not what is fully solved.'],['Write one ordinary detail around her: light, cushion, dress, table, window, baby, cake, sewing, hand.','Write why that small detail matters more than a big explanation.','Write what you want your children to know about the mother you came from.']],
+  'Father':[['Name the scene with him: sky, car, table, trip, school, house, night, lesson, or silence.','Write what he showed you without saying much.','Write what you understood only years later.','Write what part of him you still carry.'],['Choose one image connected to your father: stars, road, chair, hand, voice, book, sky, church, field.','Write what the image did for you as a child.','Write how it returns to you now.','Write the quiet lesson it left.'],['Write one time you felt guided.','Name where you were.','Write what felt safe, strange, or wondrous.','End with what still looks back at you from that memory.']],
+  'Children':[['Name one ordinary thing you did for your children.','Write how many years, days, rides, meals, waits, or small duties it repeated.','Write the sound of that season.','Write what you want them to know about that quiet love.'],['Choose one place connected to motherhood: school, kitchen, car, bedroom, hospital, airport, waiting room.','Write what you always did there.','Write the moment you realized time was passing.','Write what kind of waiting remains now.'],['Write one thing your children may not have noticed.','Name what you were feeling while doing it.','Write what changed as they grew.','End with the simplest truth you want them to carry.'],['Name one repeated act of love: waiting, cooking, driving, checking, packing, praying, listening, fetching.','Write how often you did it.','Write what they may not have known you felt.','Write what you hope they understand one day.'],['Write one ordinary sound of motherhood: bags, footsteps, doors, calls, laughter, silence, plates, school bells.','Write where you heard it.','Write why it stayed.','Write the love hidden inside that sound.']],
+  'Home':[['Name the place exactly.','Choose what carries the memory: room, gate, tree, table, staircase, window, sound, smell, or person.','Write one ordinary thing that happened there.','Write what changed.','Write what should remain for your children.'],['Name one person who moved through the house.','Write what they did there.','Write a sound or phrase connected to them.','Write why their name deserves to remain.'],['Choose one thing that stood while life happened.','Write what it witnessed: laughter, meals, sewing, games, prayer, grief, goodbye.','Write what it could tell if it could speak.','End with what still stands in you.'],['Choose one corner of the home: balcony, kitchen, bedroom, gate, tree, staircase, garden, sofa, dining table.','Write what usually happened there.','Write who belonged to that place.','Write what the place would remember if it could speak.'],['Write the names that should not disappear.','Write what each person did in the house, even simply.','Write the atmosphere they brought.','Write why remembering them is part of your legacy.']],
+  'Photograph':[['Who is in the photograph?','Where are they seated or standing?','What do you see first?','What is missing from the photo?','What do you want this photo to preserve?'],['Name the date or life season if you know it.','Write the visible details: light, clothes, hands, face, background, object.','Write the feeling that rises as you look.','Write the story behind the photo in plain words first.'],['What does this image prove?','What does it hide?','Who would you want to show this to?','What should your children know when they see it?'],['Look at the photograph and name only what is visible first.','Write the faces, clothes, light, background, hands, and distance.','Write what you know for sure about that moment.','Write what you feel but cannot prove.'],['Write who you would give this photograph to.','Write what they might not understand by looking only.','Write the story you want placed beside it.','Write what the image should preserve after memory fades.']],
+  'Prayer':[['Name the fear without dressing it up.','Write where you are: room, moonlight, bed, church, road, sea, silence.','Write what you asked for.','Write what answered: voice, silence, memory, wind, love, or nothing yet.'],['Do not rush to hope. Write the loneliness first.','Name the sound around you.','Write the moment the silence changes.','End softly, with what still holds you.'],['What is your spirit asking for?','What does your mind keep repeating?','What does your heart still believe?','Write one line of surrender, not performance.'],['Begin before comfort arrives.','Write the loneliness as a real place.','Write what sound, if any, enters the silence.','Write what remains when the prayer is not yet answered.']],
+  'Travel / Vacation':[['Name the exact place where this travel memory begins: beach, street, hotel room, airport, church, market, restaurant, balcony, road, or sea.','Choose the small detail that stayed: waves, sand, stone, key, towel, ticket, food, street, window, light, sound, or smell.','Write who was there, or who was missing.','Write what you felt there that you did not say out loud.','Write what you brought home that was not in the luggage.'],['Write the first thing you remember: light, smell, food, weather, road, water, silence, laughter.','Write what you felt away from home.','Write what you brought back that was not in the luggage.'],['Choose one moment from the trip that looked ordinary.','Write what it meant only after time passed.','Write who you were in that place.','Write what part of you wanted to stay.'],['Choose one sensory memory: heat, wind, food, salt, light, sound, rain, perfume, stone, sea.','Write what it touched in you.','Write what came home with you invisibly.']],
+  'Daily Life':[['What stayed with you today?','Name the exact moment, person, object, or sentence.','Write what you felt but did not say.','Write why this small thing might matter years from now.'],['Choose one scene from today.','Write the time of day.','Write what your body felt.','Write one sentence you want to keep from this day.'],['What did today reveal about the season of life you are in?','Name one ordinary evidence.','Write what you are learning without forcing a lesson.'],['Name one moment from today before it disappears.','Write the exact place and time if you can.','Write what you noticed.','Write why this ordinary day still belongs in your legacy.'],['Write one thing you almost ignored today.','Write what made it matter.','Write what it says about this season of your life.']],
+  'Becoming':[['Name the real place where this feeling begins: balcony, room, airport, street, beach, car, desk, mirror, church, or bed.','Write what you were looking at or touching in that place.','Write what was changing inside you, even if nothing outside had changed yet.','Write one thing you can do today without solving the whole life.'],['Name one small proof that your voice is still alive: a line, a memory, a photograph, a prayer, a page, a feeling.','Write what made you forget or silence that part of yourself.','Write what you want to return to, gently and honestly.','Write what would make today feel like a beginning.'],['Choose one threshold: door, path, horizon, first step, puzzle piece, suitcase, blank page.','Write what is behind you.','Write what is ahead of you.','Write what you can do today.'],['Name the old self you miss.','Write what she knew how to see.','Write what the present self has survived.','Write how the two can meet again on the page.']],
+  'Legacy Letter':[['Write directly to your children: "I want you to know…"','Name the story behind the truth.','Write what love taught you.','End as a mother, not as a poet.'],['What story should not disappear?','Who needs to be named?','What did this person/place/moment give you?','What blessing do you want to leave?'],['Write what you may not have said enough.','Write why it was hard to say.','Write what you hope they understand later.'],['Begin with: "One day, I want you to know…"','Write the story behind that truth.','Write what you learned the hard way.','Write what you hope they carry gently.'],['Write something you may not have said enough.','Write why you kept it quiet.','Write it now in your plain mother voice.','End with a blessing, not a performance.']],
+  'Open / Not sure':[['Type anything that came to you: object, place, person, sound, smell, photo, phrase.','Write where it belongs in your life.','Write who is connected to it.','Write what feeling is attached.','Decide: continue now, finish now, or store for later.'],['Begin with the smallest specific thing.','Write the place.','Write the person, if any.','Write what changed.','Write what should not disappear.'],['Write one true sentence.','Underline the strongest word in it by rewriting that word below.','Follow that word into a memory.','Stop when you reach one clear image.'],['Choose any anchor: object, place, person, sound, smell, phrase, photo, dream, or question.','Write why it appeared today.','Write one real detail around it.','Write what it may be asking you to remember.']]
+};
+
+function pathTitle(theme,ix){
+  const names={'Mother':['A photograph or fragment','What remains of her love','The child who needed her','The object that keeps her near','The age you were','An ordinary detail'],'Father':['A lesson that returned later','A moment of wonder','A quiet inheritance'],'Children':['Ordinary love repeated','When childhood began to leave','A letter inside a memory','Love repeated without end','A sound of motherhood'],'Home':['A place that held your life','A witness in the house','Names that must not disappear','One corner of the home','Names that should not disappear'],'Photograph':['What the image preserves','Visible and hidden','The story behind it','Only what is visible','Who you would give it to'],'Prayer':['Before hope arrives','The silence first','The voice that returns','Before comfort arrives'],'Travel / Vacation':['The small thing that stayed','The version of you who was there','A place as witness','A sensory memory'],'Daily Life':['What stayed today','A scene from today','The season you are in','One moment before it disappears','What you almost ignored'],'Becoming':['The place where change begins','The proof your voice is alive','The first step not the whole life','The old self you miss'],'Legacy Letter':['What I want you to know','A story that should not disappear','What I may not have said enough','What I want you to know someday','What I kept quiet'],'Open / Not sure':['Start from anything','Follow the smallest specific thing','One true sentence','Choose any anchor']};
+  const arr=names[theme]||names['Open / Not sure']; return arr[ix%arr.length];
+}
+
+function renderGuide(next=false){
+  if(next){ promptIndex+=3; toast('Three new writing paths shown'); }
+  const theme=$('theme').value||'Open / Not sure';
+  const anchor=($('anchor').value||'').trim();
+  const arr=doors[theme]||doors['Open / Not sure'];
+  const cards=[0,1,2].map(n=>{
+    const ix=(promptIndex+n)%arr.length; const steps=arr[ix];
+    return `<div class="pathCard"><h3>${esc(pathTitle(theme,ix))}</h3><p>${esc(theme)} writing path ${ix+1}. Answer only the lines that open something real.</p><div class="steps">${steps.map((st,i)=>`<div class="step"><b>${i+1}.</b> ${esc(st)}</div>`).join('')}</div><div class="actions"><button class="btn small primary" onclick="usePath(${ix},this)">Use This Path</button></div></div>`;
+  }).join('');
+  $('guidePanel').innerHTML=`<div class="guideHead"><b>Prompt ready</b><span>Door: ${esc(theme)}${anchor?' · Anchor: '+esc(anchor):' · Add a memory anchor if you want.'}</span></div>${cards}`;
+}
+function usePath(ix,btn){
+  flashBtn(btn);
+  const theme=$('theme').value||'Open / Not sure'; const anchor=($('anchor').value||'').trim();
+  const arr=doors[theme]||doors['Open / Not sure']; const steps=arr[ix%arr.length];
+  let starter='\n\n'+pathTitle(theme,ix);
+  if(anchor) starter+='\nMemory anchor: '+anchor;
+  starter+='\n\n'+steps.map((s,i)=>(i+1)+'. '+s+'\n   ').join('\n')+'\n';
+  $('draft').value+=starter; updateCounts();
+  setStatus('pageStatus','Writing path added. Answer only what feels useful, then press Save Page.','warn'); toast('Writing path added');
+}
+
+// ─── MENTOR ───────────────────────────────────────────────────────────────────
+function hydrateMentorWorkbench(){
+  if(!$('mentorDraft')) return;
+  if(!$('mentorDraft').value.trim()&&$('draft').value.trim()){
+    $('mentorDraft').value=$('draft').value;
+    if($('mentorTitle')) $('mentorTitle').value=$('title').value||'';
+    if($('mentorAnchor')) $('mentorAnchor').value=$('anchor').value||'';
+  }
+  updateMentorCounts();
+}
+function copyMentorToWriter(btn){
+  flashBtn(btn);
+  if($('mentorTitle')&&$('mentorTitle').value.trim()) $('title').value=$('mentorTitle').value.trim();
+  if($('mentorAnchor')&&$('mentorAnchor').value.trim()) $('anchor').value=$('mentorAnchor').value.trim();
+  $('draft').value=$('mentorDraft').value; updateCounts();
+  setStatus('mentorStatus','Copied to the Writing Page. Press Save Page there when ready.','good'); toast('Copied to Writing Page');
+}
+function mentorFromWorkbench(mode,btn){
+  if(btn) flashBtn(btn);
+  if(!$('mentorDraft').value.trim()){ $('mentorOut').textContent='Write or paste even one sentence first. The mentor needs a real page, memory, object, person, image, or feeling to hold.'; setStatus('mentorStatus','Add text in the True Mentor page box first.','warn'); return; }
+  if($('mentorTitle')&&$('mentorTitle').value.trim()) $('title').value=$('mentorTitle').value.trim();
+  if($('mentorAnchor')&&$('mentorAnchor').value.trim()) $('anchor').value=$('mentorAnchor').value.trim();
+  $('draft').value=$('mentorDraft').value; updateCounts();
+  setStatus('mentorStatus','Mentor is reading this page…','warn'); mentor(mode,true);
+}
+function detect(){ const text=($('title').value+' '+$('anchor').value+' '+$('draft').value).toLowerCase(); const map=[['Mother',['mother','mom','mama','photograph','smile','baby','october','fragments']],['Children',['children','boys','son','school','waiting','xavier','senior','fetch','fifteen']],['Home',['home','house','room','gate','tree','cypress','singer','driver','caretaker','kitchen']],['Father',['father','dad','sky','stars','jove','orion','dipper']],['Prayer',['prayer','god','soul','spirit','fear','hope','silence','moon','love']],['Photograph',['photo','photograph','picture','image','captured','fading']],['Travel / Vacation',['vacation','travel','beach','sand','rock','sea','hotel','trip','greece','assos','athens']],['Becoming',['begin','again','voice','path','puzzle','horizon','becoming','return']]]; for(const [k,words] of map){if(words.some(w=>text.includes(w))) return k;} return $('theme').value||'Open / Not sure'; }
+function strongestImage(){ const text=($('anchor').value+' '+$('draft').value).toLowerCase(); const imgs=['photograph','photo','cypress','tree','moon','waiting room','gate','house','room','singer','sand','rock','sea','flower','clock','chair','window','voice','silence','puzzle','horizon','school','light','wind','leaves']; return imgs.find(i=>text.includes(i))||$('anchor').value.trim()||'the first concrete detail'; }
+
+function mentor(mode,stay=false){
+  if(!stay) tab('mentor');
+  const draft=($('mentorDraft')&&$('mentorDraft').value.trim())||$('draft').value.trim();
+  const theme=detect(); const img=strongestImage();
+  if(!draft){ $('mentorOut').textContent='Begin with even one sentence. The mentor needs something real to hold: a memory, object, person, photograph, place, or feeling.'; return; }
+  const endpoint=localStorage.getItem(EP)||window.LIVING_PAGES_MENTOR_ENDPOINT||'';
+  if(endpoint){ callMentorEndpoint(endpoint,mode,theme,img,draft); return; }
+  const base=`Theme I hear: ${theme}\nStrongest image: ${img}\n\n`;
+  if(mode==='finish'){ renderMentorStructured({mentor_observation:'This page may be near an ending. Choose the card that feels true, then answer it in your own words.',ending_path_1:{type:'The Circle Back',prompt:'Return to the first image. How has it changed by the end of the memory?'},ending_path_2:{type:'The Simple Truth',prompt:'Stop trying to be poetic. What is the one plain fact this memory wants to leave?'},ending_path_3:{type:'The Silent Witness',prompt:'End on the object, room, tree, or light that watched this happen. What is it doing now?'},ending_path_4:{type:'The Legacy',prompt:'If your child reads only the final line many years from now, what do they need to know?'}}); return; }
+  if(mode==='deeper'){ renderMentorStructured({mentor_observation:'I see a few doors in this page. Which one do you want to open?',doors:[{title:'The Missing Person',prompt:'Who is absent from this memory, even if they are not named?'},{title:'The Witness Object',prompt:'What object, room, tree, light, or weather watched this happen?'},{title:'The Hidden Feeling',prompt:'What did you feel but could not say out loud?'},{title:'The Passage of Time',prompt:'What changed after this moment, and what remained?'},{title:'The Legacy Door',prompt:'What do you want your children to understand from this page years from now?'}]}); return; }
+  let out='';
+  if(mode==='continue') out=`${base}Continue by answering these in your own words:\n\n1. Where exactly does ${img} belong in your life?\n2. Who is connected to it?\n3. What happened around it that someone else might forget?\n4. What feeling is attached to it now, after time has passed?\n\nDo not finish yet. Add one clear scene or one remembered detail.`;
+  else if(mode==='clearer') out=`${base}For clarity, make it more exact, not more poetic yet.\n\n1. Name the real object or place. If there is none, add one.\n2. Separate memory from explanation.\n3. Replace any general word like beautiful, sad, special, or unforgettable with the actual detail that made it so.\n\nKeep your natural rhythm. Only clean what blocks the reader from seeing.`;
+  else if(mode==='voice') out=`${base}To make this more like you, ask: What did ${img} witness? What human ache is underneath it? Can the ending become simpler instead of grander?\n\nYour voice is strongest when an ordinary thing becomes a witness.`;
+  $('mentorOut').textContent=out;
+}
+
+// MENTOR CARD RENDERING
+function titleCaseKey(k){ return String(k||'').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); }
+function plainMentorText(title,value){ if(Array.isArray(value)) return title+': '+value.map(v=>typeof v==='string'?v:(v.prompt||v.question||JSON.stringify(v))).join(' | '); if(value&&typeof value==='object') return title+': '+(value.prompt||value.question||Object.entries(value).map(([k,v])=>titleCaseKey(k)+': '+(typeof v==='object'?JSON.stringify(v):v)).join(' | ')); return title+': '+String(value||''); }
+function mentorCardHtml(title,value){
+  if(value==null||value==='') return '';
+  let body='';
+  if(Array.isArray(value)) body='<ul>'+value.map(v=>'<li>'+esc(typeof v==='string'?v:(v.prompt||v.question||JSON.stringify(v)))+'</li>').join('')+'</ul>';
+  else if(typeof value==='object'){ if(value.type||value.prompt||value.question) body='<div class="mentorPath"><b>'+esc(value.type||'Path')+'</b><p>'+esc(value.prompt||value.question||'')+'</p></div>'; else body='<ul>'+Object.entries(value).map(([k,v])=>'<li><b>'+esc(titleCaseKey(k))+':</b> '+esc(typeof v==='object'?JSON.stringify(v):v)+'</li>').join('')+'</ul>'; }
+  else body='<p>'+esc(value)+'</p>';
+  const text=plainMentorText(title,value);
+  return '<div class="mentorCard"><h4>'+esc(title)+'</h4>'+body+'<div class="mentorActions"><button class="btn" onclick="useMentorQuestion(this)" data-guidance="'+text.replace(/"/g,'&quot;')+'">Use this question</button><button class="btn success" onclick="saveMentorGuidance(this)" data-guidance="'+text.replace(/"/g,'&quot;')+'">Save guidance</button><button class="btn danger" onclick="dismissMentorCard(this)">Dismiss</button></div></div>';
+}
+function renderDoorRoom(obj){
+  const dl=obj.doors||[obj.door_1,obj.door_2,obj.door_3,obj.door_4,obj.door_5].filter(Boolean);
+  if(!dl||!dl.length) return false;
+  let html='<div class="mentorCards"><div class="mentorCard"><h4>5-Door Room</h4><p>'+esc(obj.mentor_observation||'I see a few doors in this page. Which one do you want to open?')+'</p></div>';
+  dl.slice(0,5).forEach((d,i)=>{ const t=d.title||d.type||('Door '+(i+1)); const p=d.prompt||d.question||d.thread||String(d); const dg=(t+': '+p).replace(/"/g,'&quot;'); html+='<div class="doorCard"><b>'+esc(t)+'</b><p>'+esc(p)+'</p><div class="mentorActions"><button class="btn gold" onclick="openMentorDoor(this)" data-door="'+dg+'">Open this door</button><button class="btn success" onclick="saveMentorGuidance(this)" data-guidance="'+dg+'">Save door</button><button class="btn danger" onclick="dismissMentorCard(this)">Dismiss</button></div></div>'; });
+  html+='</div>'; $('mentorOut').innerHTML=html; return true;
+}
+function openMentorDoor(btn){
+  flashBtn(btn); const t=btn.dataset.door||'';
+  const q='What is the most specific object, person, sentence, or silence behind this door?';
+  $('mentorOut').innerHTML='<div class="mentorCards"><div class="mentorCard"><h4>Door Opened</h4><p>'+esc(t)+'</p><p><b>Now answer this in your own words:</b> '+q+'</p><div class="mentorActions"><button class="btn" onclick="useMentorQuestion(this)" data-guidance="'+q.replace(/"/g,'&quot;')+'">Use this question</button><button class="btn success" onclick="saveMentorGuidance(this)" data-guidance="'+t.replace(/"/g,'&quot;')+'">Save guidance</button><button class="btn danger" onclick="dismissMentorCard(this)">Dismiss</button></div></div></div>';
+  setStatus('mentorStatus','One door opened. Answer the question in your own words.','good');
+}
+function renderMentorStructured(data){
+  const obj=data&&(data.mentor||data.guidance_json||data); if(!obj||typeof obj!=='object') return false;
+  if(renderDoorRoom(obj)) return true;
+  const order=['mentor_observation','what_i_hear','what_feels_alive','question_to_deepen','missing_detail_prompt','clarity_notes','specific_questions','voice_matches','places_to_return','deep_questions','direction_option_1','direction_option_2','ending_path_1','ending_path_2','ending_path_3','ending_path_4','voice_warning','voice_warning_words','ai_speak_warning'];
+  let html='<div class="mentorCards">'; const used=new Set();
+  for(const key of order){ if(obj[key]!=null){ html+=mentorCardHtml(titleCaseKey(key),obj[key]); used.add(key); } }
+  for(const [key,val] of Object.entries(obj)){ if(!used.has(key)&&key!=='mode'&&key!=='ok') html+=mentorCardHtml(titleCaseKey(key),val); }
+  html+='</div>'; $('mentorOut').innerHTML=html; return true;
+}
+function tryRenderMentorResponse(data){ if(renderMentorStructured(data)) return; let raw=data.guidance||data.text||''; if(typeof raw==='string'){ try{ const p=JSON.parse(raw); if(renderMentorStructured(p)) return; }catch(e){} } $('mentorOut').textContent=raw||'True Mentor returned no guidance.'; }
+function useMentorQuestion(btn){ flashBtn(btn); const t=btn.dataset.guidance||''; navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{}); setStatus('mentorStatus','Guidance copied. Use it as a question or prompt, not as finished writing.','good'); toast('Guidance copied'); }
+function saveMentorGuidance(btn){ flashBtn(btn); const t=btn.dataset.guidance||''; const arr=JSON.parse(localStorage.getItem(SG)||'[]'); arr.unshift({id:Date.now(),text:t,createdAt:new Date().toISOString()}); localStorage.setItem(SG,JSON.stringify(arr.slice(0,30))); renderSavedGuidance(); setStatus('mentorStatus','Guidance saved for later.','good'); toast('Guidance saved'); }
+function dismissMentorCard(btn){ flashBtn(btn); const card=btn.closest('.mentorCard')||btn.closest('.doorCard'); if(card) card.remove(); setStatus('mentorStatus','Mentor note dismissed. You are always free to go another way.','good'); }
+function renderSavedGuidance(){ const el=$('savedGuidance'); if(!el) return; const arr=JSON.parse(localStorage.getItem(SG)||'[]'); if(!arr.length){ el.innerHTML='<div class="saveStatus warn">No saved guidance yet.</div>'; return; } el.innerHTML=arr.slice(0,10).map(g=>'<div class="savedGuidanceItem">'+esc(g.text)+'<div class="actions"><button class="btn small danger" onclick="deleteSavedGuidance('+g.id+')">Remove</button></div></div>').join(''); }
+function deleteSavedGuidance(id){ let arr=JSON.parse(localStorage.getItem(SG)||'[]'); arr=arr.filter(g=>g.id!==id); localStorage.setItem(SG,JSON.stringify(arr)); renderSavedGuidance(); }
+async function callMentorEndpoint(endpoint,mode,theme,img,draft){
+  $('mentorOut').textContent='Asking True Mentor\u2026';
+  try{
+    let token=''; if(fbUser&&fbUser.getIdToken){ try{ token=await fbUser.getIdToken(); }catch(e){} }
+    const payload={mode,theme,strongestImage:img,title:$('title').value,anchor:$('anchor').value,type:$('type').value,draft:draft.slice(0,7000),photoAttached:!!photoData,voiceAttached:!!audioData,voiceProfile:getVoiceProfile().slice(0,6000),rule:'Do not write poems, stories, quotes, essays, letters, or finished legacy text. Return JSON guidance cards only. Preserve authorship.'};
+    const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json',...(token?{'Authorization':'Bearer '+token}:{})},body:JSON.stringify(payload)});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok){ setStatus('mentorStatus','Mentor cloud unavailable \u2014 showing local guidance.','warn'); mentor(mode,true); return; }
+    tryRenderMentorResponse(data); setStatus('mentorStatus','True Mentor responded.','good'); toast('True Mentor responded');
+  }catch(e){ setStatus('mentorStatus','Could not reach True Mentor \u2014 showing local guidance.','warn'); mentor(mode,true); }
+}
+// VOICE PROFILE
+function getVoiceProfile(){ const stored=JSON.parse(localStorage.getItem(VP)||'{}'); const parts=[]; ['voiceSample1','voiceSample2','voiceSample3'].forEach((id,i)=>{ const live=$(id)?$(id).value.trim():''; const saved=stored['sample'+(i+1)]||''; if(live||saved) parts.push(live||saved); }); return parts.join('\n\n--- voice sample break ---\n\n'); }
+function saveVoiceProfile(btn){ if(btn) flashBtn(btn); const data={sample1:$('voiceSample1').value.trim(),sample2:$('voiceSample2').value.trim(),sample3:$('voiceSample3').value.trim(),updatedAt:new Date().toISOString()}; localStorage.setItem(VP,JSON.stringify(data)); const count=[data.sample1,data.sample2,data.sample3].filter(Boolean).length; setStatus('voiceProfileStatus',count?('Saved '+count+' voice sample'+(count>1?'s':'')+'. Make It More Like Me will use them.'):'No samples were entered.','good'); toast('Voice Profile saved'); }
+function loadVoiceProfile(show=false){ const data=JSON.parse(localStorage.getItem(VP)||'{}'); if($('voiceSample1')) $('voiceSample1').value=data.sample1||''; if($('voiceSample2')) $('voiceSample2').value=data.sample2||''; if($('voiceSample3')) $('voiceSample3').value=data.sample3||''; const count=[data.sample1,data.sample2,data.sample3].filter(Boolean).length; if($('voiceProfileStatus')) setStatus('voiceProfileStatus',count?('Loaded '+count+' saved voice sample'+(count>1?'s':'')+'.'):'No saved Voice Profile yet. Paste 2\u20133 authentic pieces here.','warn'); if(show) toast('Voice Profile loaded'); }
+function clearVoiceProfile(btn){ if(btn) flashBtn(btn); localStorage.removeItem(VP); ['voiceSample1','voiceSample2','voiceSample3'].forEach(id=>{ if($(id)) $(id).value=''; }); setStatus('voiceProfileStatus','Voice Profile cleared from this device.','warn'); toast('Voice Profile cleared'); }
+// ENDPOINT
+function saveEndpoint(){ localStorage.setItem(EP,$('mentorEndpoint').value.trim()); toast('Mentor endpoint saved'); }
+function testEndpoint(){ mentor('deeper'); }
+function cloudMsg(t){ const el=$('cloudMsg'); if(el) el.textContent=t; }
+// FIREBASE
+let fbApp=null,fbAuth=null,fbDb=null,fbStorage=null,fbUser=null,fbMods=null;
+async function initFirebase(){
+  if(fbApp) return true;
+  const cfg=window.LIVING_PAGES_FIREBASE_CONFIG||{};
+  if(!cfg.apiKey||cfg.apiKey.includes('PASTE')){ cloudMsg('Firebase config is missing.'); return false; }
+  try{
+    const [appM,authM,fsM,stM]=await Promise.all([import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js'),import('https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js'),import('https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js'),import('https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js')]);
+    fbMods={appM,authM,fsM,stM}; fbApp=appM.initializeApp(cfg); fbAuth=authM.getAuth(fbApp); fbDb=fsM.getFirestore(fbApp); fbStorage=stM.getStorage(fbApp);
+    try{ await fsM.enableIndexedDbPersistence(fbDb); }catch(e){}
+    authM.onAuthStateChanged(fbAuth,u=>{ fbUser=u; const el=$('userStatus'); if(el) el.textContent=u?('Logged in: '+(u.email||'user')):'Not logged in.'; if(u) loadCloudEntries(); });
+    return true;
+  }catch(e){ cloudMsg('Firebase SDK could not load. Check your internet connection. '+e.message); return false; }
+}
+async function firebaseLogin(){ if(!await initFirebase()) return; const email=$('email').value.trim(),pass=$('password').value; if(!email||!pass){ cloudMsg('Enter email and password.'); return; } try{ await fbMods.authM.signInWithEmailAndPassword(fbAuth,email,pass); cloudMsg('Logged in. Loading your Legacy Vault\u2026'); await loadCloudEntries(); }catch(e){ cloudMsg('Login failed: '+e.message); } }
+async function firebaseSignup(){ if(!await initFirebase()) return; const email=$('email').value.trim(),pass=$('password').value; if(!email||!pass){ cloudMsg('Enter email and password.'); return; } try{ await fbMods.authM.createUserWithEmailAndPassword(fbAuth,email,pass); cloudMsg('Account created. Your vault is private to this login.'); await syncNow(); }catch(e){ cloudMsg('Create account failed: '+e.message); } }
+async function loadCloudEntries(){ if(!fbUser||!fbDb) return; try{ const {collection,getDocs}=fbMods.fsM; const snap=await getDocs(collection(fbDb,'users',fbUser.uid,'entries')); const byId=Object.fromEntries(entries.map(e=>[e.id,e])); snap.forEach(d=>{ const cloud=d.data(); const local=byId[d.id]; if(!local||new Date(cloud.updatedAt||0)>new Date(local.updatedAt||0)) byId[d.id]={...cloud,id:d.id,sync:'Synced'}; }); entries=Object.values(byId).sort((a,b)=>new Date(b.updatedAt||0)-new Date(a.updatedAt||0)); save(); updateSyncBadge(); cloudMsg('Loaded and merged cloud entries.'); }catch(e){ cloudMsg('Could not load cloud entries: '+e.message); } }
+async function syncNow(auto=false){
+  if(!await initFirebase()) return; if(!fbUser){ cloudMsg('Log in first, then press Sync Now.'); return; }
+  if(!navigator.onLine){ entries.forEach(e=>{ if(e.sync!=='Synced') e.sync='Waiting to sync'; }); save(); updateSyncBadge(); cloudMsg('Offline. Your pages are saved on this device and will sync when internet returns.'); return; }
+  const {doc,setDoc}=fbMods.fsM; const {ref,uploadBytes,getDownloadURL}=fbMods.stM; let ok=0;
+  for(const e of entries){ try{ let out={...e}; if(out.photoData&&out.photoData.startsWith('data:')){ const blob=await(await fetch(out.photoData)).blob(); const r=ref(fbStorage,'users/'+fbUser.uid+'/media/'+e.id+'/photo.jpg'); await uploadBytes(r,blob,{contentType:'image/jpeg'}); out.photoUrl=await getDownloadURL(r); delete out.photoData; } if(out.audioData&&out.audioData.startsWith('data:')){ const blob=await(await fetch(out.audioData)).blob(); const r=ref(fbStorage,'users/'+fbUser.uid+'/media/'+e.id+'/voice.webm'); await uploadBytes(r,blob,{contentType:'audio/webm'}); out.audioUrl=await getDownloadURL(r); delete out.audioData; } out.sync='Synced'; await setDoc(doc(fbDb,'users',fbUser.uid,'entries',e.id),out,{merge:true}); e.sync='Synced'; if(out.photoUrl){ e.photoUrl=out.photoUrl; delete e.photoData; } if(out.audioUrl){ e.audioUrl=out.audioUrl; delete e.audioData; } ok++; }catch(err){ e.sync='Sync needs attention'; console.error(err); } }
+  save(); updateSyncBadge(); if(ok===entries.length){ toast('Synced to Legacy Vault'); cloudMsg('Synced '+ok+' of '+entries.length+' entries.'); } else { toast('Sync needs attention'); cloudMsg('Synced '+ok+' of '+entries.length+' entries. Some pages still need attention. Local copies remain safe.'); }
+}
+// NETWORK
+function updateNet(){ const on=navigator.onLine; if($('onlineBadge')){ $('onlineBadge').textContent='ONLINE'; $('onlineBadge').className='pill '+(on?'onlineActive':'inactive'); } if($('offlineBadge')){ $('offlineBadge').textContent='OFFLINE'; $('offlineBadge').className='pill '+(!on?'offlineActive':'inactive'); } updateSyncBadge(); }
+window.addEventListener('online',()=>{ updateNet(); toast('Internet restored.'); if(hasPendingSync()&&fbUser) syncNow(true); else if(hasPendingSync()) setStatus('pageStatus','Internet restored. Log in or press Sync Now to send saved pages to the Legacy Vault.','warn'); });
+window.addEventListener('offline',()=>{ updateNet(); toast('Offline. You can still write and save.'); setStatus('pageStatus','You are offline. Press Save Page; your writing will stay on this device.','warn'); });
+// INIT
+updateNet(); renderEntries(); renderGuide(); updateCounts(); loadVoiceProfile(false); renderSavedGuidance();
+setStatus('pageStatus','Ready. Write, then press Save Page.','warn');
+setAllStatus(['photoStatus','inlinePhotoStatus'],'No photo saved for this page yet.','warn');
+setAllStatus(['voiceStatus','inlineVoiceStatus'],'No voice note saved for this page yet.','warn');
+const savedEp=localStorage.getItem(EP); if(savedEp&&$('mentorEndpoint')) $('mentorEndpoint').value=savedEp;
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }
+</script>
+</body>
+</html>
