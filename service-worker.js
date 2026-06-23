@@ -1,4 +1,4 @@
-const CACHE_NAME = 'living-pages-v2-7';
+const CACHE_NAME = 'living-pages-v2-9';
 const ASSETS = ['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./firebase-config.js'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
