@@ -1,412 +1,157 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>The Living Pages V2.0 Onyx Ivory Gold</title>
-  <meta name="theme-color" content="#0E0D0C" />
-  <meta name="description" content="A private offline-first legacy studio for recovering your own poetic voice." />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
-
-  <style>
-
-    :root{
-      --ink:#111111;
-      --ink2:#1C1B1A;
-      --night:#0A0A0A;
-      --onyx:#101112;
-      --blackgold:#151515;
-      --paper:#FFFDF9;
-      --paper2:#F7F2E8;
-      --page:#FAF6ED;
-      --vellum:#E9E0D1;
-      --pearl:#FFFBF2;
-      --muted:#5D5650;
-      --gold:#B88A32;
-      --gold2:#C8A96B;
-      --gold3:#A9782A;
-      --champagne:#D7BE7A;
-      --line:#C8A96B;
-      --line2:#E8DFC9;
-      --rose:#F0E9E2;
-      --danger:#88414B;
-      --shadow:0 26px 70px rgba(10,8,7,.22);
-      --softshadow:0 12px 30px rgba(20,16,12,.10);
-      --glow:0 0 0 1px rgba(211,181,113,.26), 0 22px 56px rgba(184,137,69,.20);
-      --radius:30px;
-    }
-    *{box-sizing:border-box}
-    html{background:var(--night)}
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--ink);
-      font-family: Georgia, 'Times New Roman', Palatino, serif;
-      background:
-        radial-gradient(circle at 50% -12%, rgba(255,245,218,.22), transparent 23%),
-        radial-gradient(circle at 12% 8%, rgba(184,137,69,.33), transparent 24%),
-        radial-gradient(circle at 92% 8%, rgba(224,201,140,.23), transparent 25%),
-        linear-gradient(180deg,#070707 0%, #121212 19%, #EFE7D8 20%, #FFFDF9 55%, #F5EFE3 100%);
-      position:relative;
-    }
-    body:before{
-      content:'';
-      position:fixed; inset:0; pointer-events:none; opacity:.62;
-      background:
-        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
-        radial-gradient(circle at 50% 0%, rgba(211,181,113,.25), transparent 38%);
-      background-size:46px 46px,46px 46px,100% 100%;
-      mix-blend-mode:soft-light;
-    }
-    body:after{
-      content:'✦'; position:fixed; right:40px; top:30px; color:rgba(211,181,113,.44); font-size:64px; pointer-events:none;
-      text-shadow:0 0 22px rgba(211,181,113,.28);
-    }
-    button,input,textarea,select{font:inherit}
-    button{cursor:pointer}
-    .app{max-width:1180px;margin:0 auto;padding:28px 18px 96px}
-
-    .top{
-      display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:20px;
-      padding:22px 24px;color:#FFF8E8;
-      border:1px solid rgba(211,181,113,.52);
-      border-radius:34px;
-      background:
-        linear-gradient(135deg,rgba(14,13,12,.98),rgba(35,25,20,.96) 58%,rgba(70,48,29,.92)),
-        radial-gradient(circle at 16% 14%,rgba(224,201,140,.24),transparent 30%);
-      box-shadow:0 28px 72px rgba(11,8,6,.34), inset 0 0 0 1px rgba(255,255,255,.06);
-      position:relative;overflow:hidden;
-    }
-    .top:before{
-      content:'';position:absolute;inset:12px;border:1px solid rgba(224,201,140,.24);border-radius:24px;pointer-events:none;
-    }
-    .top:after{
-      content:'A private jewel box for memory, voice, and the truths your children will inherit';
-      position:absolute;left:118px;bottom:14px;color:rgba(255,248,232,.52);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:ui-sans-serif,system-ui,sans-serif;
-    }
-    .brand{display:flex;gap:18px;align-items:center;min-width:0;position:relative;z-index:1;padding-bottom:14px}
-    .seal{
-      width:76px;height:76px;border-radius:50%;display:grid;place-items:center;color:#111111;font-size:27px;letter-spacing:.03em;font-weight:bold;
-      background:
-        radial-gradient(circle at 35% 24%,#fffef8 0%,#EEDB9A 34%,#B88A32 63%,#111111 100%);
-      border:2px solid rgba(255,245,215,.86);
-      box-shadow:0 0 0 5px rgba(184,137,69,.14), 0 18px 42px rgba(0,0,0,.38), inset 0 1px 10px rgba(255,255,255,.42);
-      flex:0 0 auto;
-    }
-    h1{
-      font-size:48px;line-height:.92;margin:0;color:#F7E4AF;font-weight:normal;letter-spacing:.01em;
-      text-shadow:0 2px 0 rgba(0,0,0,.16),0 0 26px rgba(224,201,140,.22);
-    }
-    .ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#D3B571;letter-spacing:.16em;text-transform:uppercase;margin-top:6px;font-weight:700}
-    .tag{font-size:17px;color:#D7BE7A;margin-top:8px;font-style:italic}
-    .pill,.syncStatus{
-      border:1px solid rgba(224,201,140,.55);background:rgba(255,251,242,.06);padding:12px 16px;border-radius:999px;color:#FFF7E5;font-size:13px;box-shadow:0 12px 30px rgba(0,0,0,.22);backdrop-filter:blur(10px);position:relative;z-index:1;
-    }
-    .syncStatus{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
-    .syncStatus.off{background:rgba(104,54,64,.42);color:#ffe6de}.syncStatus.on{background:rgba(56,78,64,.42);color:#edfff1}
-
-    .nav{display:flex;gap:10px;overflow:auto;padding:4px 2px 24px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
-    .nav button{
-      border:1px solid rgba(184,137,69,.45);background:rgba(255,253,248,.96);color:var(--ink);border-radius:999px;padding:11px 17px;white-space:nowrap;box-shadow:0 9px 24px rgba(23,18,14,.08);
-    }
-    .nav button.active{background:linear-gradient(135deg,#090909,#1A1A1A);color:#FFF6DE;border-color:#CFAE66;box-shadow:0 12px 28px rgba(20,13,8,.22)}
-    .panel{display:none}.panel.active{display:block}
-    .hero{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
-
-    .card{
-      position:relative;background:
-        linear-gradient(180deg,rgba(255,253,248,.99),rgba(252,247,239,.98)),
-        radial-gradient(circle at 88% 6%,rgba(224,201,140,.16),transparent 26%);
-      border:1px solid rgba(184,137,69,.42);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);overflow:hidden;
-    }
-    .card:before{
-      content:'';position:absolute;left:18px;right:18px;top:18px;bottom:18px;border:1px solid rgba(184,137,69,.19);border-radius:22px;pointer-events:none;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.56);
-    }
-    .card:after{
-      content:'✧';position:absolute;right:26px;top:20px;color:rgba(184,137,69,.33);font-size:28px;pointer-events:none;
-    }
-    .card>*{position:relative;z-index:1}
-    .card h2{margin:0 0 14px;color:var(--ink);font-size:34px;font-weight:normal;letter-spacing:.01em}
-    .card h3{margin:0 0 12px;color:var(--ink);font-size:24px;font-weight:normal}
-    .small{font-size:16px;color:var(--muted);line-height:1.68}
-    .quote{
-      border-left:4px solid var(--gold);padding:14px 0 14px 18px;color:#3F3B36;font-style:italic;line-height:1.72;
-      background:linear-gradient(90deg,rgba(224,201,140,.16),rgba(255,253,248,.35));border-radius:0 18px 18px 0;margin-top:16px;
-    }
-    .bigbtn{
-      border:1px solid rgba(224,201,140,.7);background:linear-gradient(135deg,#080808 0%, #171717 58%, #A9782A 130%);color:#FFF6DE;border-radius:18px;padding:16px 18px;width:100%;font-weight:bold;box-shadow:0 18px 36px rgba(32,22,13,.26);margin:8px 0;letter-spacing:.01em;
-    }
-    .bigbtn:hover{box-shadow:0 20px 42px rgba(32,22,13,.30),0 0 0 3px rgba(211,181,113,.14)}
-    .ghost{border:1px solid rgba(184,137,69,.48);background:rgba(255,253,248,.98);color:var(--ink);border-radius:16px;padding:11px 14px;box-shadow:0 8px 20px rgba(23,18,14,.07)}
-    .ghost:hover{border-color:#B89146;background:#FFFBF2}
-    .mini{font-family:ui-sans-serif,system-ui,sans-serif;font-size:13px;border:1px solid rgba(184,137,69,.42);background:#FFFDF8;color:var(--ink);border-radius:13px;padding:8px 10px}
-    .danger{color:#FFFDFC;background:var(--danger);border-color:var(--danger)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .door{min-height:150px;border-radius:24px;border:1px solid rgba(184,137,69,.38);background:linear-gradient(150deg,#FFFDF9,#F5EFE3);padding:22px;text-align:left;box-shadow:var(--softshadow);position:relative;overflow:hidden}
-    .door:before{content:'';position:absolute;inset:10px;border:1px solid rgba(184,137,69,.14);border-radius:18px;pointer-events:none}
-    .door:after{content:'✦';position:absolute;right:18px;bottom:12px;color:rgba(184,137,69,.23);font-size:42px}
-    .door b{display:block;color:var(--ink);font-size:21px;margin-bottom:10px;font-weight:normal}.door span{color:var(--muted);font-size:14px;line-height:1.5}.door:hover{outline:2px solid rgba(184,137,69,.30)}
-    .flow{max-width:850px;margin:0 auto}.steps{display:flex;gap:8px;margin:10px 0 22px}.dot{height:6px;flex:1;background:#E4D5BC;border-radius:999px}.dot.on{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-    .prompt{font-size:34px;color:var(--ink);line-height:1.22;margin:14px 0 8px;font-weight:normal}.hint{color:#4E4A45;line-height:1.72;font-style:italic;font-size:17px}
-    .field{margin:14px 0}label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#7A6338;margin:0 0 7px;font-weight:700}
-    input,textarea,select{width:100%;border:1px solid rgba(184,137,69,.36);border-radius:18px;background:#FFFDF8;color:var(--ink);padding:14px 15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.86)}
-    input:focus,textarea:focus,select:focus{border-color:rgba(184,137,69,.85);box-shadow:0 0 0 4px rgba(184,137,69,.14)}
-    textarea{min-height:220px;resize:vertical;line-height:1.86;background:linear-gradient(#FFFDF9 35px,#F6F0E6 36px);background-size:100% 36px;font-size:17px}
-    .row{display:flex;gap:9px;flex-wrap:wrap}.row .ghost,.row .mini,.row .bigbtn{width:auto}.workbench{display:grid;grid-template-columns:.84fr 1.16fr;gap:18px}
-    .seedbox{border:1px solid rgba(184,137,69,.38);background:linear-gradient(180deg,#FFFDF9,#F5EFE3);border-radius:20px;padding:16px;margin:11px 0;box-shadow:var(--softshadow)}.seedbox b{color:var(--ink);font-weight:normal;font-size:18px}
-    .poemlist{display:grid;gap:14px}.entry{border:1px solid rgba(184,137,69,.35);border-radius:22px;background:linear-gradient(180deg,#FFFDF9,#F6F0E6);padding:20px;box-shadow:var(--softshadow)}
-    .entrytop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.entry h3{margin:0;color:var(--ink);font-weight:normal;font-size:22px}.badge{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;border:1px solid rgba(184,137,69,.34);border-radius:999px;padding:5px 8px;color:#705631;background:#FFFDF8}.poemtext{white-space:pre-wrap;line-height:1.68;margin-top:12px;color:#1C1A19}
-    .mentorout{background:linear-gradient(180deg,#FFFBF2,#FFFDF9);border:1px solid rgba(184,137,69,.36);border-radius:20px;padding:16px;line-height:1.72;white-space:pre-wrap;color:#353331}.empty{text-align:center;color:var(--muted);padding:30px;border:1px dashed rgba(184,137,69,.48);border-radius:22px;background:#FFFBF2}
-    .footerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(15,13,11,.86);border-top:1px solid rgba(211,181,113,.45);backdrop-filter:blur(16px);padding:10px 14px;display:flex;justify-content:center;gap:10px;z-index:10}.footerbar button{max-width:220px;background:#FFFDF9}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);background:#11100F;color:#FFF6DE;padding:12px 17px;border-radius:999px;box-shadow:var(--shadow);z-index:99;opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1}
-    .filebox{border:1px dashed rgba(184,137,69,.58);border-radius:20px;padding:15px;background:#FFFBF2;margin:12px 0}.photoPreview{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.photoPreview img{width:82px;height:82px;object-fit:cover;border-radius:16px;border:1px solid rgba(184,137,69,.36);box-shadow:var(--softshadow)}.audioRow audio{width:100%;margin-top:8px}.rec{background:#FFFDF8;color:var(--danger);border-color:#d8a7a7}.rec.on{background:var(--danger);color:#FFFDFC}
-    @media(max-width:860px){.hero,.workbench,.grid2{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.top:after{left:24px;bottom:10px;right:24px}.brand{padding-bottom:28px}.pill{display:none}.app{padding-left:12px;padding-right:12px}.card{padding:24px}.prompt{font-size:28px}h1{font-size:40px}}
-    @media(max-width:560px){.grid{grid-template-columns:1fr}h1{font-size:33px}.seal{width:58px;height:58px}.footerbar{justify-content:stretch}.footerbar button{flex:1}.nav button{padding:10px 12px}.row .ghost,.row .mini{flex:1}.row .bigbtn{width:100%}.card{border-radius:24px;padding:21px}.prompt{font-size:25px}.top{border-radius:26px;padding:18px}.brand{gap:13px}.top:after{font-size:10px}}
-
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>The Living Pages V2.2 True Mentor Legacy Journal</title>
+<meta name="theme-color" content="#0B0B0C" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<script src="firebase-config.js"></script>
+<style>
+:root{
+  --onyx:#0B0B0C;--onyx2:#151515;--ink:#171514;--muted:#6A6258;--paper:#FFFDF8;--ivory:#F7F1E7;--vellum:#EFE4D1;
+  --gold:#B89146;--gold2:#D2B36F;--deepgold:#8D6727;--line:#D9CBAE;--rose:#F5ECE6;--green:#3d5b46;--red:#8f3943;
+  --shadow:0 24px 70px rgba(10,9,8,.18);--soft:0 14px 36px rgba(20,16,12,.09);--r:26px;
+}
+*{box-sizing:border-box} html{background:var(--onyx)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(circle at 50% -10%,rgba(210,179,111,.24),transparent 26%),linear-gradient(180deg,#090909 0,#151515 230px,#F5EFE4 231px,#FFFDF8 62%,#F4EBDC 100%)}
+body:before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.55;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px;mix-blend-mode:soft-light}.app{max-width:1180px;margin:0 auto;padding:26px 16px 90px}.top{position:relative;overflow:hidden;display:flex;justify-content:space-between;gap:18px;align-items:center;color:#fff7e2;padding:24px 25px;border:1px solid rgba(210,179,111,.58);border-radius:34px;background:linear-gradient(135deg,#080808,#161616 58%,#272117);box-shadow:0 28px 70px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.05)}.top:before{content:'';position:absolute;inset:12px;border:1px solid rgba(210,179,111,.24);border-radius:24px}.brand{display:flex;gap:18px;align-items:center;position:relative;z-index:1}.seal{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;color:#111;font-size:26px;font-weight:bold;background:radial-gradient(circle at 35% 22%,#fff 0,#F5E2A6 36%,#B89146 65%,#121212 100%);border:2px solid #F6E4B7;box-shadow:0 0 0 5px rgba(184,145,70,.14),0 18px 42px rgba(0,0,0,.38)}h1{font-size:46px;line-height:.92;margin:0;color:#F7E4AF;font-weight:normal;text-shadow:0 0 24px rgba(210,179,111,.22)}.tag{font-style:italic;color:#D9C080;margin-top:8px;font-size:17px}.ver{font-family:ui-sans-serif,system-ui,sans-serif;font-size:11px;color:#D2B36F;letter-spacing:.14em;text-transform:uppercase;margin-top:7px;font-weight:800}.status{position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.pill{border:1px solid rgba(210,179,111,.54);background:rgba(255,255,255,.07);padding:10px 13px;border-radius:999px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase}.pill.on{background:rgba(61,91,70,.42)}.pill.off{background:rgba(143,57,67,.38)}.nav{display:flex;gap:10px;overflow:auto;padding:18px 2px 24px;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{border:1px solid rgba(184,145,70,.42);background:rgba(255,253,248,.97);border-radius:999px;padding:11px 16px;white-space:nowrap;box-shadow:0 8px 20px rgba(20,16,12,.06);color:#211d18}.nav button.active{background:linear-gradient(135deg,#090909,#1b1b1b);color:#fff3d5;border-color:#D2B36F}.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}.card{background:linear-gradient(180deg,rgba(255,253,248,.99),rgba(251,246,238,.98));border:1px solid rgba(184,145,70,.32);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;position:relative}.card:before{content:'';position:absolute;inset:9px;border:1px solid rgba(184,145,70,.16);border-radius:20px;pointer-events:none}.card>*{position:relative}.mini{font-family:ui-sans-serif,system-ui,sans-serif;color:var(--deepgold);letter-spacing:.12em;text-transform:uppercase;font-size:11px;font-weight:800}.headline{font-size:42px;line-height:1.02;margin:9px 0 10px}.copy{color:#4F4740;font-size:17px;line-height:1.62}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:1px solid rgba(184,145,70,.48);border-radius:999px;padding:12px 16px;background:#FFFDF8;color:#161514;box-shadow:var(--soft);font-weight:700}.btn.primary{background:linear-gradient(135deg,#080808,#1b1b1b);color:#fff4d8;border-color:#D2B36F}.btn.gold{background:linear-gradient(135deg,#B89146,#8D6727);color:#fff7e8}.btn.small{font-size:13px;padding:9px 12px}.modeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.mode{padding:17px;border-radius:22px;background:#FFFDFB;border:1px solid rgba(184,145,70,.28);box-shadow:var(--soft);cursor:pointer}.mode b{display:block;font-size:20px;margin-bottom:6px}.mode span{display:block;color:var(--muted);font-size:14px;line-height:1.45}.editor{display:grid;grid-template-columns:1fr 340px;gap:20px}.field{margin:12px 0}label{display:block;font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#8D6727;font-weight:900;margin-bottom:7px}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:18px;background:#FFFDFB;color:var(--ink);padding:13px 14px;outline:none}textarea{min-height:330px;resize:vertical;line-height:1.58;font-size:16px}.counts{font-family:ui-sans-serif,system-ui,sans-serif;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;margin-top:7px}.promptBox{padding:16px;border-radius:20px;background:linear-gradient(180deg,#fffaf1,#f7edde);border:1px solid rgba(184,145,70,.28);margin-top:10px}.promptTitle{font-size:19px;color:#2c241b;margin-bottom:8px}.steps{display:grid;gap:9px;margin-top:10px}.step{padding:12px;border-radius:16px;background:rgba(255,255,255,.76);border:1px solid rgba(217,203,174,.8);color:#4c443d;line-height:1.5}.mentorBox{min-height:220px;padding:16px;border-radius:20px;background:#101010;color:#f8ecd0;border:1px solid rgba(210,179,111,.45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);white-space:pre-wrap;line-height:1.6}.mentorBox b{color:#F5D58C}.sideList{display:grid;gap:10px}.entry{padding:13px 14px;border:1px solid rgba(184,145,70,.24);border-radius:18px;background:#fffdf9;cursor:pointer}.entry b{display:block}.entry span{font-family:ui-sans-serif,system-ui,sans-serif;color:var(--muted);font-size:12px}.chipRow{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid rgba(184,145,70,.35);background:#fffaf1;border-radius:999px;padding:8px 11px;font-size:13px;cursor:pointer}.photoPreview{max-width:100%;border-radius:18px;margin-top:10px;border:1px solid var(--line)}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff3d5;border:1px solid #D2B36F;border-radius:999px;padding:12px 18px;box-shadow:var(--shadow);z-index:20;display:none}.toast.show{display:block}@media(max-width:850px){.top{align-items:flex-start;flex-direction:column}.grid,.editor{grid-template-columns:1fr}.headline{font-size:34px}h1{font-size:38px}.modeGrid{grid-template-columns:1fr}.app{padding-bottom:120px}}
+</style>
 </head>
 <body>
 <div class="app">
-  <div class="top">
-    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy studio for recovering your own voice</div><div class="ver">V2.0 ONYX IVORY GOLD</div></div></div>
-    <div class="pill">A jewel box of memory. You write. Your children inherit your voice.</div>
-  </div>
-  <div class="nav" id="nav"></div>
+  <header class="top">
+    <div class="brand"><div class="seal">LP</div><div><h1>The Living Pages</h1><div class="tag">A legacy journal for poems, memories, photographs, and the voice only you can leave.</div><div class="ver">V2.2 TRUE MENTOR LEGACY JOURNAL</div></div></div>
+    <div class="status"><div id="netStatus" class="pill">Checking</div><div id="syncStatus" class="pill">Device first</div></div>
+  </header>
+  <nav class="nav">
+    <button class="active" data-tab="home">Home</button><button data-tab="write">Write</button><button data-tab="mentor">True Mentor</button><button data-tab="vault">Legacy Vault</button><button data-tab="media">Photos & Voice</button><button data-tab="cloud">Firebase</button>
+  </nav>
 
   <section id="home" class="panel active">
-    <div class="hero">
+    <div class="grid">
+      <div class="card"><div class="mini">Private legacy studio</div><div class="headline">Leave something true today.</div><p class="copy">Write freely when your voice is already awake. Ask for guidance when you need a doorway. Store unfinished pages when the memory needs time. Your poems remain yours; the mentor only helps you hear what is already there.</p><div class="actions"><button class="btn primary" onclick="openWriter('free')">Write Freely</button><button class="btn gold" onclick="openWriter('guided')">Guide Me Gently</button><button class="btn" onclick="openWriter('daily')">Today’s Living Page</button></div></div>
+      <div class="card"><div class="mini">Choose your doorway</div><div class="modeGrid">
+        <div class="mode" onclick="openWriter('free')"><b>Write Freely</b><span>A blank elegant page for a poem, memory, letter, prayer, or unfinished thought.</span></div>
+        <div class="mode" onclick="openWriter('guided')"><b>Guide Me Gently</b><span>Structured prompts that are clear, specific, varied, and never a cage.</span></div>
+        <div class="mode" onclick="openWriter('photo')"><b>Preserve a Photograph</b><span>Attach an image and write what it shows, hides, and should preserve.</span></div>
+        <div class="mode" onclick="openWriter('voice')"><b>Record My Voice</b><span>Speak first when writing feels hard. Save the sound of your own story.</span></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="write" class="panel">
+    <div class="editor">
       <div class="card">
-        <h2>Open a living page</h2>
-        <p class="small">Begin with one memory, one photograph, or one feeling. Open it like a jewel box: one treasure at a time, held gently in your own words.</p>
-        <button class="bigbtn" onclick="startCreate()">Open a Living Page</button>
-        <div class="quote">“These are the treasures I leave behind: my words, my voice, my memory, my love.”</div>
-        <p class="small"><b>Offline-ready:</b> after you open this from GitHub Pages once, it can open without internet. Drafts save first on this device. Firebase sync comes next.</p>
+        <div class="mini" id="writeModeLabel">Write Freely</div>
+        <div class="field"><label>Title</label><input id="title" placeholder="Untitled Living Page"></div>
+        <div class="field"><label>What kind of page is this?</label><select id="type"><option>Fragment</option><option>Memory Seed</option><option>Unfinished Page</option><option>Working Poem</option><option>Legacy Poem</option><option>Letter Note</option><option>Daily Page</option><option>Photograph Story</option><option>Voice Note</option></select></div>
+        <div class="field"><label>Your Draft / Fragment</label><textarea id="draft" placeholder="Write anything here. A line. A memory. A poem. A note to your children. A story behind a photograph. Something unfinished."></textarea><div class="counts"><span id="wc">0 words</span><span id="cc">0 characters</span></div></div>
+        <div class="actions"><button class="btn primary" onclick="saveEntry()">Save Page</button><button class="btn" onclick="mentor('continue')">Help Me Continue</button><button class="btn" onclick="mentor('finish')">Help Me Finish</button><button class="btn" onclick="storeLater()">Store for Later</button></div>
       </div>
-      <div class="card">
-        <h3>Today’s doorway</h3>
-        <p class="small" id="todayDoor"></p>
-        <button class="ghost" onclick="randomDoorPrompt()">Give me another doorway</button>
-        <button class="ghost" onclick="showPanel('doors')">Choose a Voice Door</button>
-      </div>
-    </div>
-    <div class="grid2" style="margin-top:16px">
-      <div class="card"><h3>Saved pieces</h3><p class="small" id="stats"></p></div>
-      <div class="card"><h3>Legacy rule</h3><p class="small"><b>AI does not write my legacy.</b><br>It reads what I wrote, gives tailored guidance, asks better questions, and helps me return to my own words.</p></div>
+      <aside class="card"><div class="mini">Guidance doorway</div><div id="guidePanel" class="promptBox"><div class="promptTitle">Write freely.</div><div class="copy">No prompt will interrupt you. When you want help, press a mentor button.</div></div><div class="field"><label>Memory anchor — type anything</label><input id="anchor" placeholder="Example: cypress tree, school waiting room, sand, rock, a dress, a vacation, a sound"></div><div class="field"><label>Theme / Door</label><select id="theme" onchange="renderGuide()"><option>Open / Not sure</option><option>Mother</option><option>Father</option><option>Children</option><option>Home</option><option>Photograph</option><option>Prayer</option><option>Travel / Vacation</option><option>Daily Life</option><option>Becoming</option><option>Legacy Letter</option></select></div><div class="actions"><button class="btn small" onclick="renderGuide(true)">Give me another path</button><button class="btn small" onclick="insertPromptStarter()">Use this as starter</button></div></aside>
     </div>
   </section>
 
-  <section id="create" class="panel">
-    <div class="flow card">
-      <div class="steps" id="steps"></div>
-      <div class="prompt" id="flowPrompt"></div>
-      <div class="hint" id="flowHint"></div>
-      <div class="field"><textarea id="flowAnswer" placeholder="Write plainly. It does not need to sound like a poem yet."></textarea></div>
-      <div class="row"><button class="ghost" onclick="prevStep()">Back</button><button class="bigbtn" onclick="nextStep()">Continue</button><button class="ghost" onclick="saveAsFragmentNow()">Save what I have</button></div>
-    </div>
-  </section>
+  <section id="mentor" class="panel"><div class="grid"><div class="card"><div class="mini">True mentor buttons</div><div class="headline">Guidance that responds to this page.</div><p class="copy">The local version gives a strong preview. When your secure AI mentor endpoint is connected, these buttons will read the actual page deeply and return custom mentor notes without writing the poem for you.</p><div class="actions"><button class="btn" onclick="mentor('clearer')">Make it Clearer</button><button class="btn" onclick="mentor('voice')">Make it More Like Me</button><button class="btn" onclick="mentor('finish')">Help Me Finish</button><button class="btn" onclick="mentor('deeper')">Ask Me Deeper Questions</button></div></div><div class="card"><div class="mini">Mentor Response</div><div id="mentorOut" class="mentorBox">Write or paste a page, then ask the mentor for help.</div></div></div></section>
 
-  <section id="workbench" class="panel">
-    <div class="workbench">
-      <div class="card">
-        <h2>Your seed</h2>
-        <div id="seedSummary"></div>
-        <div class="filebox">
-          <b>Optional legacy attachments</b>
-          <p class="small">Attach small photos or record your voice. This V2.0 saves them only on this device. Firebase cloud vault comes next.</p>
-          <input type="file" id="photoInput" accept="image/*" multiple onchange="handlePhotos(event)">
-          <div class="photoPreview" id="photoPreview"></div>
-          <div class="row" style="margin-top:10px"><button class="mini rec" id="recBtn" onclick="toggleRecord()">Record voice</button><button class="mini" onclick="clearAudio()">Clear audio</button></div>
-          <div class="audioRow" id="audioRow"></div>
-        </div>
-      </div>
-      <div class="card">
-        <h2>Editing window</h2>
-        <p class="small">Draft in your words. Then choose a gentle companion. The guidance will read what you wrote and respond to its theme, image, and feeling — not repeat the same generic advice.</p>
-        <div class="field"><label>Title</label><input id="draftTitle" placeholder="Untitled piece"></div>
-        <div class="field"><label>Your draft / fragment</label><textarea id="draftText" placeholder="Start arranging your own lines here..."></textarea></div>
-        <div class="field"><label>Save as</label><select id="draftStatus"><option>Fragment</option><option>Memory Seed</option><option>Working Poem</option><option>Legacy Poem</option><option>Letter Note</option></select></div>
-        <div class="row"><button class="ghost" onclick="mentor('clear')">Make it clearer</button><button class="ghost" onclick="mentor('voice')">Make it more like me</button><button class="ghost" onclick="mentor('finish')">Help me finish</button></div>
-        <div class="mentorout" id="mentorOut" style="margin-top:12px">Your tailored guidance will appear here. It will not write the poem for you.</div>
-        <button class="bigbtn" onclick="saveDraft()">Save to My Living Pages</button>
-      </div>
-    </div>
-  </section>
+  <section id="vault" class="panel"><div class="grid"><div class="card"><div class="mini">Legacy Vault</div><div class="headline">Pages waiting for you.</div><div class="actions"><button class="btn" onclick="exportBackup()">Export Backup</button><label class="btn"><input class="hidden" type="file" accept="application/json" onchange="importBackup(event)">Import Backup</label><button class="btn" onclick="newEntry()">New Page</button></div><div id="entryList" class="sideList" style="margin-top:18px"></div></div><div class="card"><div class="mini">Selected Page</div><div id="selectedEntry" class="copy">Choose a page from the vault.</div></div></div></section>
 
-  <section id="doors" class="panel">
-    <div class="card"><h2>Voice Doors</h2><p class="small">Choose the emotional room you want to enter. The app will ask, not write.</p><div class="grid" id="doorGrid"></div></div>
-  </section>
+  <section id="media" class="panel"><div class="grid"><div class="card"><div class="mini">Photographs</div><p class="copy">Attach a photo to the current page. In this local/offline version it is stored on this device. Firebase Storage sync will upload it after your project is connected.</p><input type="file" accept="image/*" onchange="attachPhoto(event)"><img id="photoPreview" class="photoPreview hidden" alt="photo preview"></div><div class="card"><div class="mini">Voice Recorder</div><p class="copy">Record a spoken memory or read your poem. Your children may one day treasure the sound of your voice as much as the words.</p><div class="actions"><button class="btn" onclick="startRec()">Record</button><button class="btn" onclick="stopRec()">Stop</button></div><audio id="audioPreview" controls class="hidden" style="width:100%;margin-top:12px"></audio></div></div></section>
 
-  <section id="archive" class="panel">
-    <div class="card">
-      <div class="entrytop"><div><h2>My Archive</h2><p class="small">Fragments, memory seeds, working poems, legacy poems, and letter notes.</p></div><button class="ghost" onclick="newBlank()">New blank entry</button></div>
-      <div class="poemlist" id="poemList"></div>
-    </div>
-  </section>
-
-  <section id="voice" class="panel">
-    <div class="card"><h2>My Voice Map</h2><p class="small">This is a gentle mirror based on the themes you save. It will become richer as you add more pieces.</p><div id="voiceMap"></div></div>
-  </section>
-
-  <section id="backup" class="panel">
-    <div class="card"><h2>Export / Import Legacy</h2><p class="small">Use Export often. V2.0 saves on this browser/device only. When we move to Firebase, this becomes your backup file.</p><div class="row"><button class="bigbtn" onclick="exportData()">Export Legacy Backup</button><label class="ghost" style="display:inline-block">Import Backup<input type="file" accept="application/json" onchange="importData(event)" style="display:none"></label><button class="ghost danger" onclick="resetAll()">Reset Demo Data</button></div></div>
-  </section>
-</div>
-<div class="footerbar"><button class="mini" onclick="showPanel('home')">Home</button><button class="mini" onclick="startCreate()">Create Today</button><button class="mini" onclick="showPanel('archive')">Archive</button></div>
-<div class="toast" id="toast"></div>
+  <section id="cloud" class="panel"><div class="grid"><div class="card"><div class="mini">Firebase Legacy Vault</div><div class="headline">Private cloud, device first.</div><p class="copy">Paste your Firebase config in <b>firebase-config.js</b>. Then enable Email/Password Authentication, Firestore, and Storage. This app keeps local/offline saving first, then syncs to your private legacy vault.</p><div class="field"><label>Email</label><input id="email" type="email" placeholder="you@example.com"></div><div class="field"><label>Password</label><input id="password" type="password" placeholder="password"></div><div class="actions"><button class="btn primary" onclick="firebaseLogin()">Login</button><button class="btn" onclick="firebaseSignup()">Create Account</button><button class="btn" onclick="syncNow()">Sync Now</button></div><div id="cloudMsg" class="promptBox">Firebase is ready to connect after config is added.</div></div><div class="card"><div class="mini">AI Mentor Endpoint</div><p class="copy">For the true mentor, use a secure Cloud Function endpoint. Never place secret AI keys inside GitHub. The browser sends your current page and receives guidance only.</p><div class="field"><label>Mentor endpoint</label><input id="mentorEndpoint" placeholder="https://...cloudfunctions.net/livingPagesMentor"></div><div class="actions"><button class="btn" onclick="saveEndpoint()">Save Endpoint</button><button class="btn" onclick="testEndpoint()">Test Mentor</button></div></div></div></section>
+</div><div id="toast" class="toast"></div>
 <script>
-const VERSION='V2.0 ONYX IVORY GOLD';
-const STORE='livingPagesV19';
-const panels=[['home','Home'],['create','Create Today'],['doors','Voice Doors'],['archive','Archive'],['voice','Voice Map'],['backup','Backup']];
+const $=id=>document.getElementById(id); const LS='living_pages_v22_entries'; const EP='living_pages_mentor_endpoint';
+let entries=JSON.parse(localStorage.getItem(LS)||'[]'), current=null, promptIndex=0, photoData='', audioData='';
 const doors={
-  Mother:{lead:'Enter through the photograph, the fragment, the ache of what love left behind.', prompts:['What fragment of your mother are you holding today?','What proof of love still remains in the image, the object, or the memory?','What question are you still asking her?']},
-  Father:{lead:'Enter through wonder, protection, sky, and the quiet lessons that returned years later.', prompts:['What did your father show you that still lives in you?','What sky, road, lesson, or silence brings him back?','What did you understand only years later?']},
-  Home:{lead:'Enter through rooms, gates, trees, names, and the things that stood while life happened.', prompts:['What stood quietly while your life was happening?','What sound belonged to that house?','Who moved through that home whose name should not disappear?']},
-  Children:{lead:'Enter through the sacred ordinary: waiting, fetching, watching time turn into years.', prompts:['What ordinary act became devotion?','What have you done so many times that it became love?','What do you want your children to know about your waiting?']},
-  Prayer:{lead:'Enter through fear, silence, hope, and the voice that rises only when the world grows quiet.', prompts:['What fear is speaking right now?','What silence are you sitting with?','What voice inside you is still gentle?']},
-  Becoming:{lead:'Enter through threshold, hesitation, the first piece, and the self who is ready to return.', prompts:['What piece of yourself are you ready to recover?','What are you beginning without knowing the whole picture?','What truth wants to return?']},
-  Photograph:{lead:'Enter through what is visible first: light, face, hand, room, date, and what the image still protects.', prompts:['Look slowly. What do you see?','Where does your eye go first?','What does this photograph preserve that memory could not?']},
-  Object:{lead:'Enter through one thing that witnessed you: tree, moon, gate, dress, window, school bag, cup, or flower.', prompts:['Choose one object. What did it witness?','What did it carry for you?','What human truth can it hold?']}
+  'Mother':[
+    ['Begin with one thing you know for certain about her.','Name the photograph, object, date, gesture, or sentence that proves it.','Write what you still do not know, but still feel.','Write what you want your children to understand about the love that reached you through fragments.'],
+    ['Choose one visible detail: her smile, dress, hands, hair, eyes, chair, cushion, or light.','Write where the light falls.','Write what the photo cannot tell you.','End by naming what remains even if memory is incomplete.'],
+    ['Write the question you would ask her if memory could answer.','Name the object that keeps the question alive.','Write what you imagine she might have wanted for you.','Save the question if it is not ready to become an answer.']
+  ],
+  'Children':[
+    ['Name one ordinary thing you did for your children.','Write how many years, days, rides, meals, waits, or small duties it repeated.','Write the sound of that season.','Write what you want them to know about that quiet love.'],
+    ['Choose one place connected to motherhood: school, kitchen, car, bedroom, hospital, airport, waiting room.','Write what you always did there.','Write the moment you realized time was passing.','Write what kind of waiting remains now.'],
+    ['Write one thing your children may not have noticed.','Name what you were feeling while doing it.','Write what changed as they grew.','End with the simplest truth you want them to carry.']
+  ],
+  'Home':[
+    ['Name the place exactly.','Choose what carries the memory: room, gate, tree, table, staircase, window, sound, smell, or person.','Write one ordinary thing that happened there.','Write what changed.','Write what should remain for your children.'],
+    ['Name one person who moved through the house.','Write what they did there.','Write a sound or phrase connected to them.','Write why their name deserves to remain.'],
+    ['Choose one thing that stood while life happened.','Write what it witnessed: laughter, meals, sewing, games, prayer, grief, goodbye.','Write what it could tell if it could speak.','End with what still stands in you.']
+  ],
+  'Photograph':[
+    ['Who is in the photograph?','Where are they seated or standing?','What do you see first?','What is missing from the photo?','What do you want this photo to preserve?'],
+    ['Name the date or life season if you know it.','Write the visible details: light, clothes, hands, face, background, object.','Write the feeling that rises as you look.','Write the story behind the photo in plain words first.'],
+    ['What does this image prove?','What does it hide?','Who would you want to show this to?','What should your children know when they see it?']
+  ],
+  'Prayer':[
+    ['Name the fear without dressing it up.','Write where you are: room, moonlight, bed, church, road, sea, silence.','Write what you asked for.','Write what answered: voice, silence, memory, wind, love, or nothing yet.'],
+    ['Do not rush to hope. Write the loneliness first.','Name the sound around you.','Write the moment the silence changes.','End softly, with what still holds you.'],
+    ['What is your spirit asking for?','What does your mind keep repeating?','What does your heart still believe?','Write one line of surrender, not performance.']
+  ],
+  'Travel / Vacation':[
+    ['Name the place.','Choose the small object or detail: sand, rock, key, towel, ticket, food, street, room, sea, church, market.','Write who was there.','Write why this small thing stayed with you.','Write what the trip revealed.'],
+    ['Write the first thing you remember: light, smell, food, weather, road, water, silence, laughter.','Write what you felt away from home.','Write what you brought back that was not in the luggage.'],
+    ['Choose one moment from the trip that looked ordinary.','Write what it meant only after time passed.','Write who you were in that place.','Write what part of you wanted to stay.']
+  ],
+  'Daily Life':[
+    ['What stayed with you today?','Name the exact moment, person, object, or sentence.','Write what you felt but did not say.','Write why this small thing might matter years from now.'],
+    ['Choose one scene from today.','Write the time of day.','Write what your body felt.','Write one sentence you want to keep from this day.'],
+    ['What did today reveal about the season of life you are in?','Name one ordinary evidence.','Write what you are learning without forcing a lesson.']
+  ],
+  'Becoming':[
+    ['Name what is asking you to begin again.','Write what you are afraid to choose.','Choose the image that carries the uncertainty.','Write the first piece, not the whole picture.'],
+    ['Write what you are no longer willing to abandon in yourself.','Name one proof that your voice is still alive.','Write what you want to practice returning to.'],
+    ['Choose one threshold: door, path, horizon, first step, puzzle piece, suitcase, blank page.','Write what is behind you.','Write what is ahead of you.','Write what you can do today.']
+  ],
+  'Legacy Letter':[
+    ['Write directly to your children: “I want you to know…”','Name the story behind the truth.','Write what love taught you.','End as a mother, not as a poet.'],
+    ['What story should not disappear?','Who needs to be named?','What did this person/place/moment give you?','What blessing do you want to leave?'],
+    ['Write what you may not have said enough.','Write why it was hard to say.','Write what you hope they understand later.']
+  ],
+  'Open / Not sure':[
+    ['Type anything that came to you: object, place, person, sound, smell, photo, phrase.','Write where it belongs in your life.','Write who is connected to it.','Write what feeling is attached.','Decide: continue now, finish now, or store for later.'],
+    ['Begin with the smallest specific thing.','Write the place.','Write the person, if any.','Write what changed.','Write what should not disappear.'],
+    ['Write one true sentence.','Underline the strongest word in it by rewriting that word below.','Follow that word into a memory.','Stop when you reach one clear image.']
+  ]
 };
-const flowPrompts={
-  Memory:[['Let the memory open softly.','Begin with the place, the hour, or the moment. Do not make it beautiful yet. Let it arrive plainly.'],['Let one detail step forward.','A clock, a gate, a tree, a Singer machine, a moon, rolling bags, an old cushion, a flower. Let the object stand.'],['Let the feeling beneath it speak.','Was it tenderness, ache, safety, longing, pride, fear, gratitude, or the quiet sadness of time passing?'],['Let the memory reveal what it carried.','What did this moment hold for you that no one else may have seen?'],['Let this page preserve one truth.','Write what you want your children, or your future self, to understand. One honest sentence is enough.']],
-  Photograph:[['Look slowly. What do you see?','Describe what is truly there: light, faces, hands, clothing, rooms, flowers, shadows, smiles, someone present, someone missing.'],['Let your eye choose first.','Where does your attention go before your mind explains it? Stay with that detail.'],['Let the photograph stir what it still carries.','What feeling rises as you look at it now? Tenderness, ache, proof of love, wonder, grief, gratitude, or a question.'],['Let the hidden story come closer.','What does this photograph hold that memory alone could not keep?'],['Let the page become a keepsake.','What do you want this photograph to preserve for the people you love?']],
-  Feeling:[['Name the feeling that arrived today.','Use ordinary words first. Tired. Afraid. Tender. Lonely. Hopeful. Restless. Soft.'],['Give the feeling an image.','If this feeling became a thing, what would it be: moon, sea, room, flower, street, cup, window, rain?'],['Let the image move.','What does it seem to be doing: waiting, bowing, hiding, opening, singing, witnessing, returning?'],['Let it touch a memory.','Who, what place, what season, what age, or what old self does it bring back?'],['Let one truth remain.','What did this feeling come to teach, reveal, or ask of you today?']]
-};
-let data={entries:[],lastDoor:null};
-let flowType='Memory', step=0, answers=[]; let photos=[]; let audioData=null; let mediaRecorder=null; let chunks=[];
-function load(){try{data=JSON.parse(localStorage.getItem(STORE))||data}catch(e){}; renderNav(); renderDoors(); renderStats(); randomDoorPrompt(false); renderArchive(); renderVoice();}
-function save(){localStorage.setItem(STORE,JSON.stringify(data));renderStats();renderArchive();renderVoice();}
-
-function updateDraftCount(){
-  const el=document.getElementById('draftText');
-  const out=document.getElementById('draftCount');
-  if(!el||!out) return;
-  const text=el.value.trim();
-  const words=text?text.split(/\s+/).filter(Boolean).length:0;
-  const chars=el.value.length;
-  let note='Write freely. Best for guidance: a few lines to about 1,500 words.';
-  if(words>1500) note='Long legacy piece. Save is okay, but guidance works better if you review one section at a time.';
-  out.textContent=`${words} words · ${chars} characters. ${note}`;
+function save(){localStorage.setItem(LS,JSON.stringify(entries)); renderEntries();}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function tab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));$(name).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+function openWriter(mode){tab('write'); newEntry(false); const labels={free:'Write Freely',guided:'Guide Me Gently',daily:'Today’s Living Page',photo:'Preserve a Photograph',voice:'Record My Voice'}; $('writeModeLabel').textContent=labels[mode]||'Write Freely'; if(mode==='daily'){$('type').value='Daily Page';$('theme').value='Daily Life'} if(mode==='photo'){$('type').value='Photograph Story';$('theme').value='Photograph'} if(mode==='voice'){$('type').value='Voice Note'} if(mode==='guided'){$('theme').value='Open / Not sure'} renderGuide();}
+function newEntry(clear=true){current=null;if(clear){$('title').value='';$('draft').value='';$('anchor').value='';photoData='';audioData='';$('photoPreview').classList.add('hidden');$('audioPreview').classList.add('hidden');updateCounts();}}
+$('draft').addEventListener('input', updateCounts); function updateCounts(){const t=$('draft').value.trim();$('wc').textContent=(t?t.split(/\s+/).length:0)+' words';$('cc').textContent=$('draft').value.length+' characters'}
+function renderGuide(next=false){if(next)promptIndex++; const theme=$('theme').value||'Open / Not sure'; const arr=doors[theme]||doors['Open / Not sure']; const steps=arr[promptIndex%arr.length]; $('guidePanel').innerHTML=`<div class="promptTitle">${theme} path ${promptIndex%arr.length+1}</div><div class="steps">${steps.map(s=>`<div class="step">${s}</div>`).join('')}</div>`;}
+function insertPromptStarter(){const theme=$('theme').value; const anchor=$('anchor').value.trim(); const starter=`\n\n[${theme}${anchor?' — '+anchor:''}]\n`; $('draft').value += starter; updateCounts();}
+function detect(){const text=($('title').value+' '+$('anchor').value+' '+$('draft').value).toLowerCase(); const map=[['Mother',['mother','mom','mama','photograph','smile','baby','october','fragments']],['Children',['children','boys','son','school','waiting','xavier','senior','fetch','fifteen']],['Home',['home','house','room','gate','tree','cypress','singer','driver','caretaker','kitchen']],['Father',['father','dad','sky','stars','jove','orion','dipper']],['Prayer',['prayer','god','soul','spirit','fear','hope','silence','moon','love']],['Photograph',['photo','photograph','picture','image','captured','fading']],['Travel / Vacation',['vacation','travel','beach','sand','rock','sea','hotel','trip','greece','assos','athens']],['Becoming',['begin','again','voice','path','puzzle','horizon','becoming','return']]]; for(const [k,words] of map){if(words.some(w=>text.includes(w))) return k;} return $('theme').value || 'Open / Not sure';}
+function strongestImage(){const text=($('anchor').value+' '+$('draft').value).toLowerCase(); const imgs=['photograph','photo','cypress','tree','moon','waiting room','gate','house','room','singer','sand','rock','sea','flower','clock','chair','window','voice','silence','puzzle','horizon','school','light','wind','leaves']; return imgs.find(i=>text.includes(i)) || $('anchor').value.trim() || 'the first concrete detail';}
+function mentor(mode){tab('mentor'); const draft=$('draft').value.trim(); const theme=detect(); const img=strongestImage(); if(!draft){$('mentorOut').textContent='Begin with even one sentence. The mentor needs something real to hold: a memory, object, person, photograph, place, or feeling.'; return;}
+ const endpoint=localStorage.getItem(EP)||window.LIVING_PAGES_MENTOR_ENDPOINT||''; if(endpoint){callMentorEndpoint(endpoint,mode,theme,img,draft);return;}
+ const base=`Theme I hear: ${theme}\nStrongest image: ${img}\n\n`;
+ let out='';
+ if(mode==='continue') out=`${base}What is alive here is not only the subject, but what it may be carrying. Continue by answering these in your own words:\n\n1. Where exactly does ${img} belong in your life?\n2. Who is connected to it?\n3. What happened around it that someone else might forget?\n4. What feeling is attached to it now, after time has passed?\n\nDo not finish yet. Add one clear scene or one remembered detail.`;
+ if(mode==='finish') out=`${base}This page may be ready for an ending, but not necessarily a final answer. Choose one finishing path:\n\nA. End with the image: return to ${img} and show it still holding the memory.\nB. End with time: what changed, disappeared, grew up, or remained?\nC. End with a person: what do you want your children, mother, father, or younger self to know?\nD. Store for later: if the memory is tender, save it as Unfinished Page.\n\nBefore writing the last lines, answer: What is the simplest truth this piece wants to leave behind?`;
+ if(mode==='clearer') out=`${base}For clarity, do not make it more poetic yet. Make it more exact.\n\n1. Circle the line that names the real object or place. If there is none, add one.\n2. Separate memory from explanation. One stanza can show what happened; another can carry what it means.\n3. Replace any general word like beautiful, sad, special, or unforgettable with the actual detail that made it so.\n\nKeep your natural rhythm. Only clean what blocks the reader from seeing.`;
+ if(mode==='voice') out=`${base}This sounds closest to your old voice when an ordinary thing becomes a witness. Your older poems often do this: a tree witnesses a house, a clock witnesses motherhood, a photograph holds love, the moon holds prayer.\n\nTo make this more like you, ask: What did ${img} witness? What human ache is underneath it? Can the ending become simpler instead of grander?`;
+ if(mode==='deeper') out=`${base}Deeper questions for this exact page:\n\n1. What are you afraid this memory will lose if you do not write it?\n2. What is visible here, and what is hidden?\n3. What name, place, or object must not disappear?\n4. What would your children understand about you if they read this years from now?\n5. Is this asking to become a poem, a letter, or simply a preserved page?`;
+ $('mentorOut').textContent=out;
 }
-
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1700)}
-function renderNav(){document.getElementById('nav').innerHTML=panels.map(p=>`<button id="nav-${p[0]}" onclick="showPanel('${p[0]}')">${p[1]}</button>`).join(''); document.getElementById('nav-home').classList.add('active')}
-function showPanel(id){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));const n=document.getElementById('nav-'+id); if(n)n.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});}
-function renderStats(){const c=data.entries.length; const legacy=data.entries.filter(e=>e.status==='Legacy Poem').length; const work=data.entries.filter(e=>e.status==='Working Poem').length; document.getElementById('stats').innerHTML=`<b>${c}</b> saved piece${c===1?'':'s'}<br><b>${legacy}</b> legacy poem${legacy===1?'':'s'}<br><b>${work}</b> working poem${work===1?'':'s'}<br><span class="ver">${VERSION}</span>`}
-function randomDoorPrompt(show=true){const names=Object.keys(doors); const d=names[Math.floor(Math.random()*names.length)]; const arr=doors[d].prompts; const q=arr[Math.floor(Math.random()*arr.length)]; data.lastDoor={d,q}; document.getElementById('todayDoor').innerHTML=`<b>${d} Door</b><br><span>${doors[d].lead}</span><br><em>${q}</em>`; if(show)toast('New doorway opened')}
-function renderDoors(){document.getElementById('doorGrid').innerHTML=Object.keys(doors).map(d=>`<button class="door" onclick="startDoor('${d}')"><b>${d} Door</b><span>${doors[d].lead}</span></button>`).join('')}
-function startDoor(d){flowType=d==='Photograph'?'Photograph':(d==='Prayer'||d==='Becoming'?'Feeling':'Memory'); step=0; answers=[]; showPanel('create'); renderStep(); document.getElementById('flowAnswer').value=doors[d].prompts[0]+'\n';}
-function startCreate(){step=0;answers=[];photos=[];audioData=null;showPanel('create'); chooseType();}
-function chooseType(){document.getElementById('steps').innerHTML='';document.getElementById('flowPrompt').textContent='Open a Living Page.';document.getElementById('flowHint').innerHTML='Choose the doorway that feels closest. The page will open with poetic guidance, then the editing window will respond to what you actually wrote.';document.getElementById('flowAnswer').classList.add('hidden'); const box=document.querySelector('#create .row'); box.innerHTML=`<button class="bigbtn" onclick="setFlow('Memory')">From a Memory</button><button class="bigbtn" onclick="setFlow('Photograph')">From a Photograph</button><button class="bigbtn" onclick="setFlow('Feeling')">From a Feeling</button>`}
-function setFlow(t){flowType=t; step=0; answers=[]; document.getElementById('flowAnswer').classList.remove('hidden'); document.querySelector('#create .row').innerHTML=`<button class="ghost" onclick="prevStep()">Back</button><button class="bigbtn" onclick="nextStep()">Continue</button><button class="ghost" onclick="saveAsFragmentNow()">Save what I have</button>`; renderStep();}
-function renderStep(){const p=flowPrompts[flowType][step]; document.getElementById('steps').innerHTML=flowPrompts[flowType].map((_,i)=>`<div class="dot ${i<=step?'on':''}"></div>`).join(''); document.getElementById('flowPrompt').textContent=p[0]; document.getElementById('flowHint').textContent=p[1]; document.getElementById('flowAnswer').value=answers[step]||''; document.getElementById('flowAnswer').focus();}
-function nextStep(){const val=document.getElementById('flowAnswer').value.trim(); answers[step]=val; if(step<4){step++;renderStep()}else{buildWorkbench()}}
-function prevStep(){if(document.getElementById('flowAnswer').classList.contains('hidden')){showPanel('home');return} answers[step]=document.getElementById('flowAnswer').value.trim(); if(step>0){step--;renderStep()}else chooseType();}
-function saveAsFragmentNow(){const val=document.getElementById('flowAnswer').classList.contains('hidden')?'':document.getElementById('flowAnswer').value.trim(); if(val)answers[step]=val; const text=answers.filter(Boolean).join('\n\n'); if(!text){toast('Write one line first');return} data.entries.unshift({id:Date.now(),title:'Untitled fragment',status:'Fragment',text,story:'Saved from quick flow.',created:new Date().toISOString(),photos:[],audio:null}); save();toast('Saved as fragment');showPanel('archive')}
-function buildWorkbench(){const labels=['Beginning','What I see','Who / what is present','Meaning underneath','What I want to preserve']; const html=answers.map((a,i)=>`<div class="seedbox"><b>${labels[i]||'Note'}</b><br>${escapeHtml(a||'')}</div>`).join(''); document.getElementById('seedSummary').innerHTML=html; document.getElementById('draftTitle').value='Untitled '+flowType.toLowerCase(); document.getElementById('draftText').value=makeDraftFromAnswers(); document.getElementById('draftStatus').value='Working Poem'; document.getElementById('mentorOut').textContent='Your seed is ready. Arrange the lines in your own way, then choose one guidance button.'; document.getElementById('photoPreview').innerHTML=''; document.getElementById('audioRow').innerHTML=''; photos=[]; audioData=null; showPanel('workbench');}
-function makeDraftFromAnswers(){return answers.filter(Boolean).join('\n\n');}
-
-function mentor(kind){
- const txt=document.getElementById('draftText').value.trim();
- if(!txt){toast('Write or paste a draft first');return}
- const title=document.getElementById('draftTitle').value.trim();
- const ctx=analyzeDraft(txt,title);
- const out=buildTailoredGuidance(kind,ctx);
- document.getElementById('mentorOut').textContent=out;
-}
-function analyzeDraft(txt,title=''){
- const lower=(title+' '+txt).toLowerCase();
- const lines=txt.split(/\n+/).map(s=>s.trim()).filter(Boolean);
- const counts={
-  Mother:['mother','mom','mama','bosom','baby','smile','october','died','passing','photograph','photo','fragment'],
-  Children:['children','boys','son','sons','school','xavier','wait','waiting','fifteen','senior','visit','bags','rollers'],
-  Home:['home','house','gate','gates','cypress','tree','trees','driver','caretaker','babysitter','singer','sunday','room','rooms'],
-  Prayer:['prayer','fear','lonely','loneliness','silence','soul','spirit','god','lord','hope','wind','leaves','love'],
-  Photograph:['photo','photograph','picture','captured','fading','image','frame','light','face','smile'],
-  Father:['father','dad','jove','orion','moon','stars','sky','dipper','court'],
-  Becoming:['begin','beginning','again','voice','return','becoming','path','puzzle','pieces','horizon','journey','choice']
- };
- let scores={}; Object.keys(counts).forEach(k=>scores[k]=counts[k].reduce((n,w)=>n+(lower.includes(w)?1:0),0));
- let theme=Object.keys(scores).sort((a,b)=>scores[b]-scores[a])[0]||'Legacy';
- if(scores[theme]===0) theme='Legacy';
- const objectWords=['photograph','photo','picture','cypress','tree','trees','moon','sky','gate','gates','house','home','singer','clock','waiting room','flower','flowers','rain','wind','leaves','puzzle','pieces','horizon','school','bags','cushion','window','sea','room','light'];
- const objects=objectWords.filter(w=>lower.includes(w)).slice(0,4);
- const emotionWords=['love','grief','sadness','fear','hope','lonely','loneliness','tender','ache','longing','joy','devotion','memory','silence','uncertain','certainty'];
- const emotions=emotionWords.filter(w=>lower.includes(w)).slice(0,4);
- return {txt,title,lower,lines,theme,objects,emotions,strongest:pickStrongLine(lines),lineCount:lines.length};
-}
-function buildTailoredGuidance(kind,c){
- const intro={
-  Mother:'This reads like a mother-fragment: a poem reaching toward love through what remains.',
-  Children:'This reads like a motherhood piece: an ordinary act carrying years of devotion.',
-  Home:'This reads like a home-memory: a place, object, or name becoming a witness.',
-  Prayer:'This reads like a prayer piece: fear, silence, and hope moving toward an inner voice.',
-  Photograph:'This reads like a photograph piece: the visible detail protecting something memory cannot fully hold.',
-  Father:'This reads like a father-memory: wonder, sky, guidance, and what returns years later.',
-  Becoming:'This reads like a becoming piece: threshold, hesitation, beginning, and the first piece of courage.',
-  Legacy:'This reads like a legacy page: something true you may want your children to understand one day.'
- }[c.theme];
- const obj=c.objects.length?`\n\nImage/object I notice: ${c.objects.join(', ')}.`:'';
- const emo=c.emotions.length?`\nFeeling underneath: ${c.emotions.join(', ')}.`:'';
- const strongest=`\nLine to protect for now:\n“${c.strongest}”`;
- if(kind==='clear'){
-  return `${intro}${obj}${emo}${strongest}\n\nMake it clearer:\n• Name the real object before explaining what it means. Your voice becomes stronger when the reader can see the thing first.\n• If one stanza contains both memory and reflection, separate them. Let the scene breathe, then let the meaning arrive.\n• Replace any broad word with a specific detail from your life: a name, room, hour, object, place, or gesture.\n• Keep the line above untouched until the last edit. It may be carrying the pulse of the piece.\n\nYour next small move:\nRead the draft aloud once. Mark the first line where your breath feels crowded. That is where the clearest edit probably begins.`;
- }
- if(kind==='voice'){
-  return `${intro}${obj}${emo}${strongest}\n\nMake it more like you:\n• Your true voice often begins with something visible, then lets it become a witness. Ask: what has this object seen?\n• Your older poems are strongest when they preserve names, places, and exact moments. Do not remove the human evidence.\n• Be careful of lines that sound beautiful but could belong to anyone. Return to what only you would know.\n• Let the ending become simpler than the middle. Your voice often lands with one human ache after the elevated imagery.\n\nYour next small move:\nAdd one concrete detail that proves this memory is yours alone.`;
- }
- const finishMap={
-  Mother:'End with what still remains: the photograph, the smile, the date, the baby, the light, or the question you are still asking her.',
-  Children:'End by widening the waiting: from school pickup to the lifelong waiting of a mother for calls, visits, returns, and becoming.',
-  Home:'End with what remained standing or silently witnessed everything: tree, gate, house, room, object, or name.',
-  Prayer:'End softly, not triumphantly. Let the answer arrive as a whisper, a steadiness, or a voice inside you.',
-  Photograph:'End with what the image still keeps safe — a face, hand, smile, room, date, or evidence of love.',
-  Father:'End with the small present-day trigger that brings him back: a sky, star, road, lesson, or quiet tug in the heart.',
-  Becoming:'End by choosing the first piece, not solving the whole picture. Let the poem begin again instead of concluding everything.',
-  Legacy:'End as a mother or as your truest self. Say the one thing you want them to carry.'
- }[c.theme];
- return `${intro}${obj}${emo}${strongest}\n\nHelp me finish:\n• ${finishMap}\n• Bring back the first image near the end so the poem feels whole.\n• Do not summarize the lesson too much. Let one image hold the truth.\n• The final line can be quieter than you think. Often the simplest human line is the one your children will remember.\n\nYour next small move:\nWrite three possible last lines in plain language. Choose the one that sounds least like performance and most like you.`;
-}
-function pickStrongLine(lines){if(!lines.length)return 'No line yet'; return lines.reduce((a,b)=>scoreLine(b)>scoreLine(a)?b:a,lines[0]);}
-function scoreLine(s){let score=s.length>18&&s.length<95?3:0; ['mother','father','children','home','moon','tree','wait','love','God','photo','voice','house','memory','years','sky'].forEach(w=>{if(s.toLowerCase().includes(w))score+=2}); return score}
-function saveDraft(){const title=document.getElementById('draftTitle').value.trim()||'Untitled piece'; const text=document.getElementById('draftText').value.trim(); if(!text){toast('Write something first');return} const entry={id:Date.now(),title,status:document.getElementById('draftStatus').value,text,story:answers.filter(Boolean).join('\n\n'),created:new Date().toISOString(),photos,audio:audioData}; data.entries.unshift(entry); save(); toast('Saved to archive'); showPanel('archive')}
-function newBlank(){answers=[];photos=[];audioData=null;document.getElementById('seedSummary').innerHTML='<div class="seedbox"><b>Blank entry</b><br>Start with your own words.</div>';document.getElementById('draftTitle').value='';document.getElementById('draftText').value=''; setTimeout(updateDraftCount,0);document.getElementById('draftStatus').value='Fragment';document.getElementById('mentorOut').textContent='Write first. Then ask for guidance.';document.getElementById('photoPreview').innerHTML='';document.getElementById('audioRow').innerHTML='';showPanel('workbench')}
-function renderArchive(){const list=document.getElementById('poemList'); if(!data.entries.length){list.innerHTML='<div class="empty">No saved pages yet. Open a Living Page when you are ready.</div>'; return} list.innerHTML=data.entries.map(e=>`<div class="entry"><div class="entrytop"><div><h3>${escapeHtml(e.title)}</h3><span class="badge">${escapeHtml(e.status)}</span> <span class="badge">${new Date(e.created).toLocaleDateString()}</span></div><div class="row"><button class="mini" onclick="editEntry(${e.id})">Open</button><button class="mini danger" onclick="deleteEntry(${e.id})">Delete</button></div></div><div class="poemtext">${escapeHtml(e.text).slice(0,900)}${e.text.length>900?'...':''}</div>${e.photos&&e.photos.length?`<div class="photoPreview">${e.photos.map(p=>`<img src="${p}">`).join('')}</div>`:''}${e.audio?`<audio controls src="${e.audio}" style="width:100%;margin-top:8px"></audio>`:''}</div>`).join('')}
-function editEntry(id){const e=data.entries.find(x=>x.id===id); if(!e)return; answers=[]; photos=e.photos||[]; audioData=e.audio||null; document.getElementById('seedSummary').innerHTML=e.story?`<div class="seedbox"><b>Story / seed</b><br>${escapeHtml(e.story)}</div>`:'<div class="seedbox"><b>Opened from archive</b></div>'; document.getElementById('draftTitle').value=e.title; document.getElementById('draftText').value=e.text; document.getElementById('draftStatus').value=e.status; renderPhotoPreview(); renderAudio(); document.getElementById('mentorOut').textContent='Opened. Edit in your own words, then save as a new version.'; showPanel('workbench')}
-function deleteEntry(id){if(confirm('Delete this saved piece from this device?')){data.entries=data.entries.filter(e=>e.id!==id);save();toast('Deleted')}}
-function renderVoice(){const box=document.getElementById('voiceMap'); const text=data.entries.map(e=>`${e.title} ${e.text} ${e.story}`).join(' ').toLowerCase(); const themes={Mother:['mother','mom','mama'],Father:['father','dad'],Home:['home','house','gate','room','tree','cypress'],Children:['children','boys','son','school','wait'],Prayer:['prayer','god','spirit','soul','love'],Nature:['moon','sky','flower','rain','wind','leaves','earth'],Memory:['memory','years','remember','photograph','photo']}; let html=''; Object.keys(themes).forEach(k=>{let n=themes[k].reduce((s,w)=>s+(text.match(new RegExp('\\b'+w+'\\b','g'))||[]).length,0); html+=`<div class="seedbox"><b>${k}</b><br>${n?`Appears ${n} time${n===1?'':'s'} in your saved work.`:'Not yet present in saved pieces.'}</div>`}); box.innerHTML=html+`<p class="small"><b>Current mirror:</b> Your voice becomes strongest when a real object or place becomes a witness to love, grief, time, or devotion.</p>`}
-function handlePhotos(ev){const files=[...ev.target.files].slice(0,4); files.forEach(file=>{const r=new FileReader(); r.onload=()=>{compressImage(r.result,900).then(img=>{photos.push(img); renderPhotoPreview();})}; r.readAsDataURL(file);});}
-function compressImage(src,max){return new Promise(res=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height; if(w>h&&w>max){h*=max/w;w=max}else if(h>max){w*=max/h;h=max} const c=document.createElement('canvas');c.width=w;c.height=h; const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',.72))}; img.src=src;})}
-function renderPhotoPreview(){document.getElementById('photoPreview').innerHTML=photos.map(p=>`<img src="${p}">`).join('')}
-async function toggleRecord(){if(mediaRecorder&&mediaRecorder.state==='recording'){mediaRecorder.stop();return} try{const stream=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[]; mediaRecorder=new MediaRecorder(stream); mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{const blob=new Blob(chunks,{type:'audio/webm'}); const r=new FileReader(); r.onload=()=>{audioData=r.result; renderAudio();}; r.readAsDataURL(blob); stream.getTracks().forEach(t=>t.stop()); document.getElementById('recBtn').classList.remove('on'); document.getElementById('recBtn').textContent='Record voice';}; mediaRecorder.start(); document.getElementById('recBtn').classList.add('on'); document.getElementById('recBtn').textContent='Stop recording'; }catch(e){toast('Microphone permission was not allowed')}}
-function renderAudio(){document.getElementById('audioRow').innerHTML=audioData?`<audio controls src="${audioData}"></audio>`:''}
-function clearAudio(){audioData=null;renderAudio();}
-function exportData(){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='the-living-pages-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click(); URL.revokeObjectURL(a.href)}
-function importData(ev){const f=ev.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{const incoming=JSON.parse(r.result); if(!incoming.entries)throw new Error('bad'); data=incoming; save(); toast('Backup imported'); showPanel('archive')}catch(e){toast('This backup file could not be read')}}; r.readAsText(f)}
-function resetAll(){if(confirm('Reset all saved demo data on this browser? Export first if needed.')){data={entries:[],lastDoor:null};save();toast('Reset complete');showPanel('home')}}
-function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-load();
-
-function updateSyncStatus(){
-  const el=document.getElementById('syncStatus');
-  if(!el) return;
-  const online = navigator.onLine;
-  el.textContent = online ? 'Online • saved on this device' : 'Offline • writing still works';
-  el.className = 'syncStatus ' + (online ? 'on' : 'off');
-}
-window.addEventListener('online', updateSyncStatus);
-window.addEventListener('offline', updateSyncStatus);
-updateSyncStatus();
-if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(()=>{ console.log('The Living Pages offline service worker is ready.'); })
-      .catch(err=>{ console.warn('Service worker registration failed:', err); });
-  });
-}
-
+async function callMentorEndpoint(endpoint,mode,theme,img,draft){$('mentorOut').textContent='Asking the mentor...'; try{const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode,theme,strongestImage:img,title:$('title').value,anchor:$('anchor').value,type:$('type').value,draft,rule:'Do not write poems for Aileen. Give tailored mentor guidance only: reflection, craft notes, questions, possible paths. Preserve authorship.'})}); const data=await res.json(); $('mentorOut').textContent=data.guidance||data.text||JSON.stringify(data,null,2);}catch(e){$('mentorOut').textContent='The mentor endpoint could not be reached. Local guidance is still available. '+e.message;}}
+function saveEntry(){const item={id:current||('lp_'+Date.now()),title:$('title').value.trim()||'Untitled Living Page',type:$('type').value,theme:$('theme').value,anchor:$('anchor').value,draft:$('draft').value,photoData,audioData,updatedAt:new Date().toISOString(),sync:'Waiting to sync'}; const i=entries.findIndex(e=>e.id===item.id); if(i>=0)entries[i]=item; else entries.unshift(item); current=item.id; save(); toast('Saved on this device');}
+function storeLater(){$('type').value='Unfinished Page';saveEntry();toast('Stored safely for later')}
+function renderEntries(){const list=$('entryList'); if(!list)return; list.innerHTML=entries.length?entries.map(e=>`<div class="entry" onclick="loadEntry('${e.id}')"><b>${esc(e.title)}</b><span>${esc(e.type)} · ${new Date(e.updatedAt).toLocaleString()} · ${esc(e.sync||'Device')}</span></div>`).join(''):'<div class="copy">No pages yet.</div>'}
+function loadEntry(id){const e=entries.find(x=>x.id===id); if(!e)return; current=e.id; $('title').value=e.title;$('type').value=e.type;$('theme').value=e.theme||'Open / Not sure';$('anchor').value=e.anchor||'';$('draft').value=e.draft||'';photoData=e.photoData||'';audioData=e.audioData||'';updateCounts(); if(photoData){$('photoPreview').src=photoData;$('photoPreview').classList.remove('hidden')} if(audioData){$('audioPreview').src=audioData;$('audioPreview').classList.remove('hidden')} $('selectedEntry').innerHTML=`<h2>${esc(e.title)}</h2><p><b>${esc(e.type)}</b> · ${esc(e.theme||'')}</p><p style="white-space:pre-wrap">${esc(e.draft||'')}</p>`; tab('write'); renderGuide();}
+function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function exportBackup(){const blob=new Blob([JSON.stringify({version:'2.2',exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'}); const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='living-pages-backup-v2-2.json';a.click();URL.revokeObjectURL(a.href)}
+function importBackup(ev){const f=ev.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{const data=JSON.parse(r.result); entries=data.entries||data||[]; save(); toast('Backup imported')}catch(e){toast('Import failed')}}; r.readAsText(f)}
+function attachPhoto(ev){const f=ev.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{photoData=r.result;$('photoPreview').src=photoData;$('photoPreview').classList.remove('hidden');toast('Photo attached to current page')}; r.readAsDataURL(f)}
+let rec, chunks=[]; async function startRec(){try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];rec=new MediaRecorder(stream);rec.ondataavailable=e=>chunks.push(e.data);rec.onstop=()=>{const blob=new Blob(chunks,{type:'audio/webm'});const r=new FileReader();r.onload=()=>{audioData=r.result;$('audioPreview').src=audioData;$('audioPreview').classList.remove('hidden');toast('Voice note ready')};r.readAsDataURL(blob);stream.getTracks().forEach(t=>t.stop())};rec.start();toast('Recording...')}catch(e){toast('Microphone not available')}} function stopRec(){if(rec&&rec.state!=='inactive')rec.stop()}
+function saveEndpoint(){localStorage.setItem(EP,$('mentorEndpoint').value.trim());toast('Mentor endpoint saved')} function testEndpoint(){mentor('deeper')}
+function cloudMsg(t){$('cloudMsg').textContent=t} async function firebaseLogin(){cloudMsg('Firebase login will work after your config is pasted and Firebase SDK connection is completed. This build is ready for the secure project details.')} async function firebaseSignup(){cloudMsg('Create the Firebase project first, then paste the config. Email/password signup will be activated in the connected build.')} async function syncNow(){entries.forEach(e=>e.sync='Waiting to sync'); save(); $('syncStatus').textContent='Waiting to sync'; toast('Marked for sync')}
+function updateNet(){const on=navigator.onLine;$('netStatus').textContent=on?'Online':'Offline';$('netStatus').className='pill '+(on?'on':'off')} window.addEventListener('online',updateNet);window.addEventListener('offline',updateNet); updateNet(); renderEntries(); renderGuide(); updateCounts(); if('serviceWorker' in navigator){navigator.serviceWorker.register('./service-worker.js').catch(()=>{})}
 </script>
 </body>
 </html>
